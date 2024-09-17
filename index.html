@@ -3,7 +3,8 @@
   <head>
     <link rel = "stylesheet" href="./node_modules/jscoq/dist/frontend/index.css">
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-    <title>Using jsCoq with NPM (a template)</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <title>LE COQ MASTER</title>
 
     <!-- important: this will not work from *within* the jsCoq package dir; -->
     <!-- this template is meant to be copied to your project dir and edited -->
@@ -14,32 +15,19 @@
   <div id="ide-wrapper" class="toggled">
     <div id="code-wrapper">
       <div id="document">
-        <h1>Write a header here</h1>
-        <p>
-            Write some text as well.
-        </p>
-        <textarea id="coq-code">
+        <h1>C'est le coq</h1>
+        <textarea id="coq-code" style = "display: none;">
 (* Write some Coq code in here *)
         </textarea>
+        
+        
+        <p> 
+        </p>
       </div>
     </div>
   </div>
 
   <!-- jsCoq configuration part -->
-  <script type="module">
-    import { JsCoq } from './node_modules/jscoq/jscoq.js';
-
-    var jscoq_ids  = ['coq-code'];
-    var jscoq_opts = {
-        prelude:       true,
-        implicit_libs: true,
-        editor:        { mode: { 'company-coq': true }, keyMap: 'default' },
-        init_pkgs:     ['init'],
-        all_pkgs:      ['coq']
-    };
-
-    JsCoq.start(jscoq_ids, jscoq_opts);
-  </script>
-      <script type="text/javascript" src="banana.js"></script>
+  <script type="module" src="banana.js"></script>
 
 </body>
