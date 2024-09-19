@@ -1,25 +1,34 @@
 function goal_to_plain_text (goal){
     console.log("AAAAAAA")
     console.log(goal.conc)
-
+    let res = ""
     if (goal.hyp.length == 0){
-        res += "Show that "
+        res = "Show that "
         res += inline_math(plain_textify(goal.conc))
         res += ".\n"
     }
     else{
 
-        let res = "Assuming that "
+        res = "Assuming: "
         for (let hp of goal.hyp){
-            res += inline_math(textify_hp(hp)) + ", "
+            res += centered_math(textify_hp(hp)) + "\n"
         }
         res += "prove that "
-        res += inline_math(plain_textify(goal.conc))
-
-        return res
+        res += inline_math(plain_textify(goal.conc)) + "."
+        
+        return latexise(res)
     }
 }
 
+function latexise (text){
+    let res = text
+    let replacements = [["→", "\\implies"], ["ℕ", "\\mathbb N"], ["∀", "\\forall"]]
+    
+    for (let r of replacements){
+        res = res.replaceAll(r[0], r[1])
+    }
+    return res
+}
 
 let inline_math = (t) => `\\(${t}\\)`
 let centered_math = (t) => `\\[${t}\\]`
@@ -33,7 +42,7 @@ function textify_hp (hp){
         else
             res += c.value
     }
-    return res
+    return `\\texttt{${hp_name}} : ${res}`
 }
 
 function plain_textify (parsed_list){
