@@ -1,32 +1,111 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <link rel = "stylesheet" href="./node_modules/jscoq/dist/frontend/index.css">
-    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <title>LE COQ MASTER</title>
-
-    <!-- important: this will not work from *within* the jsCoq package dir; -->
-    <!-- this template is meant to be copied to your project dir and edited -->
-
-  </head>
-
-<body class="jscoq-main">
-  <div id="ide-wrapper" class="toggled">
-    <div id="code-wrapper">
-      <div id="document">
-        <h1>C'est le coq</h1>
-        <textarea id="coq-code">
-(* Coq code *)
-        </textarea>
-        
-        
-        <div id="latex-proof"> 
-        </div>
+   <head>
+      <link rel = "stylesheet" href="./node_modules/jscoq/dist/frontend/index.css">
+      <style>
+         body, html {
+         margin: 0;
+         height: 100%;
+         }
+         .my_container {
+         display: flex;
+         height: 100%;
+         }
+         .my_scrollable {
+         flex: 1;
+         overflow-y: auto;
+         padding: 20px;
+         background-color: #f0f0f0;
+         }
+         .my_fixed {
+         width: 30%;
+         background-color: #ddd;
+         padding: 10px;
+         display: flex;
+         flex-direction: column;
+         }
+         .accordion {
+         background-color: #ccc;
+         cursor: pointer;
+         padding: 10px;
+         text-align: left;
+         border: none;
+         outline: none;
+         transition: 0.4s;
+         width: 100%;
+         }
+         .accordion.active, .accordion:hover {
+         background-color: #bbb;
+         }
+         .panel {
+         padding: 0 10px;
+         display: none;
+         background-color: #ccc;
+         overflow: hidden;
+         }
+         .panel.show {
+         display: block;
+         }
+      </style>
+      <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+      <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <title>Proof Utility</title>
+      <!-- important: this will not work from *within* the jsCoq package dir; -->
+      <!-- this template is meant to be copied to your project dir and edited -->
+   </head>
+   <body>
+      <div class="my_container">
+         <div class="my_scrollable">
+            <div class="jscoq-main">
+               <div id="ide-wrapper" class="toggled">
+                  <div id="code-wrapper">
+                     <div id="document">
+                        <h1>Proof Example</h1>
+                        <textarea id="coq-code">
+                            (* Coq code *)
+                        </textarea>
+                        <div id="latex-proof"> 
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="my_fixed">
+            <h3> Proof Tactics </h3>
+            <button class="accordion">Tactics</button>
+            <div class="panel">
+                <b>Proof Techniques</b>
+                <p>
+               <button>Introduce Hypothesis</button>
+               <button>Proof by Induction</button>
+               <button>False Premise</button>
+                </p>
+                <b>Equality</b>
+                <p><button>Reflexivity</button>
+               <button>Symmetry</button>
+               </p> 
+            </div>
+            <button class="accordion">Apply Previous Theorem</button>
+            <div class="panel">
+               <p>This is the filler text inside accordion 2. More content can be placed here.</p>
+            </div>
+            <button class="accordion">Manipulate Hypothesis</button>
+            <div class="panel">
+               <p>This is the filler text inside accordion 3. You can expand or collapse it to view the content.</p>
+            </div>
+         </div>
       </div>
-    </div>
-  </div>
-  
-  <script type="module" src="dwrecs.js"></script>
-
-</body>
+      </div>
+      <script type="module" src="dwrecs.js"></script>
+      <script>
+         var acc = document.getElementsByClassName("accordion");
+         for (var i = 0; i < acc.length; i++) {
+             acc[i].onclick = function() {
+                 this.classList.toggle("active");
+                 var panel = this.nextElementSibling;
+                 panel.classList.toggle("show");
+             };
+         }
+      </script>
+   </body>

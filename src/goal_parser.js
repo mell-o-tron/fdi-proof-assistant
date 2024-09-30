@@ -43,6 +43,9 @@ function parse_with_label(hyp_html, label_value){
             }
         }
     }
+    
+    console.log("BANANA")
+    console.log(result)
     return result;
 }
 

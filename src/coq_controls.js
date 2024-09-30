@@ -1,4 +1,4 @@
-import {visualize_goal} from "./visualizer.js"
+import {visualize} from "./visualizer.js"
 
 
 /* writes a new coq line to the editor */
@@ -15,11 +15,11 @@ function add_line (line_text, snippet) {
 
 /* waits for sentence to reach processed (or error) state - TODO add param to error */
 function wait_for_processed(sentence, cont, on_err, depth = 0){
-  console.log("==================== WFP")
-  console.log(sentence)
-  console.log(cont)
-  console.log(depth)
-  console.log("====================")
+//   console.log("==================== WFP")
+//   console.log(sentence)
+//   console.log(cont)
+//   console.log(depth)
+//   console.log("====================")
 
   if (sentence.phase != "processed" && sentence.phase != "error"){
     setTimeout(wait_for_processed, 100, sentence, cont, on_err, depth + 1)
@@ -34,11 +34,11 @@ function wait_for_processed(sentence, cont, on_err, depth = 0){
 
 /* waits for sentence to reach cancelling state - probly not needed. */
 function wait_for_cancelled(sentence, cont, on_err, depth = 0){
-  console.log("==================== WFC")
-  console.log(sentence.phase)
-  console.log(cont)
-  console.log(depth)
-  console.log("====================")
+//   console.log("==================== WFC")
+//   console.log(sentence.phase)
+//   console.log(cont)
+//   console.log(depth)
+//   console.log("====================")
 
   if (sentence.phase != "cancelling" && sentence.phase != "error"){
     setTimeout(wait_for_cancelled, 100, sentence, cont, on_err, depth + 1)
@@ -58,9 +58,12 @@ function go_next_n(manager, n, cont, err){
   }
   else{
     manager.goNext(true)
-    wait_for_processed(manager.doc.sentences.slice(-1)[0], () => {
+    let stmt = manager.doc.sentences.slice(-1)[0];
+    wait_for_processed(stmt, () => {
+//       console.log("PROCESSED:")
+//       console.log(stmt)
       go_next_n(manager, n-1, cont, err)
-      visualize_goal()
+      visualize(stmt)
     }, err)
   }
 }

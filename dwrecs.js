@@ -21,23 +21,25 @@ manager_promise.then(function(manager) {
   manager.when_ready.then(function (result){
     
     console.log("COQ READY")
+    console.log(manager.coq.query(1, 0, ['Mode']));
     
     let snippet = manager.provider.snippets[0]
     console.log(snippet)
-    add_line("Lemma thing : forall (x : nat), forall (y : nat) , x = x -> x = y.\nProof.", snippet)
+    add_line("Lemma thing : forall (x : nat), 2 * x = x + x.\nProof.", snippet)
     
     manager.provider.focus();
-    go_next_n(manager, 6, () => {
-      console.log(manager.doc.sentences.slice(-1)[0].phase)
+    go_next_n(manager, 2, () => {
       let a = manager.layout.proof;
       console.log(a);
       console.log(a.outerText);
       // console.log(manager.doc.sentences)
-      add_line('intro.', snippet);
-      add_line('intro.', snippet);
-      add_line('intros.', snippet);
+      add_line('induction x.', snippet);
+      add_line('rewrite <- plus_n_O.', snippet);
+      add_line('rewrite <- mult_n_O.', snippet);
+      add_line('reflexivity.', snippet);
+      
 //       add_line('reflexivity.', snippet);
-      go_next_n(manager, 3, () => {}, () => {})
+      go_next_n(manager, 4, () => {}, () => {})
       
       
 //       go_next_n(manager, 6, () => {}, () => {})
