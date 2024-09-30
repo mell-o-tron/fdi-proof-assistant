@@ -3,97 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Side-by-Side Layout with Accordion</title>
-    <style>
-        body, html {
-            margin: 0;
-            height: 100%;
-        }
-        .container {
-            display: flex;
-            height: 100%;
-        }
-        .scrollable {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px;
-            background-color: #f0f0f0;
-        }
-        .fixed {
-            width: 250px;
-            background-color: #333;
-            color: white;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-        }
-        .accordion {
-            background-color: #444;
-            color: white;
-            cursor: pointer;
-            padding: 10px;
-            text-align: left;
-            border: none;
-            outline: none;
-            transition: 0.4s;
-            width: 100%;
-        }
-        .accordion.active, .accordion:hover {
-            background-color: #555;
-        }
-        .panel {
-            padding: 0 10px;
-            display: none;
-            background-color: #333;
-            overflow: hidden;
-            color: #ddd;
-        }
-        .panel.show {
-            display: block;
-        }
-    </style>
+    <title>Tooltip Example</title>
 </head>
 <body>
-    <div class="container">
-        <div class="scrollable">
-            <!-- Scrollable content goes here -->
-            <p>Scrollable Content Line 1</p>
-            <p>Scrollable Content Line 2</p>
-            <p>Scrollable Content Line 3</p>
-            <p>Scrollable Content Line 4</p>
-            <p>Scrollable Content Line 5</p>
-            <p>Scrollable Content Line 6</p>
-            <p>Scrollable Content Line 7</p>
-            <p>Scrollable Content Line 8</p>
-            <p>Scrollable Content Line 9</p>
-        </div>
-        <div class="fixed">
-           <button class="accordion">Accordion 1</button>
-            <div class="panel">
-                <p>This is the filler text inside accordion 1. You can replace this with any content you want.</p>
-            </div>
 
-            <button class="accordion">Accordion 2</button>
-            <div class="panel">
-                <p>This is the filler text inside accordion 2. More content can be placed here.</p>
-            </div>
+<p>This is an example of an abbreviation with a tooltip. Hover over the text to see more information:
+    <abbr title="Cascading Style Sheets">CSS</abbr>.
+</p>
 
-            <button class="accordion">Accordion 3</button>
-            <div class="panel">
-                <p>This is the filler text inside accordion 3. You can expand or collapse it to view the content.</p>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        var acc = document.getElementsByClassName("accordion");
-        for (var i = 0; i < acc.length; i++) {
-            acc[i].onclick = function() {
-                this.classList.toggle("active");
-                var panel = this.nextElementSibling;
-                panel.classList.toggle("show");
-            };
-        }
-    </script>
 </body>
 </html>
