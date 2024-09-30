@@ -40,7 +40,7 @@ function visualize_goal (goal_html, comment){
     if (text == undefined) return;
 
     if (comment != undefined){
-        text = comment + "\n" + text;
+        text = comment + "<br>" + text;
     }
     
     let div = document.createElement("div");
