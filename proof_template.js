@@ -81,8 +81,8 @@ readJsonFile(`./theorems/${name}.json`).then(function (proof_obj) {
         controller.add_line(str, snippet);
         
         controller.go_next_n(str.split("\n").length, false, () => {
-          controller.add_line("intros.", snippet);
-          controller.go_next_n(1, true, () => {
+          controller.add_line("induction n.\nintro.", snippet);
+          controller.go_next_n(2, true, () => {
             
           }, () => {
             console.log("There is a mistake in the proof.")

@@ -8,17 +8,23 @@
       <meta http-equiv="content-type" content="text/html;charset=utf-8" />
       <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       <title>Proof Utility</title>
-      <!-- important: this will not work from *within* the jsCoq package dir; -->
-      <!-- this template is meant to be copied to your project dir and edited -->
    </head>
    <body>
+   
+         <div class="topbar">
+        <nav>
+            <a href="#" style="color: white; margin: 0 15px;">Home</a>
+            <a href="#" style="color: white; margin: 0 15px;">About</a>
+            <a href="#" style="color: white; margin: 0 15px;">Contact</a>
+        </nav>
+    </div>
+   
       <div class="my_container">
          <div class="my_scrollable">
             <div class="jscoq-main">
                <div id="ide-wrapper" class="toggled">
                   <div id="code-wrapper">
                      <div id="document">
-                        <h1>Proof Example</h1>
                         <textarea id="coq-code">
                             (* Coq code *)
                         </textarea>
@@ -32,7 +38,6 @@
          
          
          <div class="my_fixed">
-            <h3> Proof Tactics </h3>
             <button class="accordion">Tactics</button>
             <div class="panel">
                 <b>Proof Techniques</b>

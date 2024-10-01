@@ -5,23 +5,25 @@ body, html {
 }
 .my_container {
     display: flex;
-    height: 100%;
+    padding-top: 50px;
+    height : 100%
 }
 .my_scrollable {
     flex: 1;
     overflow-y: auto;
-    padding: 20px;
-    background-color: #f0f0f0;
+/*     padding: 20px; */
+    background-color: #fff;
 }
 .my_fixed {
 width: 30%;
     background-color: #ddd;
-    padding: 10px;
+/*     padding: 10px; */
     display: flex;
     flex-direction: column;
 }
 .accordion {
-    background-color: #ccc;
+    background-color: #73A9AD;
+    color: #fff;
     cursor: pointer;
     padding: 10px;
     text-align: left;
@@ -31,12 +33,12 @@ width: 30%;
     width: 100%;
 }
 .accordion.active, .accordion:hover {
-    background-color: #bbb;
+    background-color: #58868a;
 }
 .panel {
     padding: 0 10px;
     display: none;
-    background-color: #ccc;
+    background-color: #fff;
     overflow: hidden;
 }
 .panel.show {
@@ -73,3 +75,16 @@ width: 30%;
     padding: 15px;
     background-color: #fff;
 }
+
+
+.topbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            z-index: 100;
+        }
