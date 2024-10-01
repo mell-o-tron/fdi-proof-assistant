@@ -1,0 +1,16 @@
+{
+  "definitions": [
+    {
+      "text": "Definition of a natural number.",
+      "coq": "Inductive nat : Type := | O : nat | S : nat -> nat."
+    },
+    {
+      "text": "Definition of addition of natural numbers.",
+      "coq": "Fixpoint add (n m : nat) : nat := match n with | O => m | S n' => S (add n' m) end."
+    }
+  ],
+  "theorem": {
+    "text": "Theorem: Addition is commutative.",
+    "coq": "Theorem add_comm : forall n m : nat, add n m = add m n."
+  }
+} 

@@ -58,7 +58,7 @@ class Controller {
   }
 
   /* evaluates n lines of coq */
-  go_next_n(n, cont, err){
+  go_next_n(n, should_vis, cont, err){
     if (n == 0) {
       cont()
     }
@@ -68,8 +68,8 @@ class Controller {
       this.wait_for_processed(stmt, () => {
   //       console.log("PROCESSED:")
   //       console.log(stmt)
-        this.go_next_n(n-1, cont, err)
-        this.visualizer.visualize(stmt)
+        this.go_next_n(n-1, should_vis, cont, err);
+        if (should_vis) this.visualizer.visualize(stmt);
       }, err)
     }
   }

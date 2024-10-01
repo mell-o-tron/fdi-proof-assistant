@@ -30,7 +30,7 @@ manager_promise.then(function(manager) {
     controller.add_line("Lemma thing : forall (x : nat), 2 * x = x + x.\nProof.", snippet)
     
     manager.provider.focus();
-    controller.go_next_n(2, () => {
+    controller.go_next_n(2, true, () => {
       let a = manager.layout.proof;
       console.log(a);
       console.log(a.outerText);
@@ -39,7 +39,7 @@ manager_promise.then(function(manager) {
       controller.add_line('rewrite <- mult_n_O.', snippet);
       controller.add_line('reflexivity.', snippet);
       
-      controller.go_next_n(4, () => {}, () => {})
+      controller.go_next_n(4, true, () => {}, () => {})
 
     }, () => {
       console.log("There was an error with the proof")

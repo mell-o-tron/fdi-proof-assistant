@@ -1,0 +1,107 @@
+import { JsCoq } from './node_modules/jscoq/jscoq.js';
+import {Controller} from "./src/coq_controls.js"
+
+
+async function readJsonFile(url) {
+    try {
+        // Fetch the JSON file
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        // Parse the JSON data
+        const jsonData = await response.json();
+
+        // Return the parsed data
+        return jsonData;
+
+    } catch (err) {
+        console.error("Error fetching or parsing the file:", err);
+        return null; // Return null in case of an error
+    }
+}
+
+
+
+// set up jscoq
+var jscoq_ids  = ['coq-code'];
+var jscoq_opts = {
+prelude:   true,
+implicit_libs: true,
+editor:{ mode: { 'company-coq': true }, keyMap: 'default' },
+init_pkgs: ['init'],
+all_pkgs:  ['coq']
+};
+
+
+
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+
+const name = urlParams.get('theorem_name');
+
+readJsonFile(`./theorems/${name}.json`).then(function (proof_obj) {
+  
+  console.log(proof_obj);
+  
+  if (proof_obj == null){
+      throw new Error ("proof_obj is null");
+  }
+  else {
+    // returns the coq manager
+    let manager_promise = JsCoq.start(jscoq_ids, jscoq_opts);
+
+    manager_promise.then(function(manager) {
+
+      // waits for coq to be ready
+      manager.when_ready.then(function (result){
+            
+        let controller = new Controller(manager);
+
+        console.log("COQ READY")
+        console.log(manager.coq.query(1, 0, ['Mode']));
+        
+        // gathers the current code snippet - this is used for manipulating the code (e.g. adding lines).
+        let snippet = manager.provider.snippets[0]
+        
+        let str = "";
+        
+        
+        for (let d of proof_obj.definitions) {
+          str += d.coq + "\n";
+        }
+        
+        str += proof_obj.theorem.coq + "\nProof.\n";
+        
+        controller.add_line(str, snippet);
+        
+        /*console.log(snippet)
+        controller.add_line("Lemma thing : forall (x : nat), 2 * x = x + x.\nProof.", snippet)
+        
+        manager.provider.focus();
+        controller.go_next_n(2, true, () => {
+          let a = manager.layout.proof;
+          console.log(a);
+          console.log(a.outerText);
+          controller.add_line('induction x.', snippet);
+          controller.add_line('rewrite <- plus_n_O.', snippet);
+          controller.add_line('rewrite <- mult_n_O.', snippet);
+          controller.add_line('reflexivity.', snippet);
+          
+          controller.go_next_n(4, true, () => {}, () => {})
+
+        }, () => {
+          console.log("There was an error with the proof")
+        });*/
+
+      });
+    });
+  }
+  
+  
+}).catch(err => console.error("Error occurred while fetching or processing the JSON data:", err));
+
+
+
