@@ -66,16 +66,34 @@ readJsonFile(`./theorems/${name}.json`).then(function (proof_obj) {
         // gathers the current code snippet - this is used for manipulating the code (e.g. adding lines).
         let snippet = manager.provider.snippets[0]
         
+        
+        // adds definitions and theorem to coq code
         let str = "";
-        
-        
         for (let d of proof_obj.definitions) {
           str += d.coq + "\n";
+          controller.visualizer.visualize_math(d, "definition");
         }
         
         str += proof_obj.theorem.coq + "\nProof.\n";
         
+        controller.visualizer.visualize_math(proof_obj.theorem, "theorem");
+        
         controller.add_line(str, snippet);
+        
+        controller.go_next_n(str.split("\n").length, false, () => {
+          controller.add_line("intros.", snippet);
+          controller.go_next_n(1, true, () => {
+            
+          }, () => {
+            console.log("There is a mistake in the proof.")
+          });
+          
+          
+        }, () => {
+          console.log("There is a mistake in the definitions or theorem statement.")
+        });
+        
+        
         
         /*console.log(snippet)
         controller.add_line("Lemma thing : forall (x : nat), 2 * x = x + x.\nProof.", snippet)

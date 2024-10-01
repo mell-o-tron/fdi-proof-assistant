@@ -1,0 +1,75 @@
+body, html {
+    margin: 0;
+    height: 100%;
+    background-color: #f9f9f9;
+}
+.my_container {
+    display: flex;
+    height: 100%;
+}
+.my_scrollable {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+.my_fixed {
+width: 30%;
+    background-color: #ddd;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.accordion {
+    background-color: #ccc;
+    cursor: pointer;
+    padding: 10px;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    width: 100%;
+}
+.accordion.active, .accordion:hover {
+    background-color: #bbb;
+}
+.panel {
+    padding: 0 10px;
+    display: none;
+    background-color: #ccc;
+    overflow: hidden;
+}
+.panel.show {
+    display: block;
+} 
+
+.math-box {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.math-header {
+    padding: 5px;
+    color: #fff;
+    text-align: left;
+}
+
+.theorem-header {
+    background-color: #73A9AD; /* Blue */
+}
+
+.definition-header {
+    background-color: #7fad72; /* Green */
+}
+
+.step-header {
+    background-color: #adac72; /* Yellow */
+}
+
+.math-content {
+    padding: 15px;
+    background-color: #fff;
+}

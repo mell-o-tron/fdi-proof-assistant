@@ -27,25 +27,28 @@ class Visualizer {
     visualize(stmt) {
         let goal_html = document.getElementById("goal-text");
 
-        if (stmt.text == "\nProof.") {
+        /*if (stmt.text == "\nProof.") {
             let div = document.createElement("div");
             div.innerHTML = "<b>Proof:</b>\n";
             div.style.width = "100%";
             div.style.padding = "10px";
             document.getElementById("latex-proof").appendChild(div);
+            
         } else if (stmt.text.startsWith("\nLemma")) {
             let div = document.createElement("div");
             div.innerHTML = `<b>Lemma</b> ${this.plainTextifier.theorem_to_plain_text(stmt.text, "Lemma")}\n`;
             div.style.width = "100%";
             div.style.padding = "10px";
             document.getElementById("latex-proof").appendChild(div);
+            
         } else if (stmt.text.startsWith("\nTheorem")) {
             let div = document.createElement("div");
             div.innerHTML = `<b>Theorem</b> ${this.plainTextifier.theorem_to_plain_text(stmt.text, "Theorem")}\n`;
             div.style.width = "100%";
             div.style.padding = "10px";
             document.getElementById("latex-proof").appendChild(div);
-        } else if (this.is_tactic(stmt)) {
+            
+        } else */ if (this.is_tactic(stmt)) {
             let comment = this.tacticCommentator.tactic_comment(stmt.text.trim().replace(/ .*/, '').replace(".", ""), stmt.text);
             this.visualize_goal(goal_html, comment);
         }
@@ -64,13 +67,22 @@ class Visualizer {
             text = comment + "<br>" + text;
         }
 
-        let div = document.createElement("div");
-        div.innerHTML = text + "\n";
-        div.style.width = "100%";
-        div.style.border = "2px solid black";
-        div.style.padding = "20px";
-        div.style.marginBottom = "10px";
-        document.getElementById("latex-proof").appendChild(div);
+        let box = document.createElement("div");
+        box.className = 'math-box';
+        
+        let header = document.createElement('div');
+        header.className = `math-header step-header`;
+        header.textContent = "Proof Step";
+        
+        let content = document.createElement('div');
+        content.className = 'math-content';
+        content.innerHTML = text;
+        
+        box.appendChild(header);
+        box.appendChild(content);
+
+        document.getElementById("latex-proof").appendChild(box);
+        
         MathJax.typeset();
     }
 
@@ -79,6 +91,27 @@ class Visualizer {
         let stripped = stmt.text.trim().replace(/ .*/, '').replace(".", "");
         return this.tactics.includes(stripped) || this.terminators.includes(stripped);
     }
+    
+    visualize_math(d, type){
+        let text = d.text;
+        let box = document.createElement("div");
+        box.className = 'math-box';
+        
+        let header = document.createElement('div');
+        header.className = `math-header ${type}-header`;
+        header.textContent = type.charAt(0).toUpperCase() + type.slice(1);
+        
+        let content = document.createElement('div');
+        content.className = 'math-content';
+        content.innerHTML = text;
+        
+        box.appendChild(header);
+        box.appendChild(content);
+
+        document.getElementById("latex-proof").appendChild(box);
+        MathJax.typeset();
+    }
+
 }
 
 export { Visualizer };

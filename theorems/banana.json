@@ -1,16 +1,16 @@
 {
   "definitions": [
     {
-      "text": "Definition of a natural number.",
+      "text": "Let \\(S\\) be the successor function. \\(\\mathbb N\\) is defined as follows: <ul><li>\\(0 \\in \\mathbb N\\)</li><li>\\(\\forall n \\in \\mathbb N . S(n) \\in \\mathbb N\\).</li></ul>",
       "coq": "Inductive nat : Type := | O : nat | S : nat -> nat."
     },
     {
-      "text": "Definition of addition of natural numbers.",
-      "coq": "Fixpoint add (n m : nat) : nat := match n with | O => m | S n' => S (add n' m) end."
+      "text": "Let \\( ({+}) : \\mathbb N \\times \\mathbb N \\to \\mathbb N \\) be defined as follows:<ul><li>\\(0 + m \\triangleq m\\)</li><li>\\( Sn + m \\triangleq S (n + m) \\).</li></ul>",
+      "coq": "Fixpoint add (n m : nat) : nat := match n with | O => m | S n' => S (add n' m) end.\nNotation \"A + B\" := (add A B)."
     }
   ],
   "theorem": {
-    "text": "Theorem: Addition is commutative.",
+    "text": "Theorem: Addition is commutative, i.e. \\[ \\forall n, m \\in \\mathbb N . n + m = m + n \\]",
     "coq": "Theorem add_comm : forall n m : nat, add n m = add m n."
   }
 } 
