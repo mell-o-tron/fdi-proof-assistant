@@ -4,6 +4,7 @@ class Controller {
   constructor(manager){
     this.manager = manager
     this.visualizer = new Visualizer();
+    this.available_theorems = [];
   }
 
 

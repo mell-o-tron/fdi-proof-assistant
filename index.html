@@ -7,6 +7,8 @@
        
       <meta http-equiv="content-type" content="text/html;charset=utf-8" />
       <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+      
       <title>Proof Utility</title>
    </head>
    <body>
@@ -38,27 +40,32 @@
          
          
          <div class="my_fixed">
-            <button class="accordion">Tactics</button>
-            <div class="panel">
-                <b>Proof Techniques</b>
-                <p>
-               <button>Introduce Hypothesis</button>
-               <button>Proof by Induction</button>
-               <button>False Premise</button>
-                </p>
-                <b>Equality</b>
-                <p><button>Reflexivity</button>
-               <button>Symmetry</button>
-               </p> 
-            </div>
-            <button class="accordion">Apply Previous Theorem</button>
-            <div class="panel">
-               <p>This is the filler text inside accordion 2. More content can be placed here.</p>
-            </div>
-            <button class="accordion">Manipulate Hypothesis</button>
-            <div class="panel">
-               <p>This is the filler text inside accordion 3. You can expand or collapse it to view the content.</p>
-            </div>
+            
+            <div class="card">
+               <h1>Proof Techniques</h1>
+               
+               <details class="tactics">
+                  <summary>Tactics</summary>
+                  <p>Some text to be hidden.</p> 
+                  <p>Some text to be hidden.</p> 
+                  <p>Some text to be hidden.</p> 
+                  <p>Some text to be hidden.</p> 
+               </details>
+               
+               <details class="theorems">
+                  <summary>Apply Theorems</summary>
+                  <div id="available_theorems"></div>
+               </details>
+               
+               <details class="hypman">
+                  <summary>Manipulate Hypothesis</summary>
+                  <p>Some text to be hidden.</p> 
+                  <p>Some text to be hidden.</p> 
+                  <p>Some text to be hidden.</p> 
+                  <p>Some text to be hidden.</p> 
+               </details>
+               </div>
+               
          </div>
       </div>
       </div>
