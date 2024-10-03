@@ -180,3 +180,12 @@ width: 30%;
             text-align: left;
             z-index: 100;
         }
+
+.theorem-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}

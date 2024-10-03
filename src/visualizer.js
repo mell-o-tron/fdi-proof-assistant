@@ -112,6 +112,23 @@ class Visualizer {
         MathJax.typeset();
     }
 
+    add_theo_card(at) {
+        let theobox = document.createElement("div");
+        theobox.className = 'theorem-card';
+        let theodesc = document.createElement("div");
+        theodesc.className = 'math-content';
+        theodesc.textContent = at.text;
+        document.getElementById("available_theorems").appendChild(theobox);
+
+        let header = document.createElement('div');
+        header.className = "math-header theorem-header";
+        header.textContent = at.name;
+
+        theobox.appendChild(header);
+        theobox.appendChild(theodesc);
+        MathJax.typeset();
+    }
+
 }
 
 export { Visualizer };
