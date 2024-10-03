@@ -22,62 +22,75 @@
     </div>
    
       <div class="my_container">
-         <div class="my_scrollable">
-            <div class="jscoq-main">
+         <div class="my_scrollable" id="scroooool">
+         
+         <div id="latex-proof"> </div>
+         
+            <div class="jscoq-main" style="display: none;">
                <div id="ide-wrapper" class="toggled">
                   <div id="code-wrapper">
                      <div id="document">
-                        <textarea id="coq-code">
+                        <textarea id="coq-code" >
                             (* Coq code *)
                         </textarea>
-                        <div id="latex-proof"> 
+                        
                         </div>
                      </div>
                   </div>
                </div>
-            </div>
+            
          </div>
          
          
          <div class="my_fixed">
             
-            <div class="card">
-               <h1>Proof Techniques</h1>
-               
-               <details class="tactics">
-                  <summary>Tactics</summary>
+            <div class="accordion">
+               <div class="accordion-header">Proof Tactics</div>
+               <div class="accordion-content">
                   <p>Some text to be hidden.</p> 
                   <p>Some text to be hidden.</p> 
                   <p>Some text to be hidden.</p> 
                   <p>Some text to be hidden.</p> 
-               </details>
-               
-               <details class="theorems">
-                  <summary>Apply Theorems</summary>
-                  <div id="available_theorems"></div>
-               </details>
-               
-               <details class="hypman">
-                  <summary>Manipulate Hypothesis</summary>
                   <p>Some text to be hidden.</p> 
                   <p>Some text to be hidden.</p> 
                   <p>Some text to be hidden.</p> 
                   <p>Some text to be hidden.</p> 
-               </details>
+                  <p>Some text to be hidden.</p> 
+                  <p>Some text to be hidden.</p> 
+                  <p>Some text to be hidden.</p> 
+                  <p>Some text to be hidden.</p> 
+                  <p>Some text to be hidden.</p> 
+                  <p>Some text to be hidden.</p> 
+                  <p>Some text to be hidden.</p> 
+                  <p>Some text to be hidden.</p> 
                </div>
-               
+
+               <div class="accordion-header">Apply Theorems</div>
+               <div class="accordion-content">
+                  <div id="available_theorems"></div>
+               </div>
+
+               <div class="accordion-header">Manipulate Hypothesis</div>
+               <div class="accordion-content">
+                  <p>Some text to be hidden.</p> 
+                  <p>Some text to be hidden.</p> 
+                  <p>Some text to be hidden.</p> 
+                  <p>Some text to be hidden.</p> 
+               </div>
+            </div>
+         
          </div>
       </div>
       </div>
       <script type="module" src="proof_template.js"></script>
       <script>
-         var acc = document.getElementsByClassName("accordion");
-         for (var i = 0; i < acc.length; i++) {
-             acc[i].onclick = function() {
-                 this.classList.toggle("active");
-                 var panel = this.nextElementSibling;
-                 panel.classList.toggle("show");
-             };
-         }
+         const headers = document.querySelectorAll(".accordion-header");
+
+         headers.forEach(header => {
+            header.addEventListener("click", () => {
+            const content = header.nextElementSibling;
+            content.style.display = content.style.display === "block" ? "none" : "block";
+            });
+         });
       </script>
    </body>

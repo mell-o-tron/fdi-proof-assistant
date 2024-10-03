@@ -1,23 +1,29 @@
 import {Visualizer} from "./visualizer.js"
 
 class Controller {
-  constructor(manager){
-    this.manager = manager
+  constructor(manager, snippet){
+    this.manager = manager;
+    this.snippet = snippet;
     this.visualizer = new Visualizer();
     this.available_theorems = [];
   }
 
 
   /* writes a new coq line to the editor */
-  add_line (line_text, snippet) {
-      let cursor = snippet.editor.getCursor()
+  add_line (line_text) {
+      let cursor = this.snippet.editor.getCursor()
       console.log(cursor)
-      var line = snippet.editor.getLine(cursor.line);
+      var line = this.snippet.editor.getLine(cursor.line);
       var pos = {
           line: cursor.line,
           ch: line.length
       }
-      snippet.editor.replaceRange("\n" + line_text, pos);
+      this.snippet.editor.replaceRange("\n" + line_text, pos);
+  }
+  
+  rm_line () {
+      this.snippet.editor.replaceRange("", { line: this.snippet.editor.getCursor().line, ch: 0 }, { line: this.snippet.editor.getCursor().line + 1, ch: 0 });
+//       this.snippet.editor.execCommand("deleteLine");
   }
 
   /* waits for sentence to reach processed (or error) state - TODO add param to error */
@@ -76,16 +82,25 @@ class Controller {
   }
 
   /* un-evaluates n lines of coq */
-  go_prev_n(n, cont, err){
+  go_prev_n(n){
     if (n == 0) {
-      cont()
+      return;
     }
     else{
       this.manager.goPrev(true)
-      this.wait_for_cancelled(this.manager.doc.sentences.slice(-1)[0], () => {
-        this.go_prev_n(n-1, cont, err)
-      }, err)
+      this.go_prev_n(n-1)
     }
+  }
+  
+  rewrite_theorem(theo_name, direction){
+    this.add_line(`rewrite ${direction?"->":"<-"} ${theo_name}.`, this.snippet);
+    this.go_next_n(1, true, () => {
+      let div = document.getElementById("scroooool");
+      console.log("that div is: " + div);
+//       div.scrollTop = div.scrollHeight;  //TODO fix this
+      
+    }, () => {this.go_prev_n(1); alert("Cannot apply theorem"); this.rm_line()});
+  
   }
 }
 

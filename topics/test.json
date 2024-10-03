@@ -12,13 +12,18 @@
   "theorems": [
   {
     "name": "add_dist",
-    "text": "Addition is distributive, i.e. \\[ \\forall a, b, c \\in \\mathbb N . (a + b) + c = a + (b + c) \\]",
+    "text": "Addition is distributive: \\[ \\forall a, b, c \\in \\mathbb N . (a + b) + c = a + (b + c) \\]",
     "coq": "Theorem add_dist : forall a b c : nat, add (add a b) c = add a (add b c).\nProof.\nAdmitted.\n"
   },
   {
     "name": "add_zero_left",
-    "text": "\\[ \\forall a \\in \\mathbb N . 0 + a = a \\]",
+    "text": "0 is the left identity for +:\\[ \\forall a \\in \\mathbb N . 0 + a = a \\]",
     "coq": "Theorem add_zero_left : forall a : nat, add 0 a = a.\nProof.\nAdmitted.\n"
+  },
+  {
+    "name": "add_zero_right",
+    "text": "0 is the right identity for +:\\[ \\forall a \\in \\mathbb N . a + 0 = a \\]",
+    "coq": "Theorem add_zero_right : forall a : nat, add a 0 = a.\nProof.\nAdmitted.\n"
   }
   ]
 } 

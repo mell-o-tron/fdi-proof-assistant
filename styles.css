@@ -36,104 +36,35 @@ width: 30%;
 /*     padding: 10px; */
     display: flex;
     flex-direction: column;
+    overflow: scroll;
 }
 
 
-.card {
-  background: white;
-  padding: 38px 36px;
-  border-radius: 4px;
-  box-shadow: 0 8px 10px rgba(0, 0, 0, .1);
-  width: 100%;
-  height: 100%;
-  
-  h1 {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 1.2;
-    color: var(--color-title);
-    margin-bottom: 20px;
-  }
-  
-  details {
-    display: flex;
-    
-    border-radius: 5px;
-    overflow: auto;
-    background: rgba(0, 0, 0, .05);
-    border-left: 15px solid gray;
-    padding:15px;
-    & {
-      margin-top: 15px;
+    .accordion-content {
+      display: none;
+      padding: 10px;
+      background-color: #f1f1f1;
+      margin: 0; /* No space between header and content */
+      border-top: none; /* Remove any border between header and content */
     }
-    
-    &.tactics {
-       --highlight: var(--color-summary-1-highlight) ;
-      background: var(--color-summary-1);
-      border-left-color: var(--color-summary-1-highlight);
-    }
-    
-    &.theorems {
-       --highlight: var(--color-summary-2-highlight) ;
-      background: var(--color-summary-2);
-      border-left-color: var(--color-summary-2-highlight);
-    }
-    
-    &.hypman {
-      --highlight: var(--color-summary-3-highlight) ;
-      background: var(--color-summary-3);
-      border-left-color: var(--highlight);
-    }
-    
-    summary,p {
-      position:relative;
-      display:flex;
-      flex-direction:row;
-      align-content: center;
-      justify-content: flex-start;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 18px;
-      color: var(--color-title);
-      padding: 20px;
-      cursor:pointer;
-      &::-webkit-details-marker {
-        display:none;
-      }
-      &:focus {
-        outline: solid 3px var(--highlight);
-      }
-      &::selection {
-        background-color:var(--highlight);
-      }
-    }
-    p {
-      display: list-item;
-      cursor:default;
-      margin-left:3rem;
-      list-style-type: corona;
-    }
-    
-    summary::before {
+
+    .accordion-header {
+      color: white;
       cursor: pointer;
-      position:absolute;
-      display:inline-flex;
-      width:1rem;
-      height:1rem;
-      left: 0rem;
-      margin-right:.5rem;
+      padding: 10px;
+      background-color: #333;
+      border: 1px solid #555;
+      margin: 0; /* No space between header and content */
+    }
 
+    .accordion-header:hover {
+      background-color: #222;
     }
-    
-    &[open] {
-      summary {
-        
-        font-weight: 700;
-      }
+
+    /* Ensure the border between sections remains */
+    .accordion-header + .accordion-header {
+      border-top: none;
     }
-  }
-}
 
 
 
@@ -141,8 +72,11 @@ width: 30%;
     border: 1px solid #ddd;
     border-radius: 5px;
     margin-bottom: 20px;
+    margin-top: 20px;
     overflow: hidden;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-left: 20%;
+    margin-right: 20%;
 }
 
 .math-header {
@@ -170,6 +104,7 @@ width: 30%;
 
 
 .topbar {
+            height: 50px;
             position: fixed;
             top: 0;
             left: 0;
@@ -188,4 +123,62 @@ width: 30%;
     margin-bottom: 20px;
     overflow: hidden;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* CSS */
+.button-4 {
+  appearance: none;
+  background-color: #FAFBFC;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #24292E;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  padding: 6px 16px;
+  position: relative;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: break-word;
+}
+
+.button-4:hover {
+  background-color: #F3F4F6;
+  text-decoration: none;
+  transition-duration: 0.1s;
+}
+
+.button-4:disabled {
+  background-color: #FAFBFC;
+  border-color: rgba(27, 31, 35, 0.15);
+  color: #959DA5;
+  cursor: default;
+}
+
+.button-4:active {
+  background-color: #EDEFF2;
+  box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+  transition: none 0s;
+}
+
+.button-4:focus {
+  outline: 1px transparent;
+}
+
+.button-4:before {
+  display: none;
+}
+
+.button-4:-webkit-details-marker {
+  display: none;
 }

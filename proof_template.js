@@ -61,7 +61,6 @@ readJsonFile(`./theorems/${name}.json`).then(function (proof_obj) {
         // waits for coq to be ready
         manager.when_ready.then(function (result){
               
-          let controller = new Controller(manager);
 
           console.log("COQ READY")
           console.log(manager.coq.query(1, 0, ['Mode']));
@@ -69,6 +68,7 @@ readJsonFile(`./theorems/${name}.json`).then(function (proof_obj) {
           // gathers the current code snippet - this is used for manipulating the code (e.g. adding lines).
           let snippet = manager.provider.snippets[0]
           
+          let controller = new Controller(manager, snippet);
           
           // adds definitions and theorem to coq code
           let str = "";
@@ -91,14 +91,14 @@ readJsonFile(`./theorems/${name}.json`).then(function (proof_obj) {
           str += proof_obj.theorem.coq + "\nProof.\n";
           
           controller.visualizer.visualize_math(proof_obj.theorem, "theorem");
-          controller.add_line(str, snippet);
+          controller.add_line(str);
           
           for (let at of controller.available_theorems){ 
-            controller.visualizer.add_theo_card(at);
+            controller.visualizer.add_theo_card(at, controller);
           }
           
           controller.go_next_n(str.split("\n").length, false, () => {
-            controller.add_line("induction n.\nintro.", snippet);
+            controller.add_line("induction n.\nintro.");
             controller.go_next_n(2, true, () => {
               
             }, () => {
@@ -113,17 +113,17 @@ readJsonFile(`./theorems/${name}.json`).then(function (proof_obj) {
           
           
           /*console.log(snippet)
-          controller.add_line("Lemma thing : forall (x : nat), 2 * x = x + x.\nProof.", snippet)
+          controller.add_line("Lemma thing : forall (x : nat), 2 * x = x + x.\nProof.")
           
           manager.provider.focus();
           controller.go_next_n(2, true, () => {
             let a = manager.layout.proof;
             console.log(a);
             console.log(a.outerText);
-            controller.add_line('induction x.', snippet);
-            controller.add_line('rewrite <- plus_n_O.', snippet);
-            controller.add_line('rewrite <- mult_n_O.', snippet);
-            controller.add_line('reflexivity.', snippet);
+            controller.add_line('induction x.');
+            controller.add_line('rewrite <- plus_n_O.');
+            controller.add_line('rewrite <- mult_n_O.');
+            controller.add_line('reflexivity.');
             
             controller.go_next_n(4, true, () => {}, () => {})
 

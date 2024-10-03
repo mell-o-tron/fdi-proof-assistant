@@ -112,7 +112,7 @@ class Visualizer {
         MathJax.typeset();
     }
 
-    add_theo_card(at) {
+    add_theo_card(at, controller) {
         let theobox = document.createElement("div");
         theobox.className = 'theorem-card';
         let theodesc = document.createElement("div");
@@ -124,8 +124,20 @@ class Visualizer {
         header.className = "math-header theorem-header";
         header.textContent = at.name;
 
+        let rw_lr = document.createElement("button");
+        rw_lr.className = "button-4";
+        rw_lr.textContent = "Apply (🡒)";
+        rw_lr.onclick = () => {controller.rewrite_theorem(at.name, true)};
+
+        let rw_rl = document.createElement("button");
+        rw_rl.className = "button-4";
+        rw_rl.onclick = () => {controller.rewrite_theorem(at.name, false)};
+        rw_rl.textContent = "Apply (🡐)";
+        
         theobox.appendChild(header);
         theobox.appendChild(theodesc);
+        theobox.appendChild(rw_lr);
+        theobox.appendChild(rw_rl);
         MathJax.typeset();
     }
 
