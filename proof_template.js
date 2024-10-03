@@ -94,9 +94,12 @@ readJsonFile(`./theorems/${name}.json`).then(function (proof_obj) {
           controller.add_line(str, snippet);
           
           for (let at of controller.available_theorems){ 
-            let theo = document.createElement("button");
-            theo.textContent = at.name;
-            document.getElementById("available_theorems").appendChild(theo);
+            let theobox = document.createElement("div");
+            let theodesc = document.createElement("div");
+            theodesc.textContent = at.text;
+            theobox.appendChild(theodesc);
+            document.getElementById("available_theorems").appendChild(theobox);
+            MathJax.typeset();
           }
           
           controller.go_next_n(str.split("\n").length, false, () => {
