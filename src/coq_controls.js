@@ -6,6 +6,7 @@ class Controller {
     this.snippet = snippet;
     this.visualizer = new Visualizer();
     this.available_theorems = [];
+    this.available_tactics = [];
   }
 
 
@@ -101,6 +102,20 @@ class Controller {
       
     }, () => {this.go_prev_n(1); alert("Cannot apply theorem"); this.rm_line()});
   
+  }
+
+  apply_tactic(tac_coq, args){
+    let tactic_text = tac_coq;
+    for (let i in args){
+      tactic_text = tactic_text.replace(`$${i}`, args[i]);
+    }
+    this.add_line(`${tac_coq}`, this.snippet);
+    this.go_next_n(1, true, () => {
+      let div = document.getElementById("scroooool");
+      console.log("that div is: " + div);
+//       div.scrollTop = div.scrollHeight;  //TODO fix this
+
+    }, () => {this.go_prev_n(1); alert("Cannot apply tactic"); this.rm_line()});
   }
 }
 

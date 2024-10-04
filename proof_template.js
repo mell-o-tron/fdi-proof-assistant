@@ -83,6 +83,11 @@ readJsonFile(`./theorems/${name}.json`).then(function (proof_obj) {
             str += d.coq + "\n";
             controller.available_theorems.push(d);
           }
+
+          // adds tactics to the controller's available tactics list
+          for (let t of topic_obj.tactics) {
+            controller.available_tactics.push(t);
+          }
           
           // the definitions are visualized TODO maybe add a flag in the json to decide whether to visualize a definition
           for (let d of proof_obj.definitions) {
@@ -100,40 +105,17 @@ readJsonFile(`./theorems/${name}.json`).then(function (proof_obj) {
             controller.visualizer.add_theo_card(at, controller);
           }
           
-          
-          controller.go_next_n(str.split("\n").length, false, () => {
-            controller.add_line("induction n.\nintro.");
-            controller.go_next_n(2, true, () => {
-              
-            }, () => {
-              console.log("There is a mistake in the proof.")
-            });
-            
-            
-          }, () => {
+          for (let tac of controller.available_tactics){
+            controller.visualizer.add_tactic_card(tac, controller)
+          }
+
+
+
+          controller.go_next_n(str.split("\n").length, false, () => {}, () => {
             console.log("There is a mistake in the definitions or theorem statement.")
           });
           
-          
-          
-          /*console.log(snippet)
-          controller.add_line("Lemma thing : forall (x : nat), 2 * x = x + x.\nProof.")
-          
-          manager.provider.focus();
-          controller.go_next_n(2, true, () => {
-            let a = manager.layout.proof;
-            console.log(a);
-            console.log(a.outerText);
-            controller.add_line('induction x.');
-            controller.add_line('rewrite <- plus_n_O.');
-            controller.add_line('rewrite <- mult_n_O.');
-            controller.add_line('reflexivity.');
-            
-            controller.go_next_n(4, true, () => {}, () => {})
 
-          }, () => {
-            console.log("There was an error with the proof")
-          });*/
 
         });
       });

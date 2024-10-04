@@ -141,6 +141,40 @@ class Visualizer {
         MathJax.typeset();
     }
 
+    add_tactic_card(at, controller) {
+        let theobox = document.createElement("div");
+        theobox.className = 'theorem-card';
+        let theodesc = document.createElement("div");
+        theodesc.className = 'math-content';
+        theodesc.textContent = at.text;
+        document.getElementById("available_tactics").appendChild(theobox);
+
+        let header = document.createElement('div');
+        header.className = "math-header theorem-header";
+        header.textContent = at.name;
+
+        let tboxes = []
+
+        for (let i = 0; i < at.n_params; i++){
+            let tbox = document.createElement("INPUT");
+            tbox.setAttribute("type", "text");
+            tboxes.push(tbox);
+        }
+
+        let apply_button = document.createElement("button");
+        apply_button.className = "button-4";
+        apply_button.textContent = "Apply";
+        // apply_button.onclick = () => {controller.apply_tactic(at.name, args)};
+
+
+        theobox.appendChild(header);
+        theobox.appendChild(theodesc);
+        for (let tbox of tboxes) {
+            theobox.appendChild(tbox);
+        }
+        theobox.appendChild(apply_button);
+        MathJax.typeset();
+    }
 }
 
 export { Visualizer };
