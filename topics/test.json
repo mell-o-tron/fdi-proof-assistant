@@ -24,21 +24,40 @@
     "name": "add_zero_right",
     "text": "0 is the right identity for +:\\[ \\forall a \\in \\mathbb N . a + 0 = a \\]",
     "coq": "Theorem add_zero_right : forall a : nat, add a 0 = a.\nProof.\nAdmitted.\n"
+  },
+  {
+    "name": "add_succ",
+    "text": "The following holds\\[ \\forall (a\\; b : \\mathbb N) , a + succ(b) = succ(a + b) \\]",
+    "coq": "Theorem add_succ : forall a b : nat, (a + succ b) = succ(a + b).\nProof.\nAdmitted.\n"
   }
   ],
   "tactics" : [
     {
       "name": "induction",
       "n_params" : 1,
-      "text": "Proof by induction.",
-      "coq" : "induction $1.\n"
+      "text": "Proof by induction. Enter the induction variable:",
+      "coq" : "induction $0.\n"
     },
     
     {
       "name": "intro",
       "n_params" : 0,
-      "text": "Introduce a variable:\\[ P \\to Q \\text{ becomes ``given $P$ prove $Q$''} \\]\\[ \\forall x : A , P \\text{ becomes ``given $x : A$ prove $P$''} \\]",
+      "text": "Introduce a variable:\\[ \\texttt{\"} P \\to Q \\texttt{\"} \\text{ becomes }\\texttt{\"}\\text{given $P$ prove $Q$}\\texttt{\"} \\]\\[ \\texttt{\"}\\forall (x : A) , P\\texttt{\"} \\text{ becomes } \\texttt{\"}\\text{given $(x : A)$ prove $P$}\\texttt{\"} \\]",
       "coq" : "intro.\n"
+    },
+    
+    {
+      "name": "reflexivity",
+      "n_params" : 0,
+      "text": "Equality is reflexive.\\[ \\texttt{\"}A = A\\texttt{\"} \\text{ becomes } \\texttt{\"true\"}\\]",
+      "coq" : "reflexivity.\n"
+    },
+    
+    {
+      "name": "apply definition",
+      "n_params" : 1,
+      "text": "Apply a definition. Provide the name of the definition. You can specify an occurrence by writing:\\[ \\texttt{def_name at occ} \\]where \\[\\texttt{occ}\\]is an occurrence number starting from 1",
+      "coq" : "simpl $0.\n"
     }
   ]
 } 

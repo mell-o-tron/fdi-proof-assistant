@@ -164,7 +164,11 @@ class Visualizer {
         let apply_button = document.createElement("button");
         apply_button.className = "button-4";
         apply_button.textContent = "Apply";
-        // apply_button.onclick = () => {controller.apply_tactic(at.name, args)};
+        apply_button.onclick = () => {
+            
+            let args = tboxes.map(x => {return x.value});
+            controller.apply_tactic(at.coq, args)
+        };
 
 
         theobox.appendChild(header);

@@ -109,7 +109,7 @@ class Controller {
     for (let i in args){
       tactic_text = tactic_text.replace(`$${i}`, args[i]);
     }
-    this.add_line(`${tac_coq}`, this.snippet);
+    this.add_line(`${tactic_text}`, this.snippet);
     this.go_next_n(1, true, () => {
       let div = document.getElementById("scroooool");
       console.log("that div is: " + div);
