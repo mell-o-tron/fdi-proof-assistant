@@ -25,6 +25,21 @@
     "text": "0 is the right identity for +:\\[ \\forall a \\in \\mathbb N . a + 0 = a \\]",
     "coq": "Theorem add_zero_right : forall a : nat, add a 0 = a.\nProof.\nAdmitted.\n"
   }
+  ],
+  "tactics" : [
+    {
+      "name": "induction",
+      "n_params" : 1,
+      "text": "Proof by induction.",
+      "coq" : "induction $1.\n"
+    },
+    
+    {
+      "name": "intro",
+      "n_params" : 0,
+      "text": "Introduce a variable:\\[ P \\to Q \\text{ becomes ``given $P$ prove $Q$''} \\]\\[ \\forall x : A , P \\text{ becomes ``given $x : A$ prove $P$''} \\]",
+      "coq" : "intro.\n"
+    }
   ]
 } 
  

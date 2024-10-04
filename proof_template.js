@@ -78,11 +78,13 @@ readJsonFile(`./theorems/${name}.json`).then(function (proof_obj) {
             controller.visualizer.visualize_math(d, "definition");
           }
           
+          // adds theorems to the controller's available theorem list
           for (let d of topic_obj.theorems) {
             str += d.coq + "\n";
             controller.available_theorems.push(d);
           }
           
+          // the definitions are visualized TODO maybe add a flag in the json to decide whether to visualize a definition
           for (let d of proof_obj.definitions) {
             str += d.coq + "\n";
             controller.visualizer.visualize_math(d, "definition");
@@ -93,9 +95,11 @@ readJsonFile(`./theorems/${name}.json`).then(function (proof_obj) {
           controller.visualizer.visualize_math(proof_obj.theorem, "theorem");
           controller.add_line(str);
           
+          // Add the available theorems to the menu on the right
           for (let at of controller.available_theorems){ 
             controller.visualizer.add_theo_card(at, controller);
           }
+          
           
           controller.go_next_n(str.split("\n").length, false, () => {
             controller.add_line("induction n.\nintro.");
