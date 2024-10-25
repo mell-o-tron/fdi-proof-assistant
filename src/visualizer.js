@@ -35,11 +35,37 @@ class Visualizer {
     // Method to visualize a goal
     visualize_goal(comment) {
         
-        let vis_fun = () => {let text = ""
+        let vis_fun = () => {
+            
+            if(!this.observer.has_goals){
+                let box = document.createElement("div");
+                box.className = 'math-box';
+                
+                let header = document.createElement('div');
+                header.className = `math-header theorem-header`;
+                header.textContent = "Proof Concluded";
+                
+                let content = document.createElement('div');
+                content.className = 'math-content';
+                content.style["text-align"] = "center";
+                content.innerHTML = "";
+                
+                const QED = new Image(300);
+                QED.src = "./imgs/QED.png";
+                content.appendChild(QED);
+                
+                box.appendChild(header);
+                box.appendChild(content);
+
+                document.getElementById("latex-proof").appendChild(box);
+                return;
+            }
+            
+            let text = ""
             if (this.observer.current_goal.hypotheses.length > 0) {
                 text += "Assuming the following hypotheses:";
                 for (let h of this.observer.current_goal.hypotheses){
-                    text += this.texifier.texify (h.name + " : " + h.body)
+                    text += this.texifier.texify (`\\textit{${h.name}}` + " : " + h.body)
                 }
             }
             

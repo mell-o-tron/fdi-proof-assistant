@@ -31,14 +31,17 @@ class Observer {
     this.pprint = new FormatPrettyPrint();
     this.current_goal = {};
     this.vis_fun = (() => {});
+    this.has_goals = false;
   }
   coqReady() {  this._ready(); }
   coqGoalInfo(sid, goals) {
     if (!goals) {
       console.log("There are no current goals")
+      this.has_goals = false;
       return
     }
     if (!goals.goals) {
+      this.has_goals = false;
       console.log("There are no current goals")
       return
     }
@@ -46,19 +49,25 @@ class Observer {
     console.log(`current goals:`);
     console.log(bar, goals, bar);
     
-    let g = goals.goals[0]
-    
-    this.current_goal.hypotheses = []
-    for (let h of g.hyp) {
-      let hp_name = h[0][0][1]
-      let hp_body = this.pprint.pp2Text(h[2])
-      this.current_goal.hypotheses.push({name: hp_name, body: hp_body})
-    }
+    if (goals.goals[0]) {
+      this.has_goals = true;
+      let g = goals.goals[0]
       
-    this.current_goal.goal = this.pprint.pp2Text(g.ty)
-    this.vis_fun()
+      this.current_goal.hypotheses = []
+      for (let h of g.hyp) {
+        let hp_name = h[0][0][1]
+        let hp_body = this.pprint.pp2Text(h[2])
+        this.current_goal.hypotheses.push({name: hp_name, body: hp_body})
+      }
+      
+        
+      this.current_goal.goal = this.pprint.pp2Text(g.ty)
+    } else {
+     this.has_goals = false; 
+    }
+    this.vis_fun();
     
-    console.log(this.current_goal)
+    console.log(this.current_goal);
   }
 }
 

@@ -17,7 +17,7 @@ class TeXifier {
         for (let r of this.replacements) {
             res = res.replaceAll(r[0], r[1]);
         }
-        res = res.replaceAll(" ", " \\hspace{.1em}")
+        res = res.replace(/([a-zA-Z]) ([a-zA-Z])/g, "$1\\;$2")
         return this.centered_math(res);
     }
 
