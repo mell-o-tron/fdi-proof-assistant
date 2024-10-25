@@ -1,4 +1,5 @@
 import { JsCoq } from './node_modules/jscoq/jscoq.js';
+import { FormatPrettyPrint } from './node_modules/jscoq/jscoq.js';
 import {Controller} from "./src/coq_controls.js"
 
 
@@ -23,6 +24,43 @@ async function readJsonFile(url) {
     }
 }
 
+
+class Observer {
+  constructor() {
+    this.when_ready = new Promise(resolve => this._ready = resolve);
+    this.pprint = new FormatPrettyPrint();
+    this.current_goal = {};
+    this.vis_fun = (() => {});
+  }
+  coqReady() {  this._ready(); }
+  coqGoalInfo(sid, goals) {
+    if (!goals) {
+      console.log("There are no current goals")
+      return
+    }
+    if (!goals.goals) {
+      console.log("There are no current goals")
+      return
+    }
+    var bar = `\n${"-".repeat(60)}\n`
+    console.log(`current goals:`);
+    console.log(bar, goals, bar);
+    
+    let g = goals.goals[0]
+    
+    this.current_goal.hypotheses = []
+    for (let h of g.hyp) {
+      let hp_name = h[0][0][1]
+      let hp_body = this.pprint.pp2Text(h[2])
+      this.current_goal.hypotheses.push({name: hp_name, body: hp_body})
+    }
+      
+    this.current_goal.goal = this.pprint.pp2Text(g.ty)
+    this.vis_fun()
+    
+    console.log(this.current_goal)
+  }
+}
 
 
 // set up jscoq
@@ -57,18 +95,20 @@ readJsonFile(`./theorems/${name}.json`).then(function (proof_obj) {
       let manager_promise = JsCoq.start(jscoq_ids, jscoq_opts);
 
       manager_promise.then(function(manager) {
-
+        
         // waits for coq to be ready
         manager.when_ready.then(function (result){
-              
-
+          
+          let coq_observer = new Observer;
+          manager.coq.observers.push(coq_observer);
+          
           console.log("COQ READY")
           console.log(manager.coq.query(1, 0, ['Mode']));
           
           // gathers the current code snippet - this is used for manipulating the code (e.g. adding lines).
           let snippet = manager.provider.snippets[0]
           
-          let controller = new Controller(manager, snippet);
+          let controller = new Controller(manager, snippet, coq_observer);
           
           // adds definitions and theorem to coq code
           let str = "";
@@ -105,10 +145,12 @@ readJsonFile(`./theorems/${name}.json`).then(function (proof_obj) {
             controller.visualizer.add_theo_card(at, controller);
           }
           
+          // Add the available tactics to the menu on the right
           for (let tac of controller.available_tactics){
             controller.visualizer.add_tactic_card(tac, controller)
           }
-
+          
+          controller.visualizer.add_hp_handlers(controller)
 
 
           controller.go_next_n(str.split("\n").length, false, () => {}, () => {

@@ -85,6 +85,10 @@ width: 30%;
     text-align: left;
 }
 
+.hypothesis-header {
+    background-color: #73A9AD; /* Blue */
+}
+
 .theorem-header {
     background-color: #73A9AD; /* Blue */
 }

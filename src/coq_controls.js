@@ -1,10 +1,11 @@
 import {Visualizer} from "./visualizer.js"
 
 class Controller {
-  constructor(manager, snippet){
+  constructor(manager, snippet, observer){
     this.manager = manager;
     this.snippet = snippet;
-    this.visualizer = new Visualizer();
+    this.observer = observer;
+    this.visualizer = new Visualizer(observer);
     this.available_theorems = [];
     this.available_tactics = [];
   }
@@ -71,13 +72,16 @@ class Controller {
       cont()
     }
     else{
+      
+      // TODO not quite correct, somehow the statement should be retrieved BEFORE calling goNext. This way the solution depends on timing.
+      
       this.manager.goNext(true)
       let stmt = this.manager.doc.sentences.slice(-1)[0];
+      if (should_vis) this.visualizer.visualize(stmt);    // OPTIMISTIC VISUALIZATION - the visualizer sends a visualization function to the observer, to be executed if/when the goal changes.
       this.wait_for_processed(stmt, () => {
   //       console.log("PROCESSED:")
   //       console.log(stmt)
         this.go_next_n(n-1, should_vis, cont, err);
-        if (should_vis) this.visualizer.visualize(stmt);
       }, err)
     }
   }
