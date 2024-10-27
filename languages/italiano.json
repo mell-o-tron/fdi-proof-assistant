@@ -1,0 +1,14 @@
+{
+  "ASSUMING" : "Assumendo le seguenti ipotesi:",
+  "BYINDUCTION" : "Procediamo per induzione",
+  "INTRO" : "Introduciamo una nuova ipotesi",
+  "INTROS" : "Introduciamo delle nuove ipotesi",
+  "REFL" : "I due lati dell'uguaglianza sono identci: procediamo per riflessività",
+  "RIGHTTOLEFT" : "da destra a sinistra",
+  "LEFTTORIGHT" : "da sinistra a destra",
+  "CONCLUDED" : "dimostrazione conclusa",
+  "PROOFSTEP" : "Passo di dimostrazione",
+  "APPLYHYPOTHESIS" : "Applica Ipotesi",
+  "PROVE" : "dimostra"
+} 
+ 

@@ -71,6 +71,20 @@ class Observer {
   }
 }
 
+// make singleton?
+class LanguageSelector {
+  
+  constructor(){ 
+  }
+  
+  select_language(lang){
+    readJsonFile(`./languages/${lang}.json`).then(function (language_obj) {
+      this.current_language = language_obj;
+    }.bind(this)).catch(err => console.error("No such language found:", err));
+  }
+  
+}
+
 
 // set up jscoq
 var jscoq_ids  = ['coq-code'];
@@ -117,7 +131,12 @@ readJsonFile(`./theorems/${name}.json`).then(function (proof_obj) {
           // gathers the current code snippet - this is used for manipulating the code (e.g. adding lines).
           let snippet = manager.provider.snippets[0]
           
-          let controller = new Controller(manager, snippet, coq_observer);
+          let language_selector = new LanguageSelector();
+          language_selector.select_language("italiano");
+          
+          console.log(language_selector);
+          
+          let controller = new Controller(manager, snippet, coq_observer, language_selector);
           
           // adds definitions and theorem to coq code
           let str = "";

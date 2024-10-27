@@ -1,27 +1,28 @@
 import { TeXifier } from "./texifier.js"; // Import the PlainTextifier class
 
 class TacticCommentator {
-    constructor() {
+    constructor(language_selector) {
         this.texifier = new TeXifier(); // Create an instance of PlainTextifier for inline_math
+        this.language_selector = language_selector;
     }
 
     // Method to generate a comment based on the tactic
     tactic_comment(tactic, text) {
         switch (tactic) {
             case "induction":
-                return `We proceed by induction on ${this.texifier.inline_math(text.replace("induction", "").replace(".", ""))}.`;
+                return `${this.language_selector.current_language.BYINDUCTION} ${this.texifier.inline_math(text.replace("induction", "").replace(".", ""))}.`;
 
             case "intro":
-                return `We introduce a new hypothesis.`;
+                return `${this.language_selector.current_language.INTRO}.`;
 
             case "intros":
-                return `We introduce all new hypotheses.`;
+                return `${this.language_selector.current_language.INTROS}.`;
 
             case "reflexivity":
-                return `The two sides are the same: we apply the reflexivity property.`;
+                return `${this.language_selector.current_language.REFL}.`;
 
             case "rewrite":
-                let direction = text.includes("<-") ? `from right to left` : `from left to right`;
+                let direction = text.includes("<-") ? `${this.language_selector.current_language.RIGHTTOLEFT}` : `${this.language_selector.current_language.LEFTTORIGHT}`;
                 return `We apply: ${this.texifier.inline_math("\\texttt{" + text.replace("rewrite", "")
                     .replace(".", "")
                     .replace("->", "")

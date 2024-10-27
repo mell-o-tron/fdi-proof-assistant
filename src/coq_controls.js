@@ -1,11 +1,11 @@
 import {Visualizer} from "./visualizer.js"
 
 class Controller {
-  constructor(manager, snippet, observer){
+  constructor(manager, snippet, observer, language_selector){
     this.manager = manager;
     this.snippet = snippet;
     this.observer = observer;
-    this.visualizer = new Visualizer(observer);
+    this.visualizer = new Visualizer(observer, language_selector);
     this.available_theorems = [];
     this.available_tactics = [];
   }

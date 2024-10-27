@@ -3,10 +3,11 @@ import { TeXifier } from "./texifier.js";
 import { TacticCommentator } from "./tactic_commentator.js";
 
 class Visualizer {
-    constructor(observer) {
+    constructor(observer, language_selector) {
         this.observer = observer;
-        this.tacticCommentator = new TacticCommentator();
+        this.tacticCommentator = new TacticCommentator(language_selector);
         this.texifier = new TeXifier()
+        this.language_selector = language_selector;
 
         // List of tactics and terminators
         this.tactics = [
@@ -43,7 +44,7 @@ class Visualizer {
                 
                 let header = document.createElement('div');
                 header.className = `math-header theorem-header`;
-                header.textContent = "Proof Concluded";
+                header.textContent = this.language_selector.current_language.CONCLUDED;
                 
                 let content = document.createElement('div');
                 content.className = 'math-content';
@@ -63,13 +64,13 @@ class Visualizer {
             
             let text = ""
             if (this.observer.current_goal.hypotheses.length > 0) {
-                text += "Assuming the following hypotheses:";
+                text += this.language_selector.current_language.ASSUMING; //"Assuming the following hypotheses:";
                 for (let h of this.observer.current_goal.hypotheses){
                     text += this.texifier.texify (`\\textit{${h.name}}` + " : " + h.body)
                 }
             }
             
-            text += "Prove:" + this.texifier.texify(this.observer.current_goal.goal);
+            text += `${this.language_selector.current_language.PROVE}:` + this.texifier.texify(this.observer.current_goal.goal);
 
             if (text === undefined) return;
 
@@ -82,7 +83,7 @@ class Visualizer {
             
             let header = document.createElement('div');
             header.className = `math-header step-header`;
-            header.textContent = "Proof Step";
+            header.textContent = this.language_selector.current_language.PROOFSTEP;
             
             let content = document.createElement('div');
             content.className = 'math-content';
