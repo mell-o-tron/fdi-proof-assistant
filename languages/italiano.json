@@ -1,4 +1,6 @@
 {
+  "language_name" : "italiano",
+
   "ASSUMING" : "Assumendo le seguenti ipotesi:",
   "BYINDUCTION" : "Procediamo per induzione",
   "INTRO" : "Introduciamo una nuova ipotesi",
@@ -9,6 +11,13 @@
   "CONCLUDED" : "dimostrazione conclusa",
   "PROOFSTEP" : "Passo di dimostrazione",
   "APPLYHYPOTHESIS" : "Applica Ipotesi",
-  "PROVE" : "dimostra"
+  "PROVE" : "Si dimostri",
+  "APPLY" : "Applica",
+  "APPLYHYP" : "Applica Ipotesi",
+  "CHOOSEHYP" : "Scegli un'ipotesi",
+
+  "theorem" : "Teorema",
+  "definition" : "Definizione"
+
 } 
  

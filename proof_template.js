@@ -1,6 +1,7 @@
 import { JsCoq } from './node_modules/jscoq/jscoq.js';
 import { FormatPrettyPrint } from './node_modules/jscoq/jscoq.js';
 import {Controller} from "./src/coq_controls.js"
+import {LanguageSelector} from "./src/multilang.js"
 
 
 async function readJsonFile(url) {
@@ -24,6 +25,8 @@ async function readJsonFile(url) {
     }
 }
 
+// Observer class: gathers current goal and receives goal display function
+// KNOWN BUG:
 
 class Observer {
   constructor() {
@@ -71,20 +74,6 @@ class Observer {
   }
 }
 
-// make singleton?
-class LanguageSelector {
-  
-  constructor(){ 
-  }
-  
-  select_language(lang){
-    readJsonFile(`./languages/${lang}.json`).then(function (language_obj) {
-      this.current_language = language_obj;
-    }.bind(this)).catch(err => console.error("No such language found:", err));
-  }
-  
-}
-
 
 // set up jscoq
 var jscoq_ids  = ['coq-code'];
@@ -97,102 +86,104 @@ all_pkgs:  ['coq']
 };
 
 
+let language_selector = new LanguageSelector();
+language_selector.select_language("italiano").then(() => {
 
-const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
 
-const name = urlParams.get('theorem_name');
-const topic = urlParams.get('theorem_topic');
+  const name = urlParams.get('theorem_name');
+  const topic = urlParams.get('theorem_topic');
 
-readJsonFile(`./theorems/${name}.json`).then(function (proof_obj) {
-  readJsonFile(`./topics/${topic}.json`).then(function (topic_obj) {
-  
-    console.log(proof_obj);
-    console.log(topic_obj);
-    
-    if (proof_obj == null || topic_obj == null){
-        throw new Error ("proof environment is invalid");
-    }
-    else {
-      // returns the coq manager
-      let manager_promise = JsCoq.start(jscoq_ids, jscoq_opts);
+  readJsonFile(`./theorems/${name}.json`).then(function (proof_obj) {
+    readJsonFile(`./topics/${topic}.json`).then(function (topic_obj) {
 
-      manager_promise.then(function(manager) {
-        
-        // waits for coq to be ready
-        manager.when_ready.then(function (result){
-          
-          let coq_observer = new Observer;
-          manager.coq.observers.push(coq_observer);
-          
-          console.log("COQ READY")
-          console.log(manager.coq.query(1, 0, ['Mode']));
-          
-          // gathers the current code snippet - this is used for manipulating the code (e.g. adding lines).
-          let snippet = manager.provider.snippets[0]
-          
-          let language_selector = new LanguageSelector();
-          language_selector.select_language("italiano");
-          
-          console.log(language_selector);
-          
-          let controller = new Controller(manager, snippet, coq_observer, language_selector);
-          
-          // adds definitions and theorem to coq code
-          let str = "";
-          
-          for (let d of topic_obj.definitions) {
-            str += d.coq + "\n";
-            controller.visualizer.visualize_math(d, "definition");
-          }
-          
-          // adds theorems to the controller's available theorem list
-          for (let d of topic_obj.theorems) {
-            str += d.coq + "\n";
-            controller.available_theorems.push(d);
-          }
+      console.log(proof_obj);
+      console.log(topic_obj);
 
-          // adds tactics to the controller's available tactics list
-          for (let t of topic_obj.tactics) {
-            controller.available_tactics.push(t);
-          }
-          
-          // the definitions are visualized TODO maybe add a flag in the json to decide whether to visualize a definition
-          for (let d of proof_obj.definitions) {
-            str += d.coq + "\n";
-            controller.visualizer.visualize_math(d, "definition");
-          }
-          
-          str += proof_obj.theorem.coq + "\nProof.\n";
-          
-          controller.visualizer.visualize_math(proof_obj.theorem, "theorem");
-          controller.add_line(str);
-          
-          // Add the available theorems to the menu on the right
-          for (let at of controller.available_theorems){ 
-            controller.visualizer.add_theo_card(at, controller);
-          }
-          
-          // Add the available tactics to the menu on the right
-          for (let tac of controller.available_tactics){
-            controller.visualizer.add_tactic_card(tac, controller)
-          }
-          
-          controller.visualizer.add_hp_handlers(controller)
+      if (proof_obj == null || topic_obj == null){
+          throw new Error ("proof environment is invalid");
+      }
+      else {
+        // returns the coq manager
+        let manager_promise = JsCoq.start(jscoq_ids, jscoq_opts);
+
+        manager_promise.then(function(manager) {
+
+          // waits for coq to be ready
+          manager.when_ready.then(function (result){
+
+            let coq_observer = new Observer;
+            manager.coq.observers.push(coq_observer);
+
+            console.log("COQ READY")
+            console.log(manager.coq.query(1, 0, ['Mode']));
+
+            // gathers the current code snippet - this is used for manipulating the code (e.g. adding lines).
+            let snippet = manager.provider.snippets[0]
+
+            console.log(language_selector);
+
+            let controller = new Controller(manager, snippet, coq_observer, language_selector);
+
+            // adds definitions and theorem to coq code
+            let str = "";
+
+            for (let d of topic_obj.definitions) {
+              str += d.coq + "\n";
+              controller.visualizer.visualize_math(d, "definition");
+            }
+
+            // adds theorems to the controller's available theorem list
+            for (let d of topic_obj.theorems) {
+              str += d.coq + "\n";
+              controller.available_theorems.push(d);
+            }
+
+            // adds tactics to the controller's available tactics list
+            for (let t of topic_obj.tactics) {
+              controller.available_tactics.push(t);
+            }
+
+            // the definitions are visualized TODO maybe add a flag in the json to decide whether to visualize a definition
+            for (let d of proof_obj.definitions) {
+              str += d.coq + "\n";
+              controller.visualizer.visualize_math(d, "definition");
+            }
+
+            str += proof_obj.theorem.coq + "\nProof.\n";
+
+            console.log(proof_obj.theorem);
+
+            controller.visualizer.visualize_math(proof_obj.theorem, "theorem");
+            controller.add_line(str);
+
+            // Add the available theorems to the menu on the right
+            for (let at of controller.available_theorems){
+              controller.visualizer.add_theo_card(at, controller);
+            }
+
+            // Add the available tactics to the menu on the right
+            for (let tac of controller.available_tactics){
+              controller.visualizer.add_tactic_card(tac, controller)
+            }
+
+            controller.visualizer.add_hp_handlers(controller)
+
+            document.getElementById("loading").style.display = "none";
+
+            controller.go_next_n(str.split("\n").length, false, () => {}, () => {
+              console.log("There is a mistake in the definitions or theorem statement.")
+            });
 
 
-          controller.go_next_n(str.split("\n").length, false, () => {}, () => {
-            console.log("There is a mistake in the definitions or theorem statement.")
+
           });
-          
-
-
         });
-      });
-    }
-    
+      }
+
+    }).catch(err => console.error("Error occurred while fetching or processing the JSON data:", err));
   }).catch(err => console.error("Error occurred while fetching or processing the JSON data:", err));
-}).catch(err => console.error("Error occurred while fetching or processing the JSON data:", err));
 
 
-
+});

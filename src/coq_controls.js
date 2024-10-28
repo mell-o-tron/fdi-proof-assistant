@@ -25,16 +25,11 @@ class Controller {
   
   rm_line () {
       this.snippet.editor.replaceRange("", { line: this.snippet.editor.getCursor().line, ch: 0 }, { line: this.snippet.editor.getCursor().line + 1, ch: 0 });
-//       this.snippet.editor.execCommand("deleteLine");
   }
 
   /* waits for sentence to reach processed (or error) state - TODO add param to error */
   wait_for_processed(sentence, cont, on_err, depth = 0){
-  //   console.log("==================== WFP")
-  //   console.log(sentence)
-  //   console.log(cont)
-  //   console.log(depth)
-  //   console.log("====================")
+
 
     if (sentence.phase != "processed" && sentence.phase != "error"){
       setTimeout(this.wait_for_processed.bind(this), 100, sentence, cont, on_err, depth + 1)
@@ -49,12 +44,6 @@ class Controller {
 
   /* waits for sentence to reach cancelling state - probly not needed. */
   wait_for_cancelled(sentence, cont, on_err, depth = 0){
-  //   console.log("==================== WFC")
-  //   console.log(sentence.phase)
-  //   console.log(cont)
-  //   console.log(depth)
-  //   console.log("====================")
-
     if (sentence.phase != "cancelling" && sentence.phase != "error"){
       setTimeout(this.wait_for_cancelled.bind(this), 100, sentence, cont, on_err, depth + 1)
     }
@@ -73,14 +62,17 @@ class Controller {
     }
     else{
       
-      // TODO not quite correct, somehow the statement should be retrieved BEFORE calling goNext. This way the solution depends on timing.
-      
+      const cursor = this.snippet.editor.getCursor();
+      const vis_stmt = { text : this.snippet.editor.getLine(cursor.line-1)};    // not sure why -1 is needed, but it appears to be needed.
+
+      if (should_vis) this.visualizer.visualize(vis_stmt);    // OPTIMISTIC VISUALIZATION - the visualizer sends a visualization function to the observer, to be executed if/when the goal changes.
       this.manager.goNext(true)
+
+      // CANNOT USE THIS FOR VISUALIZATION: MUST BE RETRIEVED BEFORE - USED TO USE THIS, BUT CORRECTNESS DEPENDED ON TIMING.
       let stmt = this.manager.doc.sentences.slice(-1)[0];
-      if (should_vis) this.visualizer.visualize(stmt);    // OPTIMISTIC VISUALIZATION - the visualizer sends a visualization function to the observer, to be executed if/when the goal changes.
+
+
       this.wait_for_processed(stmt, () => {
-  //       console.log("PROCESSED:")
-  //       console.log(stmt)
         this.go_next_n(n-1, should_vis, cont, err);
       }, err)
     }
