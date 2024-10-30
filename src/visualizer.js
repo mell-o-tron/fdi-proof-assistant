@@ -163,6 +163,10 @@ class Visualizer {
 
         let theobox = document.createElement("div");
         theobox.className = 'theorem-card';
+        
+        let theodesc_container = document.createElement("div");
+        theodesc_container.className = 'math-content-container';
+        
         let theodesc = document.createElement("div");
         theodesc.className = 'math-content';
 
@@ -172,6 +176,11 @@ class Visualizer {
         let header = document.createElement('div');
         header.className = "math-header theorem-header";
         header.textContent = at.name;
+        
+        header.addEventListener("click", () => {
+            const content = header.nextElementSibling;
+            content.style.display = content.style.display === "block" ? "none" : "block";
+            });
 
         let rw_lr = document.createElement("button");
         rw_lr.className = "button-4";
@@ -184,9 +193,10 @@ class Visualizer {
         rw_rl.textContent = `${local_langsel.current_language.APPLY} (🡐)`;
         
         theobox.appendChild(header);
-        theobox.appendChild(theodesc);
-        theobox.appendChild(rw_lr);
-        theobox.appendChild(rw_rl);
+        theodesc_container.appendChild(theodesc);
+        theodesc_container.appendChild(rw_lr);
+        theodesc_container.appendChild(rw_rl);
+        theobox.appendChild(theodesc_container);
         MathJax.typeset();
     }
 
@@ -195,6 +205,10 @@ class Visualizer {
 
         let theobox = document.createElement("div");
         theobox.className = 'theorem-card';
+        
+        let theodesc_container = document.createElement("div");
+        theodesc_container.className = 'math-content-container';
+        
         let theodesc = document.createElement("div");
         theodesc.className = 'math-content';
 
@@ -204,7 +218,12 @@ class Visualizer {
         let header = document.createElement('div');
         header.className = "math-header theorem-header";
         header.textContent = at.name;
-
+        
+        header.addEventListener("click", () => {
+            const content = header.nextElementSibling;
+            content.style.display = content.style.display === "block" ? "none" : "block";
+            });
+        
         let tboxes = []
 
         for (let i = 0; i < at.n_params; i++){
@@ -224,11 +243,12 @@ class Visualizer {
 
 
         theobox.appendChild(header);
-        theobox.appendChild(theodesc);
+        theodesc_container.appendChild(theodesc);
         for (let tbox of tboxes) {
-            theobox.appendChild(tbox);
+            theodesc_container.appendChild(tbox);
         }
-        theobox.appendChild(apply_button);
+        theodesc_container.appendChild(apply_button);
+        theobox.appendChild(theodesc_container);
         MathJax.typeset();
     }
     

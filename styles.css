@@ -120,6 +120,10 @@ width: 30%;
     background-color: #fff;
 }
 
+.math-content-container {
+  display : none;
+}
+
 
 .topbar {
             height: 50px;
