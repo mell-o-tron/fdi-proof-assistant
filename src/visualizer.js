@@ -227,16 +227,36 @@ class Visualizer {
         let tboxes = []
 
         for (let i = 0; i < at.n_params; i++){
-            let tbox = document.createElement("INPUT");
-            tbox.setAttribute("type", "text");
-            tboxes.push(tbox);
+            
+            switch (at.param_types[i]){
+                case "definitions": {
+                    let tbox = document.createElement("select");
+                    
+                    for (let def of controller.definitions) {
+                        let defop = document.createElement("option");
+                        defop.value = def.name;
+                        defop.textContent = def.display_name;
+                        tbox.appendChild(defop);
+                    }
+                    
+                    tboxes.push(tbox);
+                    break;
+                }
+                default: {
+                    let tbox = document.createElement("INPUT");
+                    tbox.setAttribute("type", "text");
+                    tboxes.push(tbox);
+                    break;
+                }
+            }
+            
+            
         }
 
         let apply_button = document.createElement("button");
         apply_button.className = "button-4";
         apply_button.textContent = local_langsel.current_language.APPLY;
         apply_button.onclick = () => {
-            
             let args = tboxes.map(x => {return x.value});
             controller.apply_tactic(at.coq, args)
         };
@@ -245,7 +265,10 @@ class Visualizer {
         theobox.appendChild(header);
         theodesc_container.appendChild(theodesc);
         for (let tbox of tboxes) {
-            theodesc_container.appendChild(tbox);
+            let tbox_container = document.createElement("div");
+            tbox_container.className = "tbox-container";
+            theodesc_container.appendChild(tbox_container);
+            tbox_container.appendChild(tbox);
         }
         theodesc_container.appendChild(apply_button);
         theobox.appendChild(theodesc_container);
@@ -267,8 +290,11 @@ class Visualizer {
         header.className = "math-header hypothesis-header";
         header.textContent = local_langsel.current_language.APPLYHYP;
         
-        let tbox = document.createElement("INPUT");
-        tbox.setAttribute("type", "text");
+        let tbox_container = document.createElement("div");
+        tbox_container.className = "tbox-container";
+        
+        let tbox = document.createElement("select");
+        tbox.className = "hyp-dropdown"
         
         
         let rw_lr = document.createElement("button");
@@ -283,7 +309,8 @@ class Visualizer {
         
         hypbox.appendChild(header);
         hypbox.appendChild(theodesc);
-        hypbox.appendChild(tbox);
+        tbox_container.appendChild(tbox);
+        hypbox.appendChild(tbox_container);
         hypbox.appendChild(rw_lr);
         hypbox.appendChild(rw_rl);
         MathJax.typeset();

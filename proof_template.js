@@ -93,7 +93,9 @@ language_selector.select_language(language.trim()).then(() => {
             console.log(language_selector);
 
             let controller = new Controller(manager, snippet, coq_observer, language_selector);
-
+            
+            controller.set_definitions(topic_obj.definitions);
+            
             // adds definitions and theorem to coq code
             let str = "";
 

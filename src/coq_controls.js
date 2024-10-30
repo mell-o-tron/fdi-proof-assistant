@@ -8,8 +8,12 @@ class Controller {
     this.visualizer = new Visualizer(observer, language_selector);
     this.available_theorems = [];
     this.available_tactics = [];
+    this.definitions = [];
   }
 
+  set_definitions(defs){
+    this.definitions = defs;
+  }
 
   /* writes a new coq line to the editor */
   add_line (line_text) {
@@ -102,7 +106,7 @@ class Controller {
       console.log("that div is: " + div);
 //       div.scrollTop = div.scrollHeight;  //TODO fix this
       
-    }, () => {/*this.go_prev_n(1);*/ alert("Cannot apply theorem"); this.rm_line()});
+    }, () => {/*this.go_prev_n(1);*/ alert("Cannot apply tactic or theorem"); this.rm_line()});
   
   }
 

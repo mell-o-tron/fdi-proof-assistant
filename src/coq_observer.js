@@ -9,7 +9,7 @@ class Observer {
     this.pprint = new FormatPrettyPrint();
     this.current_goal = {};
     this.vis_fun = (() => {});
-    this.has_goals = false;
+    this.has_goals = false;   // used to check if proof is finished.
   }
   coqReady() {  this._ready(); }
   coqGoalInfo(sid, goals) {
@@ -38,6 +38,19 @@ class Observer {
         this.current_goal.hypotheses.push({name: hp_name, body: hp_body})
       }
       
+      const dropdowns = document.querySelectorAll(".hyp-dropdown");
+      
+      dropdowns.forEach(dropdown => {
+        dropdown.innerHTML = "";
+        
+        for (let h of this.current_goal.hypotheses){
+          let hopt = document.createElement('option');
+          hopt.value = h.name;
+          hopt.textContent = h.name;
+          dropdown.appendChild(hopt);
+        }
+        
+      });
         
       this.current_goal.goal = this.pprint.pp2Text(g.ty)
     } else {

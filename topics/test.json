@@ -1,6 +1,8 @@
 {
   "definitions": [
     {
+      "name": "nat",
+      "display_name": "naturals",
       "text":
         {
           "english" : "Let \\(succ(n)\\) denote the <em>successor</em> of \\(n\\). The set of the natural numbers \\(\\mathbb N\\) is defined as follows: <ul><li>\\(0 \\in \\mathbb N\\)</li><li>\\(\\forall n \\in \\mathbb N . succ(n) \\in \\mathbb N\\).</li></ul>",
@@ -9,6 +11,8 @@
       "coq": "Inductive nat : Type := | zero : nat | succ : nat -> nat.\nNotation \"0\" := (zero).\n"
     },
     {
+      "name": "add",
+      "display_name": "+",
       "text":
       {
         "english" : "Let \\( ({+}) : \\mathbb N \\times \\mathbb N \\to \\mathbb N \\) be defined as follows:<ul><li>\\(0 + m \\triangleq m\\)</li><li>\\( succ (n) + m \\triangleq succ (n + m) \\).</li></ul>",
@@ -60,6 +64,7 @@
     {
       "name": "induction",
       "n_params" : 1,
+      "param_types" : ["text"],
       "text":
         {
           "english" : "Proof by induction. Enter the induction variable:",
@@ -92,13 +97,14 @@
 
     {
       "name": "apply definition",
-      "n_params" : 1,
+      "n_params" : 2,
+      "param_types" : ["definitions", "text"],
       "text":
         {
-          "english" : "Apply a definition. Provide the name of the definition. You can specify an occurrence by writing:\\[ \\texttt{def_name at occ} \\]where \\[\\texttt{occ}\\]is an occurrence number starting from 1",
-          "italiano" : "Applica una definizione. Fornisci il nome della definizione. Puoi specificare un'occorrenza scrivendo:\\[ \\texttt{def_name at occ} \\]dove \\[\\texttt{occ}\\]è un numero d'occorrenza a partire da 1"
+          "english" : "Apply a definition. Choose the definition from the menu. Optional: use the input box to specify an occurrence writing:\\[ \\texttt{at occ} \\]where \\[\\texttt{occ}\\]is a number starting from 1",
+          "italiano" : "Applica una definizione. Scegli una definizione dal menu. Puoi specificare un'occorrenza tramite l'area di testo scrivendo:\\[ \\texttt{at occ} \\]dove \\[\\texttt{occ}\\]è un numero a partire da 1"
         },
-      "coq" : "simpl $0.\n"
+      "coq" : "simpl $0 $1.\n"
     }
   ]
 }
