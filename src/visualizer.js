@@ -9,6 +9,8 @@ class Visualizer {
         this.texifier = new TeXifier()
         this.language_selector = language_selector;
 
+        this.step_list = [];
+
         // List of tactics and terminators
         this.tactics = [
             "after", "apply", "assert", "auto", "autorewrite", "case", "change", "clear", "compute", "congruence", "constructor",
@@ -25,16 +27,16 @@ class Visualizer {
     }
 
     // Method to visualize the statement
-    visualize(stmt) {
+    visualize(stmt, controller) {
         if (this.is_tactic(stmt)) {
             let comment = this.tacticCommentator.tactic_comment(stmt.text.trim().replace(/ .*/, '').replace(".", ""), stmt.text);
-            this.visualize_goal(comment);
+            this.visualize_goal(comment, controller);
         }
         MathJax.typeset();
     }
 
     // Method to visualize a goal
-    visualize_goal(comment) {
+    visualize_goal(comment, controller) {
         
         let vis_fun = () => {
             
@@ -88,12 +90,38 @@ class Visualizer {
             let content = document.createElement('div');
             content.className = 'math-content';
             content.innerHTML = text;
-            
+
+            let bottom_bar = document.createElement('div');
+            bottom_bar.className = 'step-footer';
+            bottom_bar.innerHTML = "";
+
+            let undo = document.createElement("button");
+            undo.className = "button-4";
+            undo.textContent = "UNDO";
+            undo.onclick = () => {
+                controller.del_line();
+                this.step_list.pop();
+
+                if(this.step_list.length > 0)
+                    this.step_list[this.step_list.length - 1].bottom_bar.style.display = "block";
+
+                box.remove();
+            };
+
+            if (this.step_list.length > 0)
+                this.step_list[this.step_list.length - 1].bottom_bar.style.display = "none";
+
+            bottom_bar.appendChild(undo);
+
             box.appendChild(header);
             box.appendChild(content);
+            box.appendChild(bottom_bar);
 
             document.getElementById("latex-proof").appendChild(box);
-            
+
+            this.step_list.push({content : content, bottom_bar : bottom_bar});
+
+
             MathJax.typeset();
         }
         

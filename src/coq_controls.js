@@ -24,7 +24,13 @@ class Controller {
   }
   
   rm_line () {
-      this.snippet.editor.replaceRange("", { line: this.snippet.editor.getCursor().line, ch: 0 }, { line: this.snippet.editor.getCursor().line + 1, ch: 0 });
+      let cursor_line = this.snippet.editor.getCursor().line;
+      this.snippet.editor.replaceRange("", { line: cursor_line-1, ch: this.snippet.editor.getLine(cursor_line-1).length}, { line: cursor_line, ch: this.snippet.editor.getLine(cursor_line).length});
+  }
+
+  del_line () {
+    let cursor_line = this.snippet.editor.getCursor().line;
+    this.snippet.editor.replaceRange("", { line: cursor_line-1, ch: this.snippet.editor.getLine(cursor_line-1).length}, { line: cursor_line + 1, ch: 0 });
   }
 
   /* waits for sentence to reach processed (or error) state - TODO add param to error */
@@ -65,7 +71,7 @@ class Controller {
       const cursor = this.snippet.editor.getCursor();
       const vis_stmt = { text : this.snippet.editor.getLine(cursor.line-1)};    // not sure why -1 is needed, but it appears to be needed.
 
-      if (should_vis) this.visualizer.visualize(vis_stmt);    // OPTIMISTIC VISUALIZATION - the visualizer sends a visualization function to the observer, to be executed if/when the goal changes.
+      if (should_vis) this.visualizer.visualize(vis_stmt, this);    // OPTIMISTIC VISUALIZATION - the visualizer sends a visualization function to the observer, to be executed if/when the goal changes.
       this.manager.goNext(true)
 
       // CANNOT USE THIS FOR VISUALIZATION: MUST BE RETRIEVED BEFORE - USED TO USE THIS, BUT CORRECTNESS DEPENDED ON TIMING.
@@ -96,7 +102,7 @@ class Controller {
       console.log("that div is: " + div);
 //       div.scrollTop = div.scrollHeight;  //TODO fix this
       
-    }, () => {this.go_prev_n(1); alert("Cannot apply theorem"); this.rm_line()});
+    }, () => {/*this.go_prev_n(1);*/ alert("Cannot apply theorem"); this.rm_line()});
   
   }
 
@@ -111,7 +117,7 @@ class Controller {
       console.log("that div is: " + div);
 //       div.scrollTop = div.scrollHeight;  //TODO fix this
 
-    }, () => {this.go_prev_n(1); alert("Cannot apply tactic"); this.rm_line()});
+    }, () => {/*this.go_prev_n(1);*/ alert("Cannot apply tactic"); this.rm_line()});
   }
 }
 

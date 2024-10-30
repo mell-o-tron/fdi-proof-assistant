@@ -19,6 +19,14 @@ body, html {
     height: 100%;
     background-color: #f9f9f9;
 }
+
+.home_page {
+    padding-top: 50px;
+    height : 100%;
+    margin-left : 20%;
+    margin-right : 20%;
+}
+
 .my_container {
     display: flex;
     padding-top: 50px;
@@ -99,6 +107,12 @@ width: 30%;
 
 .step-header {
     background-color: #adac72; /* Yellow */
+}
+
+.step-footer {
+/*     background-color : #bbb; */
+    border-top: 1px solid #ddd;
+    padding : 5px;
 }
 
 .math-content {

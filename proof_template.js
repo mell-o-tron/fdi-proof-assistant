@@ -74,6 +74,9 @@ class Observer {
   }
 }
 
+const selectDropdown = document.getElementById('langs');
+selectDropdown.addEventListener('change', function (e) { console.log(e) });
+
 
 // set up jscoq
 var jscoq_ids  = ['coq-code'];

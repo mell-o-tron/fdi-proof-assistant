@@ -12,67 +12,36 @@
       <title>Proof Utility</title>
    </head>
    <body>
-   
+
          <div class="topbar">
         <nav>
             <a href="#" style="color: white; margin: 0 15px;">Home</a>
-            <a href="#" style="color: white; margin: 0 15px;">About</a>
-            <a href="#" style="color: white; margin: 0 15px;">Contact</a>
+            <a href="#" style="color: white; margin: 0 15px;">Tutorial</a>
         </nav>
     </div>
-   
-      <div class="my_container">
-         <div class="my_scrollable" id="scroooool">
-         <div id="loading" style="text-align : center;padding : 30px;"> <h1>Loading...</h1> </div>
-         <div id="latex-proof"> </div>
-         
-            <div class="jscoq-main" style="display: none">
-               <div id="ide-wrapper" class="toggled">
-                  <div id="code-wrapper">
-                     <div id="document">
-                        <textarea id="coq-code" >
-                            (* Coq code *)
-                        </textarea>
-                        
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            
-         </div>
-         
-         
-         <div class="my_fixed">
-            
-            <div class="accordion">
-               <div class="accordion-header">Proof Tactics</div>
-               <div class="accordion-content">
-                  <div id="available_tactics"></div>
-               </div>
 
-               <div class="accordion-header">Apply Theorems</div>
-               <div class="accordion-content">
-                  <div id="available_theorems"></div>
-               </div>
+   <div class="home_page">
 
-               <div class="accordion-header">Manipulate Hypothesis</div>
-               <div class="accordion-content">
-                  <div id="hypman"></div>
-               </div>
-            </div>
-         
-         </div>
-      </div>
-      </div>
-      <script type="module" src="proof_template.js"></script>
-      <script>
-         const headers = document.querySelectorAll(".accordion-header");
+   <h1> Liste </h1>
 
-         headers.forEach(header => {
-            header.addEventListener("click", () => {
-            const content = header.nextElementSibling;
-            content.style.display = content.style.display === "block" ? "none" : "block";
-            });
-         });
-      </script>
+   <ul>
+   <li>
+   <a href="./proof_env.html?theorem_name=banana&theorem_topic=test">Teorema Test</a>
+   </li>
+   <li>
+   Teorema 2
+   </li>
+   </ul>
+
+   <h1> Alberi </h1>
+   <ul>
+   <li>
+   Teorema 1
+   </li>
+   <li>
+   Teorema 2
+   </li>
+   </ul>
+   </div>
    </body>
+</html>
