@@ -204,3 +204,14 @@ width: 30%;
 .button-4:-webkit-details-marker {
   display: none;
 }
+
+.theorem-l {
+    margin-left: 1.5em;
+    width: 60%;
+    margin-bottom: 1em;
+}
+
+.theorem-name {
+    color: black;
+    font-style: normal;
+}
