@@ -17,6 +17,17 @@
         <nav>
             <a href="#" style="color: white; margin: 0 15px;">Home</a>
             <a href="#" style="color: white; margin: 0 15px;">Tutorial</a>
+            
+             <div style="float : right;margin: 0 15px;">
+
+            <label for="langs">Language:</label>
+
+            <select name="langs" id="langs">
+            <option value="italiano">Italiano</option>
+            <option value="english">English</option>
+            </select>
+
+            </div>
         </nav>
     </div>
 
@@ -26,7 +37,7 @@
 
    <ul>
    <li>
-   <a href="./proof_env.html?theorem_name=banana&theorem_topic=test">Teorema Test</a>
+   <a class="theorem-link" href="./proof_env.html?theorem_name=banana&theorem_topic=test&language=italiano">Teorema Test</a>
    </li>
    <li>
    Teorema 2
@@ -43,5 +54,33 @@
    </li>
    </ul>
    </div>
+      <script>
+         const queryString = window.location.search;
+         const urlParams = new URLSearchParams(queryString);
+         const language = urlParams.get('language') ? urlParams.get('language') : "italiano";
+      
+         const theo_links = document.querySelectorAll(".theorem-link");
+         
+         const selectDropdown = document.getElementById('langs');
+         selectDropdown.value = language;
+         
+         theo_links .forEach(link => {
+         
+            let url = new URL(link.href);
+            url.searchParams.set("language", `${selectDropdown.value}`);
+            
+            link.href = url.toString();
+         });
+         
+         
+         selectDropdown.addEventListener('change', function (e) {
+              let url = new URL(window.location.href);
+               url.searchParams.set("language", `${selectDropdown.value}`);
+                  
+               window.location.href = url.toString();
+         });
+         
+      </script>
+      
    </body>
 </html>

@@ -1,8 +1,7 @@
 import { JsCoq } from './node_modules/jscoq/jscoq.js';
-import { FormatPrettyPrint } from './node_modules/jscoq/jscoq.js';
 import {Controller} from "./src/coq_controls.js"
 import {LanguageSelector} from "./src/multilang.js"
-
+import {Observer} from "./src/coq_observer.js"
 
 async function readJsonFile(url) {
     try {
@@ -25,57 +24,28 @@ async function readJsonFile(url) {
     }
 }
 
-// Observer class: gathers current goal and receives goal display function
-// KNOWN BUG:
 
-class Observer {
-  constructor() {
-    this.when_ready = new Promise(resolve => this._ready = resolve);
-    this.pprint = new FormatPrettyPrint();
-    this.current_goal = {};
-    this.vis_fun = (() => {});
-    this.has_goals = false;
-  }
-  coqReady() {  this._ready(); }
-  coqGoalInfo(sid, goals) {
-    if (!goals) {
-      console.log("There are no current goals")
-      this.has_goals = false;
-      return
-    }
-    if (!goals.goals) {
-      this.has_goals = false;
-      console.log("There are no current goals")
-      return
-    }
-    var bar = `\n${"-".repeat(60)}\n`
-    console.log(`current goals:`);
-    console.log(bar, goals, bar);
-    
-    if (goals.goals[0]) {
-      this.has_goals = true;
-      let g = goals.goals[0]
-      
-      this.current_goal.hypotheses = []
-      for (let h of g.hyp) {
-        let hp_name = h[0][0][1]
-        let hp_body = this.pprint.pp2Text(h[2])
-        this.current_goal.hypotheses.push({name: hp_name, body: hp_body})
-      }
-      
-        
-      this.current_goal.goal = this.pprint.pp2Text(g.ty)
-    } else {
-     this.has_goals = false; 
-    }
-    this.vis_fun();
-    
-    console.log(this.current_goal);
-  }
-}
+
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+
+const name = urlParams.get('theorem_name');
+const topic = urlParams.get('theorem_topic');
+const language = urlParams.get('language');
+
 
 const selectDropdown = document.getElementById('langs');
-selectDropdown.addEventListener('change', function (e) { console.log(e) });
+
+selectDropdown.value = language;
+selectDropdown.addEventListener('change', function (e) {
+  console.log(selectDropdown.value) 
+  
+  let url = new URL(window.location.href);
+  url.searchParams.set("language", `${selectDropdown.value}`);
+    
+  window.location.href = url.toString();
+});
+
 
 
 // set up jscoq
@@ -90,14 +60,9 @@ all_pkgs:  ['coq']
 
 
 let language_selector = new LanguageSelector();
-language_selector.select_language("italiano").then(() => {
 
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
 
-  const name = urlParams.get('theorem_name');
-  const topic = urlParams.get('theorem_topic');
-
+language_selector.select_language(language.trim()).then(() => {
   readJsonFile(`./theorems/${name}.json`).then(function (proof_obj) {
     readJsonFile(`./topics/${topic}.json`).then(function (topic_obj) {
 
