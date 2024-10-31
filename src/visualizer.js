@@ -5,7 +5,7 @@ import {LanguageSelector} from "./multilang.js"
 class Visualizer {
     constructor(observer, language_selector) {
         this.observer = observer;
-        this.tacticCommentator = new TacticCommentator(language_selector);
+        this.tacticCommentator = new TacticCommentator(language_selector, observer);
         this.texifier = new TeXifier()
         this.language_selector = language_selector;
 
@@ -29,16 +29,17 @@ class Visualizer {
     // Method to visualize the statement
     visualize(stmt, controller) {
         if (this.is_tactic(stmt)) {
-            let comment = this.tacticCommentator.tactic_comment(stmt.text.trim().replace(/ .*/, '').replace(".", ""), stmt.text);
-            this.visualize_goal(comment, controller);
+            this.visualize_goal(stmt, controller);
         }
         MathJax.typeset();
     }
 
     // Method to visualize a goal
-    visualize_goal(comment, controller) {
+    visualize_goal(stmt, controller) {
         
         let vis_fun = () => {
+            
+            let comment = this.tacticCommentator.tactic_comment(stmt.text.trim().replace(/ .*/, '').replace(".", ""), stmt.text);
             
             if(!this.observer.has_goals){
                 let box = document.createElement("div");
@@ -100,6 +101,7 @@ class Visualizer {
             undo.textContent = "UNDO";
             undo.onclick = () => {
                 controller.del_line();
+                controller.observer.undo_goal_history();
                 this.step_list.pop();
 
                 if(this.step_list.length > 0)
