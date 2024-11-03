@@ -215,13 +215,13 @@ class Visualizer {
 
         let rw_lr = document.createElement("button");
         rw_lr.className = "button-4";
-        rw_lr.textContent = `${local_langsel.current_language.APPLY} (🡒)`;
+        rw_lr.textContent = `${local_langsel.current_language.APPLY} (→)`;
         rw_lr.onclick = () => {controller.rewrite_theorem(at.name, true)};
 
         let rw_rl = document.createElement("button");
         rw_rl.className = "button-4";
         rw_rl.onclick = () => {controller.rewrite_theorem(at.name, false)};
-        rw_rl.textContent = `${local_langsel.current_language.APPLY} (🡐)`;
+        rw_rl.textContent = `${local_langsel.current_language.APPLY} (←)`;
         
         theobox.appendChild(header);
         theodesc_container.appendChild(theodesc);
@@ -330,13 +330,13 @@ class Visualizer {
         
         let rw_lr = document.createElement("button");
         rw_lr.className = "button-4";
-        rw_lr.textContent = `${local_langsel.current_language.APPLY} (🡒)`;
+        rw_lr.textContent = `${local_langsel.current_language.APPLY} (→)`;
         rw_lr.onclick = () => {controller.rewrite_theorem(tbox.value, true)};
 
         let rw_rl = document.createElement("button");
         rw_rl.className = "button-4";
         rw_rl.onclick = () => {controller.rewrite_theorem(tbox.value, false)};
-        rw_rl.textContent = `${local_langsel.current_language.APPLY} (🡐)`;
+        rw_rl.textContent = `${local_langsel.current_language.APPLY} (←)`;
         
         hypbox.appendChild(header);
         hypbox.appendChild(theodesc);
