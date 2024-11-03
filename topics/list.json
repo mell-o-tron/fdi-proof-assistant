@@ -22,15 +22,6 @@
     }
   ],
   "theorems": [
-  {
-    "name": "add_dist",
-    "text":
-      {
-        "english" : "Addition is distributive: \\[ \\forall a, b, c \\in \\mathbb N . (a + b) + c = a + (b + c) \\]",
-        "italiano" : "L'addizione è distributiva: \\[ \\forall a, b, c \\in \\mathbb N . (a + b) + c = a + (b + c) \\]"
-      },
-    "coq": ""
-  }
   ],
   "tactics" : [
     {

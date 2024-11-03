@@ -60,8 +60,26 @@ class Visualizer {
                 QED.src = "./imgs/QED.png";
                 content.appendChild(QED);
                 
+                let bottom_bar = document.createElement('div');
+                bottom_bar.className = 'step-footer';
+                bottom_bar.innerHTML = "";
+                
+                let print_button = document.createElement("button");
+                print_button.className = "button-4";
+                print_button.textContent = "PRINT RESULT";
+                print_button.onclick = () => {
+                    let url = new URL("/proof_print.html", window.location.href);
+                    localStorage.setItem("goal_history", JSON.stringify(this.observer.goal_history));
+                    localStorage.setItem("tactic_history", JSON.stringify(controller.coq_history));
+                    
+
+                    open(url.toString());
+                }
+                bottom_bar.appendChild(print_button);
+                
                 box.appendChild(header);
                 box.appendChild(content);
+                box.appendChild(bottom_bar);
 
                 document.getElementById("latex-proof").appendChild(box);
                 return;
@@ -117,6 +135,7 @@ class Visualizer {
                 controller.del_line();
                 controller.observer.undo_goal_history();
                 this.step_list.pop();
+                controller.coq_history.pop();
 
                 if(this.step_list.length > 0)
                     this.step_list[this.step_list.length - 1].bottom_bar.style.display = "block";
@@ -206,7 +225,8 @@ class Visualizer {
 
         let header = document.createElement('div');
         header.className = "math-header theorem-header";
-        header.textContent = at.name;
+        console.log("AOAOAOAOAOAOAOAOAO", at)
+        header.textContent = at.display_name[`${local_langsel.current_language.language_name}`];
         
         header.addEventListener("click", () => {
             const content = header.nextElementSibling;
