@@ -2,6 +2,7 @@
   "definitions": [
     {
       "name": "list",
+      "is_function" : "false",
       "display_name": "lists",
       "text":
         {
@@ -12,7 +13,9 @@
     },
     {
       "name": "len",
+      "is_function" : "true",
       "display_name": "len",
+      "arity" : 1,
       "text":
       {
         "english" : "Let \\( \\texttt {len} : L_{\\mathbb N} \\to \\mathbb N \\) be defined as follows:<ul style=\"padding : 15px;\"><li>Base Clause: \\( \\texttt{len}([]) = 0 \\)</li><li>Inductive Clause: \\( \\texttt{len}(a :: l_1) =  \\texttt{len} (l_1) + 1 \\).</li></ul>",
@@ -22,6 +25,8 @@
     },
     {
       "name": "app",
+      "is_function" : "true",
+      "arity" : 2,
       "display_name": "app",
       "text":
       {

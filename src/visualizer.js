@@ -2,6 +2,8 @@ import { TeXifier } from "./texifier.js";
 import { TacticCommentator } from "./tactic_commentator.js";
 import {LanguageSelector} from "./multilang.js"
 import {Hinter} from "./hinter.js"
+import {Uncurrifier} from "./uncurrifier.js"
+
 
 class Visualizer {
     constructor(observer, language_selector) {
@@ -40,8 +42,9 @@ class Visualizer {
     visualize_goal(stmt, controller) {
         
         let vis_fun = () => {
+            let uncurrifier = new Uncurrifier(controller);
             
-            let comment = this.tacticCommentator.tactic_comment(stmt.text.trim().replace(/ .*/, '').replace(".", ""), stmt.text);
+            let comment = this.tacticCommentator.tactic_comment(stmt.text.trim().replace(/ .*/, '').replace(".", ""), stmt.text, uncurrifier);
             
             if(!this.observer.has_goals){
                 let box = document.createElement("div");
@@ -89,11 +92,11 @@ class Visualizer {
             if (this.observer.current_goal.hypotheses.length > 0) {
                 text += this.language_selector.current_language.ASSUMING; //"Assuming the following hypotheses:";
                 for (let h of this.observer.current_goal.hypotheses){
-                    text += this.texifier.texify (`\\textit{${h.name}}` + " : " + h.body)
+                    text += this.texifier.texify (`{${h.name}}` + " : " + uncurrifier.uncurrify(h.body))
                 }
             }
             
-            text += `${this.language_selector.current_language.PROVE}:` + this.texifier.texify(this.observer.current_goal.goal);
+            text += `${this.language_selector.current_language.PROVE}:` + this.texifier.texify(uncurrifier.uncurrify(this.observer.current_goal.goal));
 
             if (text === undefined) return;
 
