@@ -49,7 +49,7 @@
           "english" : "Proof by induction. Enter the induction variable:",
           "italiano" : "Dimostrazione per induzione. Inserisci la variabile d'induzione:"
         },
-      "coq" : "induction $0.\n"
+      "coq" : "induction $0."
     },
 
     {
@@ -60,7 +60,7 @@
           "english" : "Introduce a variable:\\[ \\texttt{\"} P \\to Q \\texttt{\"} \\text{ becomes }\\texttt{\"}\\text{given $P$ prove $Q$}\\texttt{\"} \\]\\[ \\texttt{\"}\\forall (x : A) , P\\texttt{\"} \\text{ becomes } \\texttt{\"}\\text{given $(x : A)$ prove $P$}\\texttt{\"} \\]",
           "italiano" : "Introduce una variabile:\\[ \\texttt{\"} P \\to Q \\texttt{\"} \\text{ diventa }\\texttt{\"}\\text{dato $P$ dimostra $Q$}\\texttt{\"} \\]\\[ \\texttt{\"}\\forall (x : A) , P\\texttt{\"} \\text{ diventa } \\texttt{\"}\\text{dato $(x : A)$ dimostra $P$}\\texttt{\"} \\]"
         },
-      "coq" : "intro.\n"
+      "coq" : "intro."
     },
 
     {
@@ -71,7 +71,7 @@
           "english" : "Equality is reflexive.\\[ \\texttt{\"}A = A\\texttt{\"} \\text{ becomes } \\texttt{\"true\"}\\]",
           "italiano" : "L'uguaglianza è riflessiva.\\[ \\texttt{\"}A = A\\texttt{\"} \\text{ diventa } \\texttt{\"vero\"}\\]"
         },
-      "coq" : "reflexivity.\n"
+      "coq" : "reflexivity."
     },
 
     {
@@ -83,7 +83,7 @@
           "english" : "Apply a definition. Choose the definition from the menu. Optional: use the input box to specify an occurrence writing:\\[ \\texttt{at occ} \\]where \\[\\texttt{occ}\\]is a number starting from 1",
           "italiano" : "Applica una definizione. Scegli una definizione dal menu. Puoi specificare un'occorrenza tramite l'area di testo scrivendo:\\[ \\texttt{at occ} \\]dove \\[\\texttt{occ}\\]è un numero a partire da 1"
         },
-      "coq" : "simpl $0 $1.\n"
+      "coq" : "simpl $0 $1."
     }
   ]
 }
