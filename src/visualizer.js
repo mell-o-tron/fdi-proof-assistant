@@ -85,6 +85,7 @@ class Visualizer {
                 box.appendChild(bottom_bar);
 
                 document.getElementById("latex-proof").appendChild(box);
+                this.step_list[this.step_list.length - 1].bottom_bar.style.display = "none";
                 return;
             }
             

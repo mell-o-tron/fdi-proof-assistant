@@ -89,6 +89,7 @@ class Uncurrifier {
         let s = t
         for (let fun of this.functions) {
             s = this.to_uncurried(s, fun)
+            s = s.replaceAll(fun.name, `\\texttt{${fun.name}}`)
         }
         
         return s;
