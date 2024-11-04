@@ -32,7 +32,7 @@ class Hinter {
                     res.push ({
                     name : `${this.langsel.current_language.APPLYREFLEXIVITY}`,
                     func : () => {
-                        this.controller.apply_tactic("reflexivity.\n");
+                        this.controller.apply_tactic("reflexivity.");
                     }
                 });
                 }
