@@ -110,7 +110,7 @@ class Visualizer {
             
             let header = document.createElement('div');
             header.className = `math-header step-header`;
-            header.textContent = this.language_selector.current_language.PROOFSTEP;
+            header.textContent = this.language_selector.current_language.PROOFSTEP + ` ${(this.step_list.length + 1)}`;
             
             let content = document.createElement('div');
             content.className = 'math-content';
@@ -229,7 +229,6 @@ class Visualizer {
 
         let header = document.createElement('div');
         header.className = "math-header theorem-header";
-        console.log("AOAOAOAOAOAOAOAOAO", at)
         header.textContent = at.display_name[`${local_langsel.current_language.language_name}`];
         
         header.addEventListener("click", () => {
@@ -237,18 +236,30 @@ class Visualizer {
             content.style.display = content.style.display === "block" ? "none" : "block";
             });
 
+        
+        let occ_container = document.createElement('div');
+        occ_container.className = "tbox-container";
+        occ_container.textContent = "occurrence: "
+        let occ = document.createElement("INPUT");
+        occ.setAttribute("type", "number");
+        occ.value = 1;
+        occ_container.appendChild(occ);
+        
         let rw_lr = document.createElement("button");
         rw_lr.className = "button-4";
         rw_lr.textContent = `${local_langsel.current_language.APPLY} (→)`;
-        rw_lr.onclick = () => {controller.rewrite_theorem(at.name, true)};
+        rw_lr.onclick = () => {controller.rewrite_theorem(at.name, true, occ.value)};
 
         let rw_rl = document.createElement("button");
         rw_rl.className = "button-4";
-        rw_rl.onclick = () => {controller.rewrite_theorem(at.name, false)};
+        
+        
+        rw_rl.onclick = () => {controller.rewrite_theorem(at.name, false, occ.value)};
         rw_rl.textContent = `${local_langsel.current_language.APPLY} (←)`;
         
         theobox.appendChild(header);
         theodesc_container.appendChild(theodesc);
+        theodesc_container.appendChild(occ_container);
         theodesc_container.appendChild(rw_lr);
         theodesc_container.appendChild(rw_rl);
         theobox.appendChild(theodesc_container);
@@ -351,21 +362,29 @@ class Visualizer {
         let tbox = document.createElement("select");
         tbox.className = "hyp-dropdown"
         
+        let occ_container = document.createElement('div');
+        occ_container.className = "tbox-container";
+        occ_container.textContent = "occurrence: "
+        let occ = document.createElement("INPUT");
+        occ.setAttribute("type", "number");
+        occ_container.appendChild(occ);
+        occ.value = 1;
         
         let rw_lr = document.createElement("button");
         rw_lr.className = "button-4";
         rw_lr.textContent = `${local_langsel.current_language.APPLY} (→)`;
-        rw_lr.onclick = () => {controller.rewrite_theorem(tbox.value, true)};
+        rw_lr.onclick = () => {controller.rewrite_theorem(tbox.value, true, occ.value)};
 
         let rw_rl = document.createElement("button");
         rw_rl.className = "button-4";
-        rw_rl.onclick = () => {controller.rewrite_theorem(tbox.value, false)};
+        rw_rl.onclick = () => {controller.rewrite_theorem(tbox.value, false, occ.value)};
         rw_rl.textContent = `${local_langsel.current_language.APPLY} (←)`;
         
         hypbox.appendChild(header);
         hypbox.appendChild(theodesc);
         tbox_container.appendChild(tbox);
         hypbox.appendChild(tbox_container);
+        hypbox.appendChild(occ_container);
         hypbox.appendChild(rw_lr);
         hypbox.appendChild(rw_rl);
         MathJax.typeset();

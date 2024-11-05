@@ -101,8 +101,8 @@ class Controller {
     }
   }
   
-  rewrite_theorem(theo_name, direction){
-    let text = `rewrite ${direction?"->":"<-"} ${theo_name}.`
+  rewrite_theorem(theo_name, direction, occ){
+    let text = `rewrite ${direction?"->":"<-"} ${theo_name} at ${occ}.`
     this.add_line(text, this.snippet);
     this.go_next_n(1, true, () => {
       this.coq_history.push(text);
