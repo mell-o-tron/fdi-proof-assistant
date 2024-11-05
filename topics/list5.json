@@ -219,7 +219,7 @@
           "english" : "Simplify an arithmetic expression.",
           "italiano" : "Semplifica una espressione aritmetica, i.e. x+7+0+3=2+x+3+0+4+0+1 \\rightarrow x+10=x+10"
         },
-      "coq" : "ring_simplify"
+      "coq" : "ring_simplify."
     }
   ]
 }

@@ -30,8 +30,8 @@
       "display_name": "rev",
       "text":
       {
-        "english" : "Let \\( \\texttt{rev} : L_A \\to L_A \\) be defined as follows:<ul style=\"padding : 15px\"><li>\\( \\texttt{rev}([]) = [] \\)</li><li>\\( \\texttt{rev}(a :: l') = \\texttt{app}( : Type\\texttt{rev}( : Typel'), [a]) \\).</li></ul>",
-        "italiano" : "Sia \\( \\texttt{rev} : L_A \\to L_A \\) definito come segue:<ul style=\"padding : 15px\"><li>\\( \\texttt{rev}([]) = [] \\)</li><li>\\( \\texttt{rev}( : Typea :: l') = \\texttt{app}( : Type\\texttt{rev}( : Typel'), [a]) \\).</li></ul>"
+        "english" : "Let \\( \\texttt{rev} : L_A \\to L_A \\) be defined as follows:<ul style=\"padding : 15px\"><li>\\( \\texttt{rev}([]) = [] \\)</li><li>\\( \\texttt{rev}(a :: l') = \\texttt{app}(\\texttt{rev}(l'), [a]) \\).</li></ul>",
+        "italiano" : "Sia \\( \\texttt{rev} : L_A \\to L_A \\) definito come segue:<ul style=\"padding : 15px\"><li>\\( \\texttt{rev}([]) = [] \\)</li><li>\\( \\texttt{rev}(a :: l') = \\texttt{app}(\\texttt{rev}(l'), [a]) \\).</li></ul>"
       },
       "coq": "Fixpoint rev (l : list) : list := match l with | [] => [] | a :: l' => app (rev l') [a] end.\n"
     },
@@ -205,7 +205,7 @@
           "english" : "Simplify an arithmetic expression.",
           "italiano" : "Semplifica una espressione aritmetica, i.e. x+7+0+3=2+x+3+0+4+0+1 \\rightarrow x+10=x+10"
         },
-      "coq" : "ring_simplify"
+      "coq" : "ring_simplify."
     }
   ]
 }
