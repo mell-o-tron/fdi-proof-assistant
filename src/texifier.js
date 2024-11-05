@@ -9,6 +9,9 @@ class TeXifier {
             ["→", "\\to"],
             ["ℕ", "\\mathbb{N}"],
             ["list", "L_A"],
+            ["false", "\\texttt{false}"],
+            ["true", "\\texttt{true}"],
+            ["||", "\\vee"],
 //             [" ", "\\;"],
             ["∀", "\\forall"],
             ["§", ","]
