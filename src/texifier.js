@@ -43,7 +43,7 @@ class TeXifier {
         
         let m = res.match(/if\s+(.+?)\s+then\s+(.+?)\s+else/);
         
-        if(m && !m[1].contains("if") && !m[1].contains("then") && !m[1].contains("else") && !m[2].contains("if") && !m[2].contains("then") && !m[2].contains("else")) {
+        if(m && !m[1].includes("if") && !m[1].includes("then") && !m[1].includes("else") && !m[2].includes("if") && !m[2].includes("then") && !m[2].includes("else")) {
             let beginning_index = res.indexOf("if");
             let beginning_of_end = res.indexOf("else");
             let end_index = end_or_first_unmatched_rpar(res, beginning_of_end);

@@ -212,7 +212,7 @@ class Visualizer {
         MathJax.typeset();
     }
 
-    add_theo_card(at, controller) {
+    add_theo_card(at, controller, type_id = "available_theorems") {
         let local_langsel = new LanguageSelector();
 
         let theobox = document.createElement("div");
@@ -225,7 +225,6 @@ class Visualizer {
         theodesc.className = 'math-content';
 
         theodesc.textContent = at.text[`${local_langsel.current_language.language_name}`];
-        document.getElementById("available_theorems").appendChild(theobox);
 
         let header = document.createElement('div');
         header.className = "math-header theorem-header";
@@ -257,6 +256,8 @@ class Visualizer {
         rw_rl.onclick = () => {controller.rewrite_theorem(at.name, false, occ.value)};
         rw_rl.textContent = `${local_langsel.current_language.APPLY} (←)`;
         
+        
+        document.getElementById(type_id).appendChild(theobox);
         theobox.appendChild(header);
         theodesc_container.appendChild(theodesc);
         theodesc_container.appendChild(occ_container);

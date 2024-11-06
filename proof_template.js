@@ -159,7 +159,11 @@ language_selector.select_language(language.trim()).then(() => {
             
             // Add the available theorems to the menu on the right
             for (let at of controller.available_theorems){
-              controller.visualizer.add_theo_card(at, controller);
+              if (at.name.endsWith("base_clause") || at.name.endsWith("inductive_clause")){
+                controller.visualizer.add_theo_card(at, controller, "available_definitions");
+              } else {
+                controller.visualizer.add_theo_card(at, controller);
+              }
             }
 
             // Add the available tactics to the menu on the right
