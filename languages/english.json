@@ -20,6 +20,7 @@
   "BASECLAUSE" : "Base Clause",
   "INDUCTIVECLAUSE" : "Inductive Clause",
   "BEGINFIRSTBASECLAUSE" : "We begin with the first base clause",
+  "END_OF_BASE_CASE" : "End of base case. Now prove the inductive case.",
   
   "CHOOSEARBITRARY" : "choose arbitrary",
   "APPLYREFLEXIVITY" : "Apply reflexivity of =",
