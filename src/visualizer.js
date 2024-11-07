@@ -133,7 +133,8 @@ class Visualizer {
             /* UNDO BUTTON */
             
             let undo = document.createElement("button");
-            undo.className = "button-4";
+//            undo.className = "button-4";
+            undo.className = "btn btn-danger";
             undo.textContent = "UNDO";
             undo.onclick = () => {
                 controller.rm_line();
@@ -160,7 +161,8 @@ class Visualizer {
             
             for (let h of hints) {
                 let hint_button = document.createElement("button");
-                hint_button.className = "button-4";
+//                hint_button.className = "button-4";
+                hint_button.className = "btn btn-primary";
                 hint_button.textContent = h.name;
                 hint_button.onclick = h.func;
                 
