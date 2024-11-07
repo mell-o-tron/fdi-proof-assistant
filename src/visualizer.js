@@ -3,6 +3,7 @@ import { TacticCommentator } from "./tactic_commentator.js";
 import {LanguageSelector} from "./multilang.js"
 import {Hinter} from "./hinter.js"
 import {Uncurrifier} from "./uncurrifier.js"
+import {TheoremParser} from "./theorem_parser.js"
 
 
 class Visualizer {
@@ -199,7 +200,7 @@ class Visualizer {
         return this.tactics.includes(stripped) || this.terminators.includes(stripped);
     }
     
-    visualize_math(d, type){
+    visualize_math(d, type, controller){
         let local_langsel = new LanguageSelector();
 
         let text = (d.text[`${local_langsel.current_language.language_name}`]);
@@ -214,8 +215,33 @@ class Visualizer {
         content.className = 'math-content';
         content.innerHTML = text;
         
+        let bottom_bar = document.createElement('div');
+        bottom_bar.className = 'step-footer';
+        bottom_bar.innerHTML = "";
+        
+        let hint_button = document.createElement("button");
+        
+        let hintbox = document.createElement("div");
+        hintbox.className = "hint-box";
+            
+        bottom_bar.appendChild(hintbox)
+        
+        if(type == "theorem" && d.initial_hint) {
+                hint_button.className = "btn btn-primary";
+                hint_button.textContent = d.initial_hint.text[`${local_langsel.current_language.language_name}`];
+                hint_button.onclick = (() => {
+                    controller.apply_tactic(d.initial_hint.coq);
+                }).bind(controller);
+                
+                hintbox.appendChild(hint_button);
+        }
+        
         box.appendChild(header);
         box.appendChild(content);
+        
+        if(type == "theorem" && d.initial_hint){
+            box.appendChild(bottom_bar);
+        }
 
         document.getElementById("latex-proof").appendChild(box);
         MathJax.typeset();
@@ -223,7 +249,14 @@ class Visualizer {
 
     add_theo_card(at, controller, type_id = "available_theorems") {
         let local_langsel = new LanguageSelector();
-
+        let theorem_parser = new TheoremParser();
+        
+        let theorem_variables = theorem_parser.get_variables(at.coq);
+        
+        if (!theorem_variables) {           // TODO ugly hack, fix properly
+            theorem_variables = [];
+        }
+        
         let theobox = document.createElement("div");
         theobox.className = 'theorem-card';
         
@@ -247,29 +280,63 @@ class Visualizer {
         
         let occ_container = document.createElement('div');
         occ_container.className = "tbox-container";
-        occ_container.textContent = "occurrence: "
+        occ_container.textContent = "occurrence: "          // TODO language
         let occ = document.createElement("INPUT");
         occ.setAttribute("type", "number");
         occ.value = 1;
         occ_container.appendChild(occ);
         
+        let var_containers = [];
+        let var_inputs = [];
+        
+        for (let v of theorem_variables) {
+            let var_container = document.createElement('div');
+            var_container.className = "tbox-container";
+            var_container.textContent = `value of ${v}: `        // TODO language
+            let var_input = document.createElement("INPUT");
+            var_input.setAttribute("type", "text");
+            var_container.appendChild(var_input);
+            
+            var_containers.push(var_container);
+            var_inputs.push(var_input);
+        }
+        
+        
         let rw_lr = document.createElement("button");
         rw_lr.className = "button-4";
         rw_lr.textContent = `${local_langsel.current_language.APPLY} (→)`;
-        rw_lr.onclick = () => {controller.rewrite_theorem(at.name, true, occ.value)};
+        rw_lr.onclick = () => {controller.rewrite_theorem(at.name, true, occ.value, var_inputs.map(x => x.value), theorem_variables)};
 
         let rw_rl = document.createElement("button");
         rw_rl.className = "button-4";
         
         
-        rw_rl.onclick = () => {controller.rewrite_theorem(at.name, false, occ.value)};
+        rw_rl.onclick = () => {controller.rewrite_theorem(at.name, false, occ.value, var_inputs.map(x => x.value), theorem_variables)};
         rw_rl.textContent = `${local_langsel.current_language.APPLY} (←)`;
         
+        
+        let hidden_section = document.createElement('div');
+        hidden_section.style.display = "none";
+        for (let c of var_containers) {
+            hidden_section.appendChild(c);
+        }
+        
+        
+        hidden_section.appendChild(occ_container);
+        
+        let show_controls = document.createElement("button");
+        show_controls.className = "button-4";
+        show_controls.onclick = () => {hidden_section.style.display == "block" ? hidden_section.style.display = "none" : hidden_section.style.display = "block"};
+        show_controls.textContent = `More controls`;            // TODO language
+        
+        let show_controls_container = document.createElement('div');
+        show_controls_container.appendChild(show_controls);
         
         document.getElementById(type_id).appendChild(theobox);
         theobox.appendChild(header);
         theodesc_container.appendChild(theodesc);
-        theodesc_container.appendChild(occ_container);
+        theodesc_container.appendChild(show_controls_container);
+        theodesc_container.appendChild(hidden_section);
         theodesc_container.appendChild(rw_lr);
         theodesc_container.appendChild(rw_rl);
         theobox.appendChild(theodesc_container);
@@ -383,11 +450,11 @@ class Visualizer {
         let rw_lr = document.createElement("button");
         rw_lr.className = "button-4";
         rw_lr.textContent = `${local_langsel.current_language.APPLY} (→)`;
-        rw_lr.onclick = () => {controller.rewrite_theorem(tbox.value, true, occ.value)};
+        rw_lr.onclick = () => {controller.rewrite_theorem(tbox.value, true, occ.value, [], [])};
 
         let rw_rl = document.createElement("button");
         rw_rl.className = "button-4";
-        rw_rl.onclick = () => {controller.rewrite_theorem(tbox.value, false, occ.value)};
+        rw_rl.onclick = () => {controller.rewrite_theorem(tbox.value, false, occ.value, [], [])};
         rw_rl.textContent = `${local_langsel.current_language.APPLY} (←)`;
         
         hypbox.appendChild(header);

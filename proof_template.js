@@ -143,7 +143,7 @@ language_selector.select_language(language.trim()).then(() => {
               
               
             for (let d of topic_obj.definitions) {
-              controller.visualizer.visualize_math(d, "definition");
+              controller.visualizer.visualize_math(d, "definition", controller);
             }
 
             for (let d of topic_obj.theorems) {
@@ -151,10 +151,10 @@ language_selector.select_language(language.trim()).then(() => {
             }
 
             for (let d of proof_obj.definitions) {
-              controller.visualizer.visualize_math(d, "definition");
+              controller.visualizer.visualize_math(d, "definition", controller);
             }
               
-            controller.visualizer.visualize_math(proof_obj.theorem, "theorem");
+            controller.visualizer.visualize_math(proof_obj.theorem, "theorem", controller);
             
             
             // Add the available theorems to the menu on the right

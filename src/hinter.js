@@ -25,6 +25,20 @@ class Hinter {
             }
         }
         
+        {/* HINT FORALL with paren */
+            let m = cur_goal.match(/^forall\s*\(([a-zA-Z0-9]+)/);
+            console.log("HINT".repeat(10))
+            console.log(m)
+            if (m) {
+                res.push ({
+                    name : `${this.langsel.current_language.HINT}: ${this.langsel.current_language.CHOOSEARBITRARY} ${m[1]} (Intro)`,
+                    func : () => {
+                        this.controller.apply_tactic("intro.");
+                    }
+                });
+            }
+        }
+        
         {/* HINT SYMMETRY */
             if(cur_goal.includes("=")){
                 let s = cur_goal.split("=").map(x => x.trim())
