@@ -185,6 +185,7 @@ width: 30%;
   vertical-align: middle;
   white-space: nowrap;
   word-wrap: break-word;
+  margin: 0.3em;
 }
 
 .button-4:hover {
