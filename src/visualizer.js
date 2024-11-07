@@ -147,6 +147,7 @@ class Visualizer {
             undo.onclick = () => {
                 controller.rm_line();
                 controller.observer.undo_goal_history();
+                controller.observer.populate_hyps();
                 this.step_list.pop();
                 controller.coq_history.pop();
 
