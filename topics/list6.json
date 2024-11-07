@@ -180,8 +180,8 @@
       "param_types" : ["text"],
       "text":
         {
-          "english" : "Proof by induction. Enter the induction variable:",
-          "italiano" : "Dimostrazione per casi. Inserire l'espressione su cui dividere i casi (nel secondo input si puo' mettere un nome per l'ipotesi):"
+          "english" : "Proof by cases. Insert the expression on which the proof will be split:",
+          "italiano" : "Dimostrazione per casi. Inserire l'espressione su cui dividere i casi:"
         },
       "coq" : "destruct_with_eqn ($0)."
     },
