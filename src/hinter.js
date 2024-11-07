@@ -17,7 +17,7 @@ class Hinter {
             console.log(m)
             if (m) {
                 res.push ({
-                    name : `${this.langsel.current_language.CHOOSEARBITRARY} ${m[1]}`,
+                    name : `${this.langsel.current_language.HINT}: ${this.langsel.current_language.CHOOSEARBITRARY} ${m[1]} (Intro)`,
                     func : () => {
                         this.controller.apply_tactic("intro.");
                     }
@@ -30,7 +30,7 @@ class Hinter {
                 let s = cur_goal.split("=").map(x => x.trim())
                 if (s[0] == s[1]){
                     res.push ({
-                    name : `${this.langsel.current_language.APPLYREFLEXIVITY}`,
+                    name : `${this.langsel.current_language.HINT}: ${this.langsel.current_language.APPLYREFLEXIVITY} (Reflexivity)`,
                     func : () => {
                         this.controller.apply_tactic("reflexivity.");
                     }
