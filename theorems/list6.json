@@ -5,8 +5,8 @@
   "theorem": {
     "text":
       {
-        "english" : "Teorema: Reversing a list doesn't change it's length, i.e. \\[ \\forall l \\in L_A . \\; \\texttt{len}(\\texttt{rev}(l)) = \\texttt{len}(l) \\]",
-        "italiano" : "Teorema: interazione belList app, i.e. \\[ \\forall l_1,l_2 \\in L_A . \\; \\forall b \\in A. \\; \\texttt{belList}(\\texttt{app}(l_1,l_2),b) = \\texttt{belList}(l_1,b) \\vee \\texttt{belList}(l_2,b) \\]"
+        "english" : "Teorema: interaction between belList and app, i.e. \\[ \\forall l_1,l_2 \\in L_A . \\; \\forall b \\in A. \\; \\texttt{belList}(\\texttt{app}(l_1,l_2),b) = \\texttt{belList}(l_1,b) \\vee \\texttt{belList}(l_2,b) \\]",
+        "italiano" : "Teorema: interazione fra belList e app, i.e. \\[ \\forall l_1,l_2 \\in L_A . \\; \\forall b \\in A. \\; \\texttt{belList}(\\texttt{app}(l_1,l_2),b) = \\texttt{belList}(l_1,b) \\vee \\texttt{belList}(l_2,b) \\]"
       },
     "coq": "Theorem belList_app: forall l1 l2 : list , forall b : A , belList (app l1 l2) b = belList l1 b || belList l2 b."
   }
