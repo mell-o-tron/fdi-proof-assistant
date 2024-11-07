@@ -105,12 +105,19 @@ class Visualizer {
                 text = comment + " " + text;
             }
 
+            let bigBox = document.createElement("div");
+            bigBox.className = 'goal-bigBox';
+            let enumeration = document.createElement("p");
+            enumeration.className = 'goal-enum';
+            enumeration.innerHTML = `${(this.step_list.length +1)}.`;
+
+            bigBox.appendChild(enumeration);
             let box = document.createElement("div");
-            box.className = 'math-box';
+            box.className = 'goal-box';
             
             let header = document.createElement('div');
             header.className = `math-header step-header`;
-            header.textContent = this.language_selector.current_language.PROOFSTEP + ` ${(this.step_list.length + 1)}`;
+            header.textContent = this.language_selector.current_language.PROOFSTEP;
             
             let content = document.createElement('div');
             content.className = 'math-content';
@@ -145,7 +152,7 @@ class Visualizer {
                 if(this.step_list.length > 0)
                     this.step_list[this.step_list.length - 1].bottom_bar.style.display = "block";
 
-                box.remove();
+                bigBox.remove();
             };
 
             if (this.step_list.length > 0)
@@ -172,8 +179,8 @@ class Visualizer {
             box.appendChild(header);
             box.appendChild(content);
             box.appendChild(bottom_bar);
-
-            document.getElementById("latex-proof").appendChild(box);
+            bigBox.appendChild(box);
+            document.getElementById("latex-proof").appendChild(bigBox);
 
             this.step_list.push({content : content, bottom_bar : bottom_bar});
 
