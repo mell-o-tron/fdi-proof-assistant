@@ -105,12 +105,19 @@ class Visualizer {
                 text = comment + " " + text;
             }
 
+            let bigBox = document.createElement("div");
+            bigBox.className = 'goal-bigBox';
+            let enumeration = document.createElement("p");
+            enumeration.className = 'goal-enum';
+            enumeration.innerHTML = `${(this.step_list.length +1)}.`;
+
+            bigBox.appendChild(enumeration);
             let box = document.createElement("div");
-            box.className = 'math-box';
+            box.className = 'goal-box';
             
             let header = document.createElement('div');
             header.className = `math-header step-header`;
-            header.textContent = this.language_selector.current_language.PROOFSTEP + ` ${(this.step_list.length + 1)}`;
+            header.textContent = this.language_selector.current_language.PROOFSTEP;
             
             let content = document.createElement('div');
             content.className = 'math-content';
@@ -133,7 +140,8 @@ class Visualizer {
             /* UNDO BUTTON */
             
             let undo = document.createElement("button");
-            undo.className = "button-4";
+//            undo.className = "button-4";
+            undo.className = "btn btn-danger";
             undo.textContent = "UNDO";
             undo.onclick = () => {
                 controller.rm_line();
@@ -144,7 +152,7 @@ class Visualizer {
                 if(this.step_list.length > 0)
                     this.step_list[this.step_list.length - 1].bottom_bar.style.display = "block";
 
-                box.remove();
+                bigBox.remove();
             };
 
             if (this.step_list.length > 0)
@@ -160,7 +168,8 @@ class Visualizer {
             
             for (let h of hints) {
                 let hint_button = document.createElement("button");
-                hint_button.className = "button-4";
+//                hint_button.className = "button-4";
+                hint_button.className = "btn btn-primary";
                 hint_button.textContent = h.name;
                 hint_button.onclick = h.func;
                 
@@ -170,8 +179,8 @@ class Visualizer {
             box.appendChild(header);
             box.appendChild(content);
             box.appendChild(bottom_bar);
-
-            document.getElementById("latex-proof").appendChild(box);
+            bigBox.appendChild(box);
+            document.getElementById("latex-proof").appendChild(bigBox);
 
             this.step_list.push({content : content, bottom_bar : bottom_bar});
 
