@@ -94,21 +94,21 @@
       "name": "or_absorbtion",
       "text":
           {
-            "english": "\\(\\texttt{true}\\) is the absorbtion of \\(\\vee\\): \\[ \\forall b \\in Bool.\\; \\texttt{true} \\vee b = \\texttt{true} \\]",
-            "italiano": "\\(\\texttt{true}\\) e' l'assorbimento di or \\(\\vee\\): \\[ \\forall b \\in Bool.\\; \\texttt{true} \\vee b = \\texttt{true} \\]"
+            "english": "\\(\\texttt{true}\\) is the absorbing element of \\(\\vee\\): \\[ \\forall b \\in Bool.\\; \\texttt{true} \\vee b = \\texttt{true} \\]",
+            "italiano": "\\(\\texttt{true}\\) è l'elemento assorbente di \\(\\vee\\): \\[ \\forall b \\in Bool.\\; \\texttt{true} \\vee b = \\texttt{true} \\]"
           },
         "coq": "Theorem or_absorbtion : forall b : Bool , true || b = true.\nProof.\nreflexivity.\nQed."
     },
     {
       "display_name": {
           "english": "\\(\\vee\\) identity",
-          "italiano": "Identita' \\(\\vee\\)"
+          "italiano": "Unità \\(\\vee\\)"
         },
       "name": "or_identity",
       "text":
           {
-            "english": "\\(\\texttt{false}\\) is the identity of \\(\\vee\\): \\[ \\forall b \\in Bool.\\; \\texttt{false} \\vee b = b \\]",
-            "italiano": "\\(\\texttt{false}\\) e' l'identita di \\(\\vee\\): \\[ \\forall b \\in Bool.\\; \\texttt{false} \\vee b = b \\]"
+            "english": "\\(\\texttt{false}\\) is the identity element of \\(\\vee\\): \\[ \\forall b \\in Bool.\\; \\texttt{false} \\vee b = b \\]",
+            "italiano": "\\(\\texttt{false}\\) è l'elemento neutro di \\(\\vee\\): \\[ \\forall b \\in Bool.\\; \\texttt{false} \\vee b = b \\]"
           },
         "coq": "Theorem or_identity : forall b : Bool , false || b = b.\nProof.\nreflexivity.\nQed."
     },
@@ -128,13 +128,13 @@
     {
       "display_name": {
           "english": "app associativity",
-          "italiano": "associativita' app"
+          "italiano": "associatività app"
       },
       "name": "app_assoc",
       "text":
           {
-            "english": "\\(\\texttt{app}\\)  is associative: \\[ \\forall l_1,l_2,l_3 \\in L_A.\\; \\texttt{app}(\\texttt{app}(l_1,l_2),l_3) = \\texttt{app}(l_1,\\texttt{app}(l_2,l_3)) \\]",
-            "italiano": "\\(\\texttt{app}\\)  e' associativa: \\[ \\forall l_1,l_2,l_3 \\in L_A.\\; \\texttt{app}(\\texttt{app}(l_1,l_2),l_3) = \\texttt{app}(l_1,\\texttt{app}(l_2,l_3)) \\]"
+            "english": "\\(\\texttt{app}\\) is associative: \\[ \\forall l_1,l_2,l_3 \\in L_A.\\; \\texttt{app}(\\texttt{app}(l_1,l_2),l_3) = \\texttt{app}(l_1,\\texttt{app}(l_2,l_3)) \\]",
+            "italiano": "\\(\\texttt{app}\\) è associativa: \\[ \\forall l_1,l_2,l_3 \\in L_A.\\; \\texttt{app}(\\texttt{app}(l_1,l_2),l_3) = \\texttt{app}(l_1,\\texttt{app}(l_2,l_3)) \\]"
           },
       "coq": "Theorem app_assoc: forall l1 l2 l3 : list , app (app l1 l2) l3 = app l1 (app l2 l3).\nProof.\nAdmitted.\n"
     }

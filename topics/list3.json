@@ -103,13 +103,13 @@
     {
       "display_name": {
           "english": "app associativity",
-          "italiano": "associativita' app"
+          "italiano": "associatività app"
       },
       "name": "app_assoc",
       "text":
           {
-            "english": "\\(\\texttt{app}\\)  is associative: \\[ \\forall l_1,l_2,l_3 \\in L_A.\\; \\texttt{app}(\\texttt{app}(l_1,l_2),l_3) = \\texttt{app}(l_1,\\texttt{app}(l_2,l_3)) \\]",
-            "italiano": "\\(\\texttt{app}\\)  e' associativa: \\[ \\forall l_1,l_2,l_3 \\in L_A.\\; \\texttt{app}(\\texttt{app}(l_1,l_2),l_3) = \\texttt{app}(l_1,\\texttt{app}(l_2,l_3)) \\]"
+            "english": "\\(\\texttt{app}\\) is associative: \\[ \\forall l_1,l_2,l_3 \\in L_A.\\; \\texttt{app}(\\texttt{app}(l_1,l_2),l_3) = \\texttt{app}(l_1,\\texttt{app}(l_2,l_3)) \\]",
+            "italiano": "\\(\\texttt{app}\\) è associativa: \\[ \\forall l_1,l_2,l_3 \\in L_A.\\; \\texttt{app}(\\texttt{app}(l_1,l_2),l_3) = \\texttt{app}(l_1,\\texttt{app}(l_2,l_3)) \\]"
           },
       "coq": "Theorem app_assoc: forall l1 l2 l3 : list , app (app l1 l2) l3 = app l1 (app l2 l3).\nProof.\nAdmitted.\n"
     }
