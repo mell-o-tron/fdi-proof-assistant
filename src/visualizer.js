@@ -3,6 +3,7 @@ import { TacticCommentator } from "./tactic_commentator.js";
 import {LanguageSelector} from "./multilang.js"
 import {Hinter} from "./hinter.js"
 import {Uncurrifier} from "./uncurrifier.js"
+import {Currifier} from "./currifier.js"
 import {TheoremParser} from "./theorem_parser.js"
 
 
@@ -302,17 +303,18 @@ class Visualizer {
             var_inputs.push(var_input);
         }
         
+        let currifier = new Currifier(controller);
         
         let rw_lr = document.createElement("button");
         rw_lr.className = "button-4";
         rw_lr.textContent = `${local_langsel.current_language.APPLY} (→)`;
-        rw_lr.onclick = () => {controller.rewrite_theorem(at.name, true, occ.value, var_inputs.map(x => x.value), theorem_variables)};
+        rw_lr.onclick = () => {controller.rewrite_theorem(at.name, true, occ.value, var_inputs.map(x => currifier.currify(x.value)), theorem_variables)};
 
         let rw_rl = document.createElement("button");
         rw_rl.className = "button-4";
         
         
-        rw_rl.onclick = () => {controller.rewrite_theorem(at.name, false, occ.value, var_inputs.map(x => x.value), theorem_variables)};
+        rw_rl.onclick = () => {controller.rewrite_theorem(at.name, false, occ.value, var_inputs.map(x => currifier.currify(x.value)), theorem_variables)};
         rw_rl.textContent = `${local_langsel.current_language.APPLY} (←)`;
         
         
