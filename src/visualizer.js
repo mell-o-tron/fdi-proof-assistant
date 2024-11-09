@@ -15,6 +15,8 @@ class Visualizer {
         this.language_selector = language_selector;
         
         this.step_list = [];
+        
+        this.apply_buttons = []
 
         // List of tactics and terminators
         this.tactics = [
@@ -235,6 +237,8 @@ class Visualizer {
                     controller.apply_tactic(d.initial_hint.coq);
                 }).bind(controller);
                 
+                controller.visualizer.apply_buttons.push(hint_button);
+                
                 hintbox.appendChild(hint_button);
         }
         
@@ -309,7 +313,9 @@ class Visualizer {
         rw_lr.className = "button-4";
         rw_lr.textContent = `${local_langsel.current_language.APPLY} (→)`;
         rw_lr.onclick = () => {controller.rewrite_theorem(at.name, true, occ.value, var_inputs.map(x => currifier.currify(x.value)), theorem_variables)};
-
+        
+        controller.visualizer.apply_buttons.push(rw_lr);
+        
         let rw_rl = document.createElement("button");
         rw_rl.className = "button-4";
         
@@ -317,6 +323,7 @@ class Visualizer {
         rw_rl.onclick = () => {controller.rewrite_theorem(at.name, false, occ.value, var_inputs.map(x => currifier.currify(x.value)), theorem_variables)};
         rw_rl.textContent = `${local_langsel.current_language.APPLY} (←)`;
         
+        controller.visualizer.apply_buttons.push(rw_rl);
         
         let hidden_section = document.createElement('div');
         hidden_section.style.display = "none";
@@ -406,6 +413,8 @@ class Visualizer {
             let args = tboxes.map(x => {return x.value});
             controller.apply_tactic(at.coq, args)
         };
+        
+        controller.visualizer.apply_buttons.push(apply_button);
 
 
         theobox.appendChild(header);
@@ -455,10 +464,14 @@ class Visualizer {
         rw_lr.textContent = `${local_langsel.current_language.APPLY} (→)`;
         rw_lr.onclick = () => {controller.rewrite_theorem(tbox.value, true, occ.value, [], [])};
 
+        controller.visualizer.apply_buttons.push(rw_lr);
+        
         let rw_rl = document.createElement("button");
         rw_rl.className = "button-4";
         rw_rl.onclick = () => {controller.rewrite_theorem(tbox.value, false, occ.value, [], [])};
         rw_rl.textContent = `${local_langsel.current_language.APPLY} (←)`;
+        
+        controller.visualizer.apply_buttons.push(rw_rl);
         
         hypbox.appendChild(header);
         hypbox.appendChild(theodesc);

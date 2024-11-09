@@ -82,7 +82,7 @@ language_selector.select_language(language.trim()).then(() => {
           // waits for coq to be ready
           manager.when_ready.then(function (result){
 
-            let coq_observer = new Observer;
+            let coq_observer = new Observer();
             manager.coq.observers.push(coq_observer);
 
             console.log("COQ READY")
