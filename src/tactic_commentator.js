@@ -57,8 +57,8 @@ class TacticCommentator {
                     let base_clause_text = this.language_selector.current_language.BASECLAUSE;
                     let inductive_clause_text = this.language_selector.current_language.INDUCTIVECLAUSE;
                     
-                    s += `<ul style="margin : 20px;"><li>${base_clause_text}: <div class="scroll-equation">${(ng0)}</div></li>`;
-                    s += `<li>${inductive_clause_text}: <div class="scroll-equation">${(ng1)}</div></li></ul>`;
+                    s += `<ul style="margin : 20px;"><li>${base_clause_text}:${(ng0)}</li>`;
+                    s += `<li>${inductive_clause_text}: ${(ng1)}</li></ul>`;
                 } else{
                     // WARNING NOT TESTED
                     
@@ -66,7 +66,7 @@ class TacticCommentator {
                     for (let i in new_goals){
                         let hpsi = new_goals[i].hypotheses.map(x => `${x.name} : ${uncurrifier.uncurrify(x.body)}`).join(" \\\\ \\wedge \\;\\; &")
                         let ngi = this.texifier.texify(`\\begin{aligned}&${hpsi} \\\\ \\implies &${uncurrifier.uncurrify(new_goals[i].goal)}\\end{aligned}`);
-                        s += `<li><div class="scroll-equation">(${(ng0)})</div></li>`;
+                        s += `<li>(${(ng0)})</li>`;
                     }
                     s += "</ul>";
                 }

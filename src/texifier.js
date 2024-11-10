@@ -38,7 +38,7 @@ class TeXifier {
         ];
     }
 
-    texify(text) {
+    replace_ifs (text) {
         let res = text;
         
         let m = res.match(/if\s+(.+?)\s+then\s+(.+?)\s+else/);
@@ -54,32 +54,21 @@ class TeXifier {
             // TODO does not work for more than one if in an expression: could call recursively but would break comma-placeholder - maybe do separate function to be called recursively before texify.
             
             res = res.replace(res.slice(beginning_index, end_index), `\\begin{cases} ${m[2]} & \\text{ if }${m[1]}\\\\${else_branch} & \\text{ otherwise}\\end{cases}`)
+            
         }
         
-        for (let r of this.replacements) {
-            res = res.replaceAll(r[0], r[1]);
-        }
-        res = res.replaceAll(/([a-zA-Z0-9]) ([a-zA-Z0-9])/g, "$1\\;$2")
-        res = res.replaceAll(/([a-zA-Z])([0-9]+)/g, "$1_{$2}")
+        res = res.replace(/\\bigg\s*\(\s*\\begin\{cases\}/, "(\\begin{cases}")
+        res = res.replace(/\\end\{cases\}\s*\\bigg\s*\)/, "\\end{cases})")
         
-        return this.centered_math(res);
+        res = res.replace(/\(\s*\\begin\{cases\}/, "\\bigg(\\begin{cases}")
+        res = res.replace(/\\end\{cases\}\s*\)/, "\\end{cases}\\bigg)")
+        
+        return res;
+        
     }
     
-    texify_inline(text) {
-        let res = text;
-        
-        let m = res.match(/if\s+(.+?)\s+then\s+(.+?)\s+else/);
-        if(m) {
-            let beginning_index = res.indexOf("if");
-            let beginning_of_end = res.indexOf("else");
-            let end_index = end_or_first_unmatched_rpar(res, beginning_of_end);
-            
-            let else_branch = res.slice(beginning_of_end, end_index).replace("else", "");
-            
-            // TODO does not work for nested ifs
-            
-            res = res.replace(res.slice(beginning_index, end_index), `\\begin{cases} ${m[2]} & \\text{ if }${m[1]}\\\\${else_branch} & \\text{ otherwise}\\end{cases}`)
-        }
+    texify_common(text){
+        let res = this.replace_ifs(text);
         
         for (let r of this.replacements) {
             res = res.replaceAll(r[0], r[1]);
@@ -87,8 +76,17 @@ class TeXifier {
         res = res.replaceAll(/([a-zA-Z0-9]) ([a-zA-Z0-9])/g, "$1\\;$2")
         res = res.replaceAll(/([a-zA-Z])([0-9]+)/g, "$1_{$2}")
         
-        
+        return res
+    }
     
+    texify(text) {
+        let res = this.texify_common(text);
+        
+        return `<div class="scroll-equation">` + this.centered_math(res) + `</div>`;
+    }
+    
+    texify_inline(text) { 
+        let res = this.texify_common(text);
         
         return this.inline_math(res);
     }
