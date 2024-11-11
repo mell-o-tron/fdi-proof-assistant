@@ -42,10 +42,14 @@ class TeXifier {
             [",", " ."],
             ["→", "\\to"],
             ["ℕ", "\\mathbb{N}"],
+            ["listn", "L_\\mathbb{N}"],
             ["list", "L_A"],
+            ["btn", "BT_\\mathbb{N}"],
+            ["bte", "BT_A"],
             ["false", "\\texttt{false}"],
             ["true", "\\texttt{true}"],
             ["||", "\\vee"],
+            ["lmd", "\\lambda"],
 //             [" ", "\\;"],
             ["∀", "\\forall"],
             ["§", ","]
@@ -88,7 +92,7 @@ class TeXifier {
             res = res.replaceAll(r[0], r[1]);
         }
         res = res.replaceAll(/([a-zA-Z0-9]) ([a-zA-Z0-9])/g, "$1\\;$2")
-        res = res.replaceAll(/([a-zA-Z])([0-9]+)/g, "$1_{$2}")
+        res = res.replaceAll(/([\s\(;][a-zA-Z])([0-9]+)/g, "$1_{$2}")
         
         
         // TODO recognize stuff of form X == Y and put it into parens

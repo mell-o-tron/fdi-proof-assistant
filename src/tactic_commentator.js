@@ -57,7 +57,7 @@ class TacticCommentator {
                                       
                     let ng0 = this.texifier.texify(uncurrifier.uncurrify(new_goals[0].goal));
                     
-                    let hps1 = new_goals[1].hypotheses.map(x => `${x.name} : ${uncurrifier.uncurrify(x.body)}`).join(" \\\\")
+                    let hps1 = new_goals[1].hypotheses.map(x => `${x.name} : ${uncurrifier.uncurrify(x.body)}`).join(" \\\\\n")
                     
                     let ng1 = this.texifier.texify(`\\begin{gather*}${hps1} \\\\ \\Downarrow \\\\ ${uncurrifier.uncurrify(new_goals[1].goal)}\\end{gather*}`);
                     
