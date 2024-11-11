@@ -27,7 +27,7 @@ function end_of_word (s, i) {
 function find_matching_paren (s, i) {
     let j = i;
     let depth = 1;
-    while (j < s.length && depth != 0) {
+    while (j < s.length - 1 && depth != 0) {
         j++;
         if (s[j] == "(") depth ++;
         if (s[j] == ")") depth --;
