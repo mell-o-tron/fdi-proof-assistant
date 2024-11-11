@@ -96,9 +96,13 @@ class Visualizer {
             let text = ""
             if (this.observer.current_goal.hypotheses.length > 0) {
                 text += this.language_selector.current_language.ASSUMING; //"Assuming the following hypotheses:";
+                // Put all hypothesis in a centered LaTeX environment, so their vertical spacing is correct.
+                let hps = "\\begin{gather*}\n";
                 for (let h of this.observer.current_goal.hypotheses){
-                    text += this.texifier.texify (`{${h.name}}` + " : " + uncurrifier.uncurrify(h.body))
+                    hps += `{${h.name}}` + " : " + uncurrifier.uncurrify(h.body) + "\\\\";
                 }
+                hps += "\n\\end{gather*}";
+                text += this.texifier.texify(hps);
             }
             
             text += `${this.language_selector.current_language.PROVE}:` + this.texifier.texify(uncurrifier.uncurrify(this.observer.current_goal.goal));
