@@ -18,6 +18,20 @@ function end_or_first_unmatched_rpar (s, i) {
     
 }
 
+
+function find_zero_depth_equals (s) {
+    let j = 0;
+    let depth = 0;
+    let equal_signs = []
+    while (j < s.length) {
+        if (s[j] == "(") depth ++;
+        if (s[j] == ")") depth --;
+        if (s[j-1] != "=" && s[j] == "=" && s[j+1] != "=" && depth == 0) equal_signs.push(j);
+        j++;
+    }
+    return equal_signs;
+}
+
 class TeXifier {
     constructor() {
         this.replacements = [
@@ -75,6 +89,9 @@ class TeXifier {
         }
         res = res.replaceAll(/([a-zA-Z0-9]) ([a-zA-Z0-9])/g, "$1\\;$2")
         res = res.replaceAll(/([a-zA-Z])([0-9]+)/g, "$1_{$2}")
+        
+        
+        // TODO recognize stuff of form X == Y and put it into parens
         
         return res
     }

@@ -153,6 +153,7 @@ class Visualizer {
                 controller.observer.populate_hyps();
                 this.step_list.pop();
                 controller.coq_history.pop();
+                controller.visualizer.tacticCommentator.undo_stack();
 
                 if(this.step_list.length > 0)
                     this.step_list[this.step_list.length - 1].bottom_bar.style.display = "block";
