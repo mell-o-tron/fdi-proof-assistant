@@ -46,6 +46,12 @@ class Uncurrifier {
         for (let d of controller.definitions){
             if(d.is_function == "true") {
                 this.functions.push({name : d.name, arity : d.arity});
+            } else if (d.constructors != null) {
+                for (let c of d.constructors) {
+                    // What to do for constructors with arity 0?
+                    // Maybe just don't put them in the definition?
+                    this.functions.push({name : c.name, arity : c.arity});
+                }
             }
         }
 //         console.log("THIS DOT FUNCTIONS", this.functions)
