@@ -105,6 +105,13 @@ width: 30%;
     justify-content: right;
 }
 
+.btn-danger {
+  --bs-btn-bg: #C85157;
+  --bs-btn-hover-bg: #B04046;
+  --bs-btn-active-bg: #b02a37;
+  --bs-btn-active-border-color: #a52834;
+}
+
 .goal-enum {
   margin-right: 0.35em;
   margin-top: 0.4em;
