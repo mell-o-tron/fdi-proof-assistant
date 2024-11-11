@@ -158,6 +158,12 @@ class Visualizer {
                 if(this.step_list.length > 0)
                     this.step_list[this.step_list.length - 1].bottom_bar.style.display = "block";
 
+                // If this node closed a case then we remove the closed case text box (if the node before this one is the closed case text box, then it must mean that this step was the one that closed the case, so the case uncloses when we undo it)
+                let siblings = bigBox.parentNode.children;
+                if (siblings[siblings.length-2] && siblings[siblings.length-2].className == "end-case") {
+                    siblings[siblings.length-2].remove();
+                }
+
                 bigBox.remove();
             };
 

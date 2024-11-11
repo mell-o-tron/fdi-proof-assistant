@@ -161,6 +161,16 @@ width: 30%;
 }
 
 
+.end-case {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #f9f5f2;
+}
+
 .topbar {
             height: 50px;
             position: fixed;

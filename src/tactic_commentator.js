@@ -98,10 +98,14 @@ class TacticCommentator {
                 
                 res += `${this.language_selector.current_language.REFL}.`;
                 
-                if(cur_inductive_goal && same_goal(cur_inductive_goal, this.observer.current_goal)){
-                    res += `<br><div style="text-align: center;"><b>` + this.language_selector.current_language.END_OF_BASE_CASE + "</b></div><br>"
-                    
+                if(cur_inductive_goal && same_goal(cur_inductive_goal, this.observer.current_goal)){                 
                     this.inductive_goal_stack.pop();
+
+                    // Create finish base case box
+                    let fin = document.createElement('div');
+                    fin.className = "end-case";
+                    fin.innerHTML = "<b>" + this.language_selector.current_language.END_OF_BASE_CASE + "</b>";
+                    document.getElementById("latex-proof").appendChild(fin);
                     
                 }
                 return res;
