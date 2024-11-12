@@ -7,9 +7,9 @@
       "text":
         {
           "english" : "Let \\(A\\) be a set. The set \\(L_A\\) of lists of elements of \\( A \\) is defined as follows: <ul style=\"padding : 15px;\"><li>Base Clause: \\([] \\in L_A\\)</li><li>Inductive Clause: \\(\\forall a \\in A .\\; \\forall l \\in L_A .\\; a :: [] \\in L_A \\).</li></ul>The notation \\( a::b::c::[] \\) is equivalent to \\([a, b, c]\\).",
-          "italiano": "Sia \\(A\\) un insieme. L'insieme \\(L_A\\) delle liste di elementi di \\( A \\) è definito come segue: <ul style=\"padding : 15px;\"><li>Clausola Base: \\([] \\in L_A\\)</li><li> Clausola Induttiva: \\(\\forall a \\in A .\\; l \\in L_A .\\; a :: [] \\in L_A \\).</li></ul>La notazione \\( a::b::c::[] \\) è equivalente alla notazione \\([a, b, c]\\)."
+          "italiano": "Sia \\(A\\) un insieme. L'insieme \\(L_A\\) delle liste di elementi di \\( A \\) è definito come segue: <ul style=\"padding : 15px;\"><li>Clausola Base: \\([] \\in L_A\\)</li><li> Clausola Induttiva: \\(\\forall a \\in A .\\; \\forall l \\in L_A .\\; a :: [] \\in L_A \\).</li></ul>La notazione \\( a::b::c::[] \\) è equivalente alla notazione \\([a, b, c]\\)."
         },
-      "coq": "Notation Bool := bool.\nVariable A : Type.\nVariable eqA : A -> A -> Bool.\nInfix \"==\" := eqA (at level 60). \nNotation \"x || y\" := (orb x y).\nInductive list : Type := | nil : list | cons : A -> list -> list.\nInfix \"::\" := cons (at level 60, right associativity).\nNotation \"[ ]\" := nil (format \"[ ]\").\nNotation \"[ x ]\" := (cons x nil).\nNotation \"[ x ; y ; .. ; z ]\" := (cons x (cons y .. (cons z nil) ..)).\n"
+      "coq": "Require Import Arith.\nVariable A : Type.\nInductive list : Type := | nil : list | cons : A -> list -> list.\nInfix \"::\" := cons (at level 60, right associativity).\nNotation \"[ ]\" := nil (format \"[ ]\").\nNotation \"[ x ]\" := (cons x nil).\nNotation \"[ x ; y ; .. ; z ]\" := (cons x (cons y .. (cons z nil) ..)).\n"
     },
     {
       "name": "app",
@@ -36,19 +36,18 @@
       "coq": "Fixpoint rev (l : list) : list := match l with | [] => [] | a :: l' => app (rev l') [a] end.\n"
     },
     {
-      "name": "belList",
+      "name": "len",
       "is_function" : "true",
-      "arity" : 2,
-      "display_name": "belList",
+      "display_name": "len",
+      "arity" : 1,
       "text":
       {
-        "english" : "Let \\( \\texttt {belList} : L_A \\times A \\to Bool \\) be defined as follows:<ul style=\"padding : 15px;\"><li>Base Clause: \\( \\texttt{belList}([], b) = \\texttt{false} \\)</li><li>Inductive Clause: \\( \\texttt{belList}(a :: l, b) = \\begin{cases} \\texttt{true} & \\text{if}\\; a == b\\\\ \\texttt{belList}(l, b) & \\text{otherwise}\\end{cases} \\)</li></ul>",
-        "italiano" : "Sia \\( \\texttt {belList} : L_A \\times A \\to Bool \\) definita come segue:<ul style=\"padding : 15px;\"><li>Clausola Base: \\( \\texttt{belList}([], b) = \\texttt{false} \\)</li><li>Clausola Induttiva: \\( \\texttt{belList}(a :: l, b) = \\begin{cases} \\texttt{true} & \\text{if}\\; a == b\\\\ \\texttt{belList}(l, b) & \\text{otherwise}\\end{cases}\\)</li></ul>"
+        "english" : "Let \\( \\texttt {len} : L_A \\to \\mathbb N \\) be defined as follows:<ul style=\"padding : 15px;\"><li>Base Clause: \\( \\texttt{len}([]) = 0 \\)</li><li>Inductive Clause: \\( \\texttt{len}(a :: l_1) =  \\texttt{len} (l_1) + 1 \\).</li></ul>",
+        "italiano" : "Sia \\( \\texttt {len} : L_A \\to \\mathbb N \\) definita come segue:<ul style=\"padding : 15px;\"><li>Clausola Base: \\( \\texttt{len}([]) = 0 \\)</li><li>Clausola Induttiva: \\( \\texttt{len}(a :: l_1) =  \\texttt{len} (l_1) + 1 \\).</li></ul>"
       },
-      "coq": "Fixpoint belList (l : list) (b : A) : Bool := match l with | [] => false | a::l' => if a == b then true else belList l' b end.\n"
+      "coq": "Fixpoint len (x : list) : nat := match x with | [] => 0 | (x :: xs) => len xs + 1 end.\n"
     }
-
-      ],
+  ],
     "theorems": [
     {
       "name": "app_base_clause",
@@ -101,67 +100,28 @@
       "coq": "Theorem rev_inductive_clause: forall l : list , forall a : A , rev (a :: l) = app (rev l) [a].\nProof.\nAdmitted.\n"
         },
     {
-      "name": "belList_base_clause",
+      "name": "len_base_clause",
       "display_name": {
-        "english": "belList (base clause)",
-        "italiano": "belList (clausola base)"
+        "english": "len (base clause)",
+        "italiano": "len (clausola base)"
       },
       "text": {
-        "english": "Base clause of definition of \\(\\texttt{belList}\\):\\[ \\forall b \\in A .\\; \\texttt{belList}([], b) = \\texttt{false} \\]",
-        "italiano": "Clausola base della definizione di \\(\\texttt{belList}\\):\\[ \\forall b \\in A .\\; \\texttt{belList}([], b) = \\texttt{false} \\]"
+        "english": "Base clause of definition of \\(\\texttt{len}\\):\n\n\\[ \\texttt{len}([]) = 0 \\]",
+        "italiano": "Caso base della definizione di \\(\\texttt{len}\\):\n\n\\[ \\texttt{len}([]) = 0 \\]"
       },
-      "coq": "Theorem belList_base_clause : forall (b : A), belList [] b = false.\nProof.\nAdmitted."
+      "coq": "Theorem len_base_clause : len [] = 0.\nProof.\nAdmitted."
     },
     {
-      "name": "belList_inductive_clause",
+      "name": "len_inductive_clause",
       "display_name": {
-        "english": "belList (inductive clause)",
-        "italiano": "belList (clausola induttiva)"
+        "english": "len (inductive clause)",
+        "italiano": "len (clausola induttiva)"
       },
       "text": {
-        "english": "Inductive clause of the definition of \\(\\texttt{belList}\\): \\begin{multline} \\forall l \\in L_A.\\; \\forall a,b \\in A .\\\\ \\texttt{belList}(a :: l, b) = \\begin{cases} \\texttt{true} & \\text{if}\\; a == b\\\\ \\texttt{belList}(l, b) & \\text{otherwise}\\end{cases} \\end{multline}",
-        "italiano": "Clausola induttiva della definizione di \\(\\texttt{belList}\\): \\begin{multline} \\forall l \\in L_A.\\; \\forall a,b \\in A .\\\\ \\texttt{belList}(a :: l, b) = \\begin{cases} \\texttt{true} & \\text{if}\\; a == b\\\\ \\texttt{belList}(l, b) & \\text{otherwise}\\end{cases} \\end{multline}"
+        "english": "Inductive clause of definition of \\(\\texttt{len}\\):\n\n\\[ \\forall l_1 \\in L_A .\\; \\forall a \\in A .\\; \\texttt{len}(a :: l_1) = \\texttt{len}(l_1) + 1 \\]",
+        "italiano": "Clausola Induttiva della definizione di \\(\\texttt{len}\\):\n\n\\[ \\forall l_1 \\in L_A .\\; \\forall a \\in A.\\; \\texttt{len}(a :: l_1) = \\texttt{len}(l_1) + 1 \\]"
       },
-      "coq": "Theorem belList_inductive_clause : forall (l : list) , forall (a b : A) , belList (a :: l) b = if a == b then true else belList l b.\nProof.\nAdmitted."
-    },
-    {
-      "display_name": {
-          "english": "\\(\\vee\\) absorbtion",
-          "italiano": "Assorbimento \\(\\vee\\)"
-        },
-      "name": "or_absorbtion",
-      "text":
-          {
-            "english": "\\(\\texttt{true}\\) is the absorbing element of \\(\\vee\\): \\[ \\forall b \\in Bool.\\; \\texttt{true} \\vee b = \\texttt{true} \\]",
-            "italiano": "\\(\\texttt{true}\\) è l'elemento assorbente di \\(\\vee\\): \\[ \\forall b \\in Bool.\\; \\texttt{true} \\vee b = \\texttt{true} \\]"
-          },
-        "coq": "Theorem or_absorbtion : forall b : Bool , true || b = true.\nProof.\nreflexivity.\nQed."
-    },
-    {
-      "display_name": {
-          "english": "\\(\\vee\\) identity",
-          "italiano": "Unità \\(\\vee\\)"
-        },
-      "name": "or_identity",
-      "text":
-          {
-            "english": "\\(\\texttt{false}\\) is the identity element of \\(\\vee\\): \\[ \\forall b \\in Bool.\\; \\texttt{false} \\vee b = b \\]",
-            "italiano": "\\(\\texttt{false}\\) è l'elemento neutro di \\(\\vee\\): \\[ \\forall b \\in Bool.\\; \\texttt{false} \\vee b = b \\]"
-          },
-        "coq": "Theorem or_identity : forall b : Bool , false || b = b.\nProof.\nreflexivity.\nQed."
-    },
-    {
-      "display_name": {
-          "english": "\\(\\vee\\) commutativity",
-          "italiano": "Commutatività \\(\\vee\\)"
-        },
-      "name": "or_comm",
-      "text":
-          {
-            "english": "\\(\\vee\\) is commutative:: \\[ \\forall a,b \\in Bool.\\; a \\vee b = b \\vee a \\]",
-            "italiano": "\\(\\vee\\) è commutativa: \\[ \\forall a,b \\in Bool.\\; a \\vee b = b \\vee a \\]"
-          },
-        "coq": "Theorem or_comm : forall a b : Bool , a || b = b || a.\nProof.\nAdmitted.\n"
+      "coq": "Theorem len_inductive_clause : forall (l1 : list) (a : A), len (a :: l1) = len (l1) + 1.\nProof.\nAdmitted."
     },
     {
       "display_name": {
@@ -191,21 +151,21 @@
     },
     {
       "display_name": {
-          "english": "belList app interaction",
-          "italiano": "interazione belList app"
-        },
-      "name": "belList_app",
+          "english": "len of app",
+          "italiano": "len di app"
+      },
+      "name": "len_app",
       "text":
           {
-            "english": "Interaction between \\(\\texttt{belList}\\) and \\(\\texttt{app}\\), i.e. \\begin{multline} \\forall l_1,l_2 \\in L_A . \\; \\forall b \\in A. \\\\ \\texttt{belList}(\\texttt{app}(l_1,l_2),b) = \\texttt{belList}(l_1,b) \\vee \\texttt{belList}(l_2,b) \\end{multline}\\(\\texttt{false}\\) is the identity element of \\(\\vee\\): \\[ \\forall b \\in Bool.\\; \\texttt{false} \\vee b = b \\]",
-        "italiano" : "Interazione fra \\(\\texttt{belList}\\) e \\(\\texttt{app}\\), i.e. \\begin{gather*} \\forall l_1,l_2 \\in L_A . \\; \\forall b \\in A. \\\\ \\texttt{belList}(\\texttt{app}(l_1,l_2),b) =\\\\ \\texttt{belList}(l_1,b) \\vee \\texttt{belList}(l_2,b) \\end{gather*}"
+            "english": "The length of the list obtained by appending two lists is equal to the sum of the length of the two lists: \\[ \\forall l_1\\;l_2 \\in L_A.\\; \\texttt{len}(\\texttt{app}(l_1,l_2)) = \\texttt{len}(l_1) + \\texttt{len}(l_2) \\]",
+            "italiano": "La lunghezza della lista ottenuta concatenando due liste e' equivalente alla somma delle lunghezze delle due liste: \\[ \\forall l_1\\;l_2 \\in L_A.\\; \\texttt{len}(\\texttt{app}(l_1,l_2)) = \\texttt{len}(l_1) + \\texttt{len}(l_2) \\]"
           },
-    "coq": "Theorem belList_app: forall l1 l2 : list , forall b : A , belList (app l1 l2) b = belList l1 b || belList l2 b.\nProof.\nAdmitted.\n"
+      "coq": "Theorem len_app: forall l1 l2  : list , len (app l1 l2) = len l1 + len l2.\nProof.\nAdmitted.\n"
     }
   ],
   "tactics" : [
     {
-      "name": "induction","display_name": {"english":"induction", "italiano" : "induzione"},
+      "name": "induction",
       "n_params" : 1,
       "param_types" : ["text"],
       "text":
@@ -217,7 +177,7 @@
     },
 
     {
-      "name": "intro", "display_name": {"english":"variable introduction", "italiano" : "introduzione di variabile"},
+      "name": "intro",
       "n_params" : 0,
       "text":
         {
@@ -228,7 +188,7 @@
     },
 
     {
-      "name": "reflexivity", "display_name": {"english":"reflexivity", "italiano" : "riflessività"},
+      "name": "reflexivity",
       "n_params" : 0,
       "text":
         {
@@ -237,21 +197,9 @@
         },
       "coq" : "reflexivity."
     },
-
-    {
-      "name": "destruct", "display_name": {"english":"proof by cases", "italiano" : "dimostrazione per casi"},
-      "n_params" : 1,
-      "param_types" : ["text"],
-      "text":
-        {
-          "english" : "Proof by cases. Insert the expression on which the proof will be split:",
-          "italiano" : "Dimostrazione per casi. Inserire l'espressione su cui dividere i casi:"
-        },
-      "coq" : "destruct_with_eqn ($0)."
-    },
     
     {
-      "name": "simplify arithmetic", "display_name": {"english":"simplify arithmetic", "italiano" : "semplifica aritmetica"},
+      "name": "simplify arithmetic",
       "n_params" : 0,
       "text":
         {

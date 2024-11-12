@@ -243,7 +243,7 @@
   ],
   "tactics" : [
     {
-      "name": "induction",
+      "name": "induction","display_name": {"english":"induction", "italiano" : "induzione"},
       "n_params" : 1,
       "param_types" : ["text"],
       "text":
@@ -255,7 +255,7 @@
     },
 
     {
-      "name": "intro",
+      "name": "intro", "display_name": {"english":"variable introduction", "italiano" : "introduzione di variabile"},
       "n_params" : 0,
       "text":
         {
@@ -266,7 +266,7 @@
     },
 
     {
-      "name": "reflexivity",
+      "name": "reflexivity", "display_name": {"english":"reflexivity", "italiano" : "riflessività"},
       "n_params" : 0,
       "text":
         {
@@ -277,7 +277,7 @@
     },
 
     {
-      "name": "destruct",
+      "name": "destruct", "display_name": {"english":"proof by cases", "italiano" : "dimostrazione per casi"},
       "n_params" : 1,
       "param_types" : ["text"],
       "text":
@@ -289,7 +289,7 @@
     },
     
     {
-      "name": "simplify arithmetic",
+      "name": "simplify arithmetic", "display_name": {"english":"simplify arithmetic", "italiano" : "semplifica aritmetica"},
       "n_params" : 0,
       "text":
         {

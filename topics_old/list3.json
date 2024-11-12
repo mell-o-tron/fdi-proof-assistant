@@ -6,10 +6,10 @@
       "display_name": "lists",
       "text":
         {
-          "english" : "Let \\(A\\) be a set. The set \\(L_A\\) of lists of elements of \\( A \\) is defined as follows: <ul style=\"padding : 15px;\"><li>Base Clause: \\([] \\in L_A\\)</li><li>Inductive Clause: \\(\\forall a \\in A .\\; \\forall l \\in L_A .\\; a :: [] \\in L_A \\).</li></ul>The notation \\( a::b::c::[] \\) is equivalent to \\([a, b, c]\\).",
+          "english" : "Let \\(A\\) be a set. The set \\(L_A\\) of lists of elements of \\( A \\) is defined as follows: <ul style=\"padding : 15px;\"><li>Base Clause: \\([] \\in L_A\\)</li><li>Inductive Clause: \\(\\forall a \\in A . \\forall l \\in L_A . a :: [] \\in L_A \\).</li></ul>The notation \\( a::b::c::[] \\) is equivalent to \\([a, b, c]\\).",
           "italiano": "Sia \\(A\\) un insieme. L'insieme \\(L_A\\) delle liste di elementi di \\( A \\) è definito come segue: <ul style=\"padding : 15px;\"><li>Clausola Base: \\([] \\in L_A\\)</li><li> Clausola Induttiva: \\(\\forall a \\in A .\\; \\forall l \\in L_A .\\; a :: [] \\in L_A \\).</li></ul>La notazione \\( a::b::c::[] \\) è equivalente alla notazione \\([a, b, c]\\)."
         },
-      "coq": "Require Import Arith.\nVariable A : Type.\nInductive list : Type := | nil : list | cons : A -> list -> list.\nInfix \"::\" := cons (at level 60, right associativity).\nNotation \"[ ]\" := nil (format \"[ ]\").\nNotation \"[ x ]\" := (cons x nil).\nNotation \"[ x ; y ; .. ; z ]\" := (cons x (cons y .. (cons z nil) ..)).\n"
+      "coq": "Variable A : Type.\nInductive list : Type := | nil : list | cons : A -> list -> list.\nInfix \"::\" := cons (at level 60, right associativity).\nNotation \"[ ]\" := nil (format \"[ ]\").\nNotation \"[ x ]\" := (cons x nil).\nNotation \"[ x ; y ; .. ; z ]\" := (cons x (cons y .. (cons z nil) ..)).\n"
     },
     {
       "name": "app",
@@ -34,18 +34,6 @@
         "italiano" : "Sia \\( \\texttt{rev} : L_A \\to L_A \\) definito come segue:<ul style=\"padding : 15px\"><li>Clausola Base: \\( \\texttt{rev}([]) = [] \\)</li><li>Clausola Induttiva: \\( \\texttt{rev}(a :: l') = \\texttt{app}(\\texttt{rev}(l'), [a]) \\).</li></ul>"
       },
       "coq": "Fixpoint rev (l : list) : list := match l with | [] => [] | a :: l' => app (rev l') [a] end.\n"
-    },
-    {
-      "name": "len",
-      "is_function" : "true",
-      "display_name": "len",
-      "arity" : 1,
-      "text":
-      {
-        "english" : "Let \\( \\texttt {len} : L_A \\to \\mathbb N \\) be defined as follows:<ul style=\"padding : 15px;\"><li>Base Clause: \\( \\texttt{len}([]) = 0 \\)</li><li>Inductive Clause: \\( \\texttt{len}(a :: l_1) =  \\texttt{len} (l_1) + 1 \\).</li></ul>",
-        "italiano" : "Sia \\( \\texttt {len} : L_A \\to \\mathbb N \\) definita come segue:<ul style=\"padding : 15px;\"><li>Clausola Base: \\( \\texttt{len}([]) = 0 \\)</li><li>Clausola Induttiva: \\( \\texttt{len}(a :: l_1) =  \\texttt{len} (l_1) + 1 \\).</li></ul>"
-      },
-      "coq": "Fixpoint len (x : list) : nat := match x with | [] => 0 | (x :: xs) => len xs + 1 end.\n"
     }
   ],
     "theorems": [
@@ -81,7 +69,7 @@
       "name": "rev_base_clause",
       "text":
         {
-          "english": "Base clause of the definition of \\(\\texttt{rev}\\): \\[ \\texttt{rev}([]) = [] \\]",
+          "english": "Base clause of the definition of \\( \\texttt{rev} \\): \\[ \\texttt{rev}([]) = [] \\]",
           "italiano": "Clausola base della definizione di \\(\\texttt{rev}\\): \\[ \\texttt{rev}([]) = [] \\]"
         },
         "coq": "Theorem rev_base_clause : rev [] = [].\nProof.\nAdmitted.\n"
@@ -100,40 +88,16 @@
       "coq": "Theorem rev_inductive_clause: forall l : list , forall a : A , rev (a :: l) = app (rev l) [a].\nProof.\nAdmitted.\n"
         },
     {
-      "name": "len_base_clause",
-      "display_name": {
-        "english": "len (base clause)",
-        "italiano": "len (clausola base)"
-      },
-      "text": {
-        "english": "Base clause of definition of \\(\\texttt{len}\\):\n\n\\[ \\texttt{len}([]) = 0 \\]",
-        "italiano": "Caso base della definizione di \\(\\texttt{len}\\):\n\n\\[ \\texttt{len}([]) = 0 \\]"
-      },
-      "coq": "Theorem len_base_clause : len [] = 0.\nProof.\nAdmitted."
-    },
-    {
-      "name": "len_inductive_clause",
-      "display_name": {
-        "english": "len (inductive clause)",
-        "italiano": "len (clausola induttiva)"
-      },
-      "text": {
-        "english": "Inductive clause of definition of \\(\\texttt{len}\\):\n\n\\[ \\forall l_1 \\in L_A .\\; \\forall a \\in A .\\; \\texttt{len}(a :: l_1) = \\texttt{len}(l_1) + 1 \\]",
-        "italiano": "Clausola Induttiva della definizione di \\(\\texttt{len}\\):\n\n\\[ \\forall l_1 \\in L_A .\\; \\forall a \\in A.\\; \\texttt{len}(a :: l_1) = \\texttt{len}(l_1) + 1 \\]"
-      },
-      "coq": "Theorem len_inductive_clause : forall (l1 : list) (a : A), len (a :: l1) = len (l1) + 1.\nProof.\nAdmitted."
-    },
-    {
       "display_name": {
           "english": "app of empty list",
           "italiano": "app di lista vuota"
-        },
+      },
       "name": "app_empty",
       "text":
-          {
-            "english": "\\(\\texttt{app}\\) of a list and the empty list is equal to the original list: \\[ \\forall l_1 \\in L_A.\\; \\texttt{app}(l_1,[]) = l_1 \\]",
-            "italiano": "\\(\\texttt{app}\\) di una lista e la lista vuota equivale alla lista originale: \\[ \\forall l_1 \\in L_A.\\; \\texttt{app}(l_1,[]) = l_1 \\]"
-          },
+      {
+        "english" : "app of a list and the empty list is equal to the original list: \\[ \\forall l_1 \\in L_A.\\; \\texttt{app}(l_1,[]) = l_1 \\]",
+        "italiano": "app di una lista e la lista vuota equivale alla lista originale: \\[ \\forall l_1 \\in L_A.\\; \\texttt{app}(l_1,[]) = l_1 \\]"
+      },
         "coq": "Theorem app_empty : forall l1 : list , app l1 [] = l1.\nProof.\nAdmitted.\n"
     },
     {
@@ -148,24 +112,11 @@
             "italiano": "\\(\\texttt{app}\\) è associativa: \\[ \\forall l_1,l_2,l_3 \\in L_A.\\; \\texttt{app}(\\texttt{app}(l_1,l_2),l_3) = \\texttt{app}(l_1,\\texttt{app}(l_2,l_3)) \\]"
           },
       "coq": "Theorem app_assoc: forall l1 l2 l3 : list , app (app l1 l2) l3 = app l1 (app l2 l3).\nProof.\nAdmitted.\n"
-    },
-    {
-      "display_name": {
-          "english": "len of app",
-          "italiano": "len di app"
-      },
-      "name": "len_app",
-      "text":
-          {
-            "english": "The length of the list obtained by appending two lists is equal to the sum of the length of the two lists: \\[ \\forall l_1\\;l_2 \\in L_A.\\; \\texttt{len}(\\texttt{app}(l_1,l_2)) = \\texttt{len}(l_1) + \\texttt{len}(l_2) \\]",
-            "italiano": "La lunghezza della lista ottenuta concatenando due liste e' equivalente alla somma delle lunghezze delle due liste: \\[ \\forall l_1\\;l_2 \\in L_A.\\; \\texttt{len}(\\texttt{app}(l_1,l_2)) = \\texttt{len}(l_1) + \\texttt{len}(l_2) \\]"
-          },
-      "coq": "Theorem len_app: forall l1 l2  : list , len (app l1 l2) = len l1 + len l2.\nProof.\nAdmitted.\n"
     }
   ],
   "tactics" : [
     {
-      "name": "induction","display_name": {"english":"induction", "italiano" : "induzione"},
+      "name": "induction",
       "n_params" : 1,
       "param_types" : ["text"],
       "text":
@@ -177,36 +128,23 @@
     },
 
     {
-      "name": "intro", "display_name": {"english":"variable introduction", "italiano" : "introduzione di variabile"},
-      "n_params" : 0,
-      "text":
-        {
-          "english" : "Introduce a variable:\\[ \\texttt{\"} P \\to Q \\texttt{\"} \\text{ becomes }\\texttt{\"}\\text{given $P$ prove $Q$}\\texttt{\"} \\]\\[ \\texttt{\"}\\forall (x : A) , P\\texttt{\"} \\text{ becomes } \\texttt{\"}\\text{given $(x : A)$ prove $P$}\\texttt{\"} \\]",
-          "italiano" : "Introduce una variabile:\\[ \\texttt{\"} P \\to Q \\texttt{\"} \\text{ diventa }\\texttt{\"}\\text{dato $P$ dimostra $Q$}\\texttt{\"} \\]\\[ \\texttt{\"}\\forall (x : A) , P\\texttt{\"} \\text{ diventa } \\texttt{\"}\\text{dato $(x : A)$ dimostra $P$}\\texttt{\"} \\]"
-        },
+      "name": "intro",
+      "n_params" :  0,
+      "text": {
+        "english" : "Introduce a variable:\\[ \\texttt{\"} P \\to Q \\texttt{\"} \\text{ becomes }\\texttt{\"}\\text{given $P$ prove $Q$}\\texttt{\"} \\]\\[ \\texttt{\"}\\forall (x : A) , P\\texttt{\"} \\text{ becomes } \\texttt{\"}\\text{given $(x : A)$ prove $P$}\\texttt{\"} \\]",
+        "italiano" : "Introduce una variabile:\\[ \\texttt{\"} P \\to Q \\texttt{\"} \\text{ diventa }\\texttt{\"}\\text{dato $P$ dimostra $Q$}\\texttt{\"} \\]\\[ \\texttt{\"}\\forall (x : A) , P\\texttt{\"} \\text{ diventa } \\texttt{\"}\\text{dato $(x : A)$ dimostra $P$}\\texttt{\"} \\]"
+      },
       "coq" : "intro."
     },
 
     {
-      "name": "reflexivity", "display_name": {"english":"reflexivity", "italiano" : "riflessività"},
-      "n_params" : 0,
-      "text":
-        {
-          "english" : "Equality is reflexive.\\[ \\texttt{\"}A = A\\texttt{\"} \\text{ becomes } \\texttt{\"true\"}\\]",
-          "italiano" : "L'uguaglianza è riflessiva.\\[ \\texttt{\"}A = A\\texttt{\"} \\text{ diventa } \\texttt{\"vero\"}\\]"
+      "name": "reflexivity",
+      "n_params" :  0,
+      "text": {
+        "english" : "Equality is  reflexive.\\[ \\\"}A = A\\texttt{\"} \\text{ becomes } \\texttt{\"true\"}\\]",
+        "italiano" : "L'uguaglianza è riflessiva.\\[ \\\"}A = A\\texttt{\"} \\text{ diventa } \\texttt{\"vero\"}\\]"
         },
       "coq" : "reflexivity."
-    },
-    
-    {
-      "name": "simplify arithmetic", "display_name": {"english":"simplify arithmetic", "italiano" : "semplifica aritmetica"},
-      "n_params" : 0,
-      "text":
-        {
-          "english" : "Simplify an arithmetic expression, i.e. \\[x+7+y+0+3=2+x+3+4+y+1\\] becomes \\[x+y+10=x+y+10\\]",
-          "italiano" : "Semplifica una espressione aritmetica, i.e. \\[x+7+y+0+3=2+x+3+4+y+1\\] diventa \\[x+y+10=x+y+10\\]"
-        },
-      "coq" : "ring_simplify."
     }
   ]
 }

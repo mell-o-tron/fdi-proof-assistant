@@ -32,17 +32,23 @@ class TacticCommentator {
         this.language_selector = language_selector;
         this.observer = observer;
         
-        this.inductive_goal_stack = []; // for nested induction
-        this.inductive_goal_history = [];     // stack of stacks, for undo
+        this.inductive_goal_stack = [];         // for nested induction
+        this.inductive_goal_history = [];       // stack of stacks, for undo
+
+        this.destruct_goal_stack = [];             // for nested cases
+        this.destruct_goal_history = [];       // stack of stacks, for undo
     }
 
     undo_stack() {
         this.inductive_goal_stack = this.inductive_goal_history.pop();
+        this.destruct_goal_stack = this.destruct_goal_history.pop();
     }
     
     // Method to generate a comment based on the tactic
     tactic_comment(tactic, text, uncurrifier) {
+        console.log("TACTIC!!!!", tactic);
         this.inductive_goal_history.push(structuredClone(this.inductive_goal_stack));
+        this.destruct_goal_history.push(structuredClone(this.destruct_goal_stack));
         console.log("INDUCTION HISTORY: ", this.inductive_goal_history)
         switch (tactic) {
             case "induction":
@@ -91,6 +97,7 @@ class TacticCommentator {
                 let res = "";
                 
                 let cur_inductive_goal = this.inductive_goal_stack[this.inductive_goal_stack.length - 1];
+                let cur_destruct_goal = this.destruct_goal_stack[this.destruct_goal_stack.length - 1];
                 
                 console.log("INDUCTIVE", cur_inductive_goal)
                 console.log("CURRENT", this.observer.current_goal)
@@ -108,18 +115,47 @@ class TacticCommentator {
                     document.getElementById("latex-proof").appendChild(fin);
                     
                 }
+
+                if(cur_destruct_goal && same_goal(cur_destruct_goal, this.observer.current_goal)){
+                    this.destruct_goal_stack.pop();
+
+                    // Create finish base case box
+                    let fin = document.createElement('div');
+                    fin.className = "end-case";
+                    fin.innerHTML = "<b>" + this.language_selector.current_language.END_OF_CASE + "</b>";
+                    document.getElementById("latex-proof").appendChild(fin);
+
+                }
+
                 return res;
 
             case "rewrite":
                 let direction = text.includes("<-") ? `${this.language_selector.current_language.RIGHTTOLEFT}` : `${this.language_selector.current_language.LEFTTORIGHT}`;
-                return `We apply: ${this.texifier.inline_math("\\texttt{" + text.replace("rewrite", "")
+                return `${this.language_selector.current_language.WEAPPLY}: ${this.texifier.inline_math("\\texttt{" + text.replace("rewrite", "")
                     .replace(".", "")
                     .replace("->", "")
                     .replace("<-", "")
                     // .replaceAll("_", "\\_")
                     .trim() + "}")} ${direction}.`;
 
+            case "destruct_with_eqn": {     // scope to redefine new goals
+
+                // TODO ONLY GIVES END OF CASE IF SPLIT IN TWO. GENERALIZE BY PUSHING ALL NEW GOALS.
+
+                let new_goals = this.observer.new_goals;
+                if(new_goals.length == 2){
+                    this.destruct_goal_stack.push(new_goals[1]); // save second case goal
+
+                }
+
+                return `${this.language_selector.current_language.DESTRUCT}.`;
+
+            }
+
+            case "ring_simplify":
+                return `${this.language_selector.current_language.RING}.`
             default:
+                console.log("COMMENTATOR FAILED", tactic)
                 return "";
         }
     }

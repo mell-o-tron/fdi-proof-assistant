@@ -9,24 +9,7 @@
           "english" : "Let \\(A\\) be a set. The set \\(L_A\\) of lists of elements of \\( A \\) is defined as follows: <ul style=\"padding : 15px;\"><li>Base Clause: \\([] \\in L_A\\)</li><li>Inductive Clause: \\(\\forall a \\in A .\\; \\forall l \\in L_A .\\; a :: [] \\in L_A \\).</li></ul>The notation \\( a::b::c::[] \\) is equivalent to \\([a, b, c]\\).",
           "italiano": "Sia \\(A\\) un insieme. L'insieme \\(L_A\\) delle liste di elementi di \\( A \\) è definito come segue: <ul style=\"padding : 15px;\"><li>Clausola Base: \\([] \\in L_A\\)</li><li> Clausola Induttiva: \\(\\forall a \\in A .\\; l \\in L_A .\\; a :: [] \\in L_A \\).</li></ul>La notazione \\( a::b::c::[] \\) è equivalente alla notazione \\([a, b, c]\\)."
         },
-      "coq": "Require Import Arith\nInductive listn : Type := | nil : listn | cons : nat -> listn -> listn.\nInfix \"::\" := cons (at level 60, right associativity).\nNotation \"[ ]\" := nil (format \"[ ]\").\nNotation \"[ x ]\" := (cons x nil).\nNotation \"[ x ; y ; .. ; z ]\" := (cons x (cons y .. (cons z nil) ..)).\n"
-    },
-    {
-      "name": "btn",
-      "is_function" : "false",
-      "display_name": "btn",
-      "constructors": [
-        {
-          "name": "N",
-          "arity": 3
-        }
-      ],
-      "text":
-        {
-          "english" : "Let \\(A\\) be a set. The set \\(L_A\\) of lists of elements of \\( A \\) is defined as follows: <ul style=\"padding : 15px;\"><li>Base Clause: \\([] \\in L_A\\)</li><li>Inductive Clause: \\(\\forall a \\in A .\\; \\forall l \\in L_A .\\; a :: [] \\in L_A \\).</li></ul>The notation \\( a::b::c::[] \\) is equivalent to \\([a, b, c]\\).",
-          "italiano": "Sia \\(A\\) un insieme. L'insieme \\({BT}_A\\) degli alberi binari etichettati con elementi di \\( A \\) è definito come segue: <ul style=\"padding : 15px;\"><li>Clausola Base: \\(\\lambda \\in BT_A\\)</li><li> Clausola Induttiva: \\(\\forall a \\in A .\\; t_1,t_2 \\in BT_A .\\; N(t_1,a,t_2) \\in BT_A \\).</li></ul>La notazione \\( a::b::c::[] \\) è equivalente alla notazione \\([a, b, c]\\)."
-        },
-      "coq": "Inductive btn : Type := | lmd : btn | N : btn -> nat -> btn -> btn.\n"
+      "coq": "Require Import Arith.\nInductive listn : Type := | nil : listn | cons : nat -> listn -> listn.\nInfix \"::\" := cons (at level 60, right associativity).\nNotation \"[ ]\" := nil (format \"[ ]\").\nNotation \"[ x ]\" := (cons x nil).\nNotation \"[ x ; y ; .. ; z ]\" := (cons x (cons y .. (cons z nil) ..)).\n"
     },
     {
       "name": "app",
@@ -51,30 +34,6 @@
         "italiano" : "Sia \\( \\texttt {sumList} : L_\\mathbb{N} \\to \\mathbb{N} \\) definita come segue:<ul style=\"padding : 15px;\"><li>Clausola Base: \\( \\texttt{sumList}([]) = 0 \\)</li><li>Clausola Induttiva: \\( \\texttt{sumList}(n :: l) = \\texttt{sumList}(l) + n \\)</li></ul>"
       },
       "coq": "Fixpoint sumList (l : listn) : nat := match l with | [] => 0 | n :: l => sumList l + n end.\n"
-    },
-    {
-      "name": "sumBT",
-      "is_function" : "true",
-      "arity" : 1,
-      "display_name": "sumBT",
-      "text":
-      {
-        "english" : "Let \\( \\texttt {sumBT} : BT_\\mathbb{N} \\to \\mathbb{N} \\) be defined as follows:<ul style=\"padding : 15px;\"><li>Base Clause: \\( \\texttt{sumBT}(\\lambda) = 0 \\)</li><li>Inductive Clause: \\( \\texttt{sumBT}(N(t_1,n,t_2)) = \\texttt{sumBT}(t_1) + \\texttt{sumBT}(t_2) + n \\)</li></ul>",
-        "italiano" : "Sia \\( \\texttt {sumBT} : BT_\\mathbb{N} \\to \\mathbb{N} \\) definita come segue:<ul style=\"padding : 15px;\"><li>Clausola Base: \\( \\texttt{sumBT}(\\lambda) = 0 \\)</li><li>Clausola Induttiva: \\( \\texttt{sumBT}(N(t_1,n,t_2)) = \\texttt{sumBT}(t_1) + \\texttt{sumBT}(t_2) + n \\)</li></ul>"
-      },
-      "coq": "Fixpoint sumBT (t : btn) : nat := match t with | lmd => 0 | N t1 n t2  => sumBT t1 + sumBT t2 + n end.\n"
-    },
-    {
-      "name": "visit2",
-      "is_function" : "true",
-      "arity" : 1,
-      "display_name": "visit2",
-      "text":
-      {
-        "english" : "Let \\( \\texttt {visit2} : BT_A \\to L_A \\) be defined as follows:<ul style=\"padding : 15px;\"><li>Base Clause: \\( \\texttt{visit2}(\\lambda) = [] \\)</li><li>Inductive Clause: \\( \\texttt{visit2}(N(t_1,a,t_2) = a :: \\texttt{app}(\\texttt{visit2}(t_1),\\texttt{visit2}(t_2))\\)</li></ul>",
-        "italiano" : "Sia \\( \\texttt {visit2} : BT_A \\to L_A \\) definita come segue:<ul style=\"padding : 15px;\"><li>Clausola Base: \\( \\texttt{visit2}(\\lambda) = [] \\)</li><li>Clausola Induttiva: \\( \\texttt{visit2}(N(t_1,a,t_2) = a :: \\texttt{app}(\\texttt{visit2}(t_1),\\texttt{visit2}(t_2))\\)</li></ul>"
-      },
-      "coq": "Fixpoint visit2 (t : btn) : listn := match t with | lmd => [] | N t1 a t2 => a :: app (visit2 t1) (visit2 t2) end.\n"
     }
 
       ],
@@ -110,7 +69,7 @@
         "italiano": "sumList (clausola base)"
       },
       "text": {
-        "english": "Base clause of definition of \\(\\texttt{sumList}\\):\\[ \\texttt{sumList}([]) = 0 \\]",
+        "english": "Base clause of definition of \\(\\texttt{belList}\\):\\[ \\texttt{sumList}([]) = 0 \\]",
         "italiano": "Clausola base della definizione di \\(\\texttt{sumList}\\):\\[ \\texttt{sumList}([]) = 0 \\]"
       },
       "coq": "Theorem sumList_base_clause : sumList [] = 0.\nProof.\nreflexivity.\nQed."
@@ -126,54 +85,6 @@
         "italiano": "Clausola induttiva della definizione di \\(\\texttt{sumList}\\): \\begin{multline} \\forall l \\in L_\\mathbb{N}.\\; \\forall n \\in \\mathbb{N} .\\\\ \\texttt{sumList}(n :: l) = \\texttt{sumList}(l) + n \\end{multline}"
       },
       "coq": "Theorem sumList_inductive_clause : forall (l : listn) (n : nat), sumList (n :: l) = sumList l + n.\nProof.\nreflexivity.\nQed."
-    },
-    {
-      "name": "sumBT_base_clause",
-      "display_name": {
-        "english": "sumBT (base clause)",
-        "italiano": "sumBT (clausola base)"
-      },
-      "text": {
-        "english": "Base clause of definition of \\(\\texttt{sumBT}\\):\\[ \\texttt{sumBT}(\\lambda) = 0 \\]",
-        "italiano": "Clausola base della definizione di \\(\\texttt{sumBT}\\):\\[ \\texttt{sumBT}(\\lambda) = 0 \\]"
-      },
-      "coq": "Theorem sumBT_base_clause : sumBT lmd = 0.\nProof.\nreflexivity.\nQed."
-    },
-    {
-      "name": "sumBT_inductive_clause",
-      "display_name": {
-        "english": "sumBT (inductive clause)",
-        "italiano": "sumBT (clausola induttiva)"
-      },
-      "text": {
-        "english": "Inductive clause of the definition of \\(\\texttt{sumBT}\\): \\begin{multline} \\forall t_1,t_2 \\in BT_\\mathbb{N}.\\; \\forall n \\in \\mathbb{N} .\\\\ \\texttt{sumBT}(N(t_1, n, t_2)) = \\texttt{sumBT}(t_1) + \\texttt{sumBT}(t_2) + n \\end{multline}",
-        "italiano": "Clausola induttiva della definizione di \\(\\texttt{sumBT}\\): \\begin{multline} \\forall t_1,t_2 \\in BT_\\mathbb{N}.\\; \\forall n \\in \\mathbb{N} .\\\\ \\texttt{sumBT}(N(t_1, n, t_2)) = \\texttt{sumBT}(t_1) + \\texttt{sumBT}(t_2) + n \\end{multline}"
-      },
-      "coq": "Theorem sumBT_inductive_clause : forall (t1 t2 : btn) (n : nat) , sumBT (N t1 n t2) = sumBT t1 + sumBT t2 + n.\nProof.\nreflexivity.\nQed.\n"
-    },
-    {
-      "name": "visit2_base_clause",
-      "display_name": {
-        "english": "visit2 (base clause)",
-        "italiano": "visit2 (clausola base)"
-      },
-      "text": {
-        "english": "Base clause of definition of \\(\\texttt{visit2}\\):\n\n\\[ \\texttt{visit2}(\\lambda) = [] \\]",
-        "italiano": "Clausola base della definizione di \\(\\texttt{visit2}\\):\n\n\\[ \\texttt{visit2}(\\lambda) = [] \\]"
-      },
-      "coq": "Theorem visit2_base_clause : visit2 lmd = [].\nProof.\nreflexivity.\nQed.\n"
-    },
-    {
-      "name": "visit2_inductive_clause",
-      "display_name": {
-        "english": "visit2 (inductive clause)",
-        "italiano": "visit2 (clausola induttiva)"
-      },
-      "text": {
-        "english": "Inductive clause of the definition of \\(\\texttt{visit2}\\):\n\n\\begin{gather*} \\forall t_1,t_2 \\in L_A .\\; \\forall a \\in A .\\\\ \\texttt{visit2}(N(t_1, a, t_2)) =\\\\ a :: \\texttt{app}(\\texttt{visit2}(t_1), \\texttt{visit2}(t_2)) \\end{gather*}",
-        "italiano": "Clausola induttiva della definizione di \\(\\texttt{visit2}\\):\n\n\\begin{gather*} \\forall t_1,t_2 \\in L_A .\\; \\forall a \\in A .\\\\ \\texttt{visit2}(N(t_1, a, t_2)) =\\\\ a :: \\texttt{app}(\\texttt{visit2}(t_1), \\texttt{visit2}(t_2)) \\end{gather*}"
-      },
-      "coq": "Theorem visit2_inductive_clause : forall (t1 t2 : btn) (a : nat) , visit2 (N t1 a t2) = a :: app (visit2 t1) (visit2 t2).\nProof.\nreflexivity.\nQed.\n"
     },
     {
       "display_name": {
@@ -200,24 +111,11 @@
             "italiano": "\\(\\texttt{app}\\) è associativa: \\[ \\forall l_1,l_2,l_3 \\in L_A.\\; \\texttt{app}(\\texttt{app}(l_1,l_2),l_3) = \\texttt{app}(l_1,\\texttt{app}(l_2,l_3)) \\]"
           },
       "coq": "Theorem app_assoc: forall l1 l2 l3 : listn , app (app l1 l2) l3 = app l1 (app l2 l3).\nProof.\nAdmitted.\n"
-    },
-    {
-      "display_name": {
-          "english": "sumList app interaction",
-          "italiano": "interazione sumList app"
-      },
-      "name": "sumList_app",
-      "text":
-          {
-            "english" : "Interaction between \\(\\texttt{sumList}\\) and \\(\\texttt{app}\\), i.e. \\begin{multline} \\forall l_1,l_2 \\in L_\\mathbb{N} . \\\\ \\texttt{sumList}(\\texttt{app}(l_1,l_2)) = \\texttt{susList}(l_1) + \\texttt{sumList}(l_2) \\end{multline}",
-            "italiano" : "Interazione fra \\(\\texttt{sumList}\\) e \\(\\texttt{app}\\), i.e. \\begin{multline} \\forall l_1,l_2 \\in L_\\mathbb{N} . \\\\ \\texttt{sumList}(\\texttt{app}(l_1,l_2)) = \\texttt{susList}(l_1) + \\texttt{sumList}(l_2) \\end{multline}"
-          },
-          "coq": "Theorem sumList_app: forall l1 l2 : listn , sumList (app l1 l2)  = sumList l1 + sumList l2.\nProof.\nAdmitted."
     }
   ],
   "tactics" : [
     {
-      "name": "induction","display_name": {"english":"induction", "italiano" : "induzione"},
+      "name": "induction",
       "n_params" : 1,
       "param_types" : ["text"],
       "text":
@@ -229,7 +127,7 @@
     },
 
     {
-      "name": "intro", "display_name": {"english":"variable introduction", "italiano" : "introduzione di variabile"},
+      "name": "intro",
       "n_params" : 0,
       "text":
         {
@@ -240,7 +138,7 @@
     },
 
     {
-      "name": "reflexivity", "display_name": {"english":"reflexivity", "italiano" : "riflessività"},
+      "name": "reflexivity",
       "n_params" : 0,
       "text":
         {
@@ -251,7 +149,7 @@
     },
 
     {
-      "name": "destruct", "display_name": {"english":"proof by cases", "italiano" : "dimostrazione per casi"},
+      "name": "destruct",
       "n_params" : 1,
       "param_types" : ["text"],
       "text":
@@ -263,7 +161,7 @@
     },
     
     {
-      "name": "simplify arithmetic", "display_name": {"english":"simplify arithmetic", "italiano" : "semplifica aritmetica"},
+      "name": "simplify arithmetic",
       "n_params" : 0,
       "text":
         {

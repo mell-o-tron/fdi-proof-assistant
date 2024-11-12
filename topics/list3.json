@@ -116,7 +116,7 @@
   ],
   "tactics" : [
     {
-      "name": "induction",
+      "name": "induction","display_name": {"english":"induction", "italiano" : "induzione"},
       "n_params" : 1,
       "param_types" : ["text"],
       "text":
@@ -128,7 +128,7 @@
     },
 
     {
-      "name": "intro",
+      "name": "intro", "display_name": {"english":"variable introduction", "italiano" : "introduzione di variabile"},
       "n_params" :  0,
       "text": {
         "english" : "Introduce a variable:\\[ \\texttt{\"} P \\to Q \\texttt{\"} \\text{ becomes }\\texttt{\"}\\text{given $P$ prove $Q$}\\texttt{\"} \\]\\[ \\texttt{\"}\\forall (x : A) , P\\texttt{\"} \\text{ becomes } \\texttt{\"}\\text{given $(x : A)$ prove $P$}\\texttt{\"} \\]",
@@ -138,11 +138,11 @@
     },
 
     {
-      "name": "reflexivity",
+      "name": "reflexivity", "display_name": {"english":"reflexivity", "italiano" : "riflessività"},
       "n_params" :  0,
       "text": {
-        "english" : "Equality is  reflexive.\\[ \\\"}A = A\\texttt{\"} \\text{ becomes } \\texttt{\"true\"}\\]",
-        "italiano" : "L'uguaglianza è riflessiva.\\[ \\\"}A = A\\texttt{\"} \\text{ diventa } \\texttt{\"vero\"}\\]"
+        "english" : "Equality is  reflexive.\\[ \\texttt{\"}A = A\\texttt{\"} \\text{ becomes } \\texttt{\"true\"}\\]",
+        "italiano" : "L'uguaglianza è riflessiva.\\[ \\texttt{\"}A = A\\texttt{\"} \\text{ diventa } \\texttt{\"vero\"}\\]"
         },
       "coq" : "reflexivity."
     }
