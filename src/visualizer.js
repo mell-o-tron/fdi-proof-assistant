@@ -64,7 +64,7 @@ class Visualizer {
                 content.innerHTML = "";
                 
                 const QED = new Image(300);
-                QED.src = "./imgs/QED.png";
+                QED.src = "./imgs/exactly.gif";
                 content.appendChild(QED);
                 
                 let bottom_bar = document.createElement('div');
@@ -444,7 +444,8 @@ class Visualizer {
     add_hp_application_card (controller) {
 
         let local_langsel = new LanguageSelector();
-
+        let theorem_parser = new TheoremParser();
+        
         let hypbox = document.createElement("div");
         hypbox.className = 'theorem-card';
         let theodesc = document.createElement("div");
@@ -456,30 +457,65 @@ class Visualizer {
         header.className = "math-header hypothesis-header";
         header.textContent = local_langsel.current_language.APPLYHYP;
         
+        let currifier = new Currifier(controller);
+        
         let tbox_container = document.createElement("div");
         tbox_container.className = "tbox-container";
         
         let tbox = document.createElement("select");
         tbox.className = "hyp-dropdown"
         
+        let hidden_section = document.createElement('div');
         let occ_container = document.createElement('div');
         occ_container.className = "tbox-container";
-        occ_container.textContent = "occurrence: "
+        occ_container.textContent = "occurrence: "          // TODO language
+        
+        let more_controls_container = document.createElement('div');
+        
+        hidden_section.appendChild(more_controls_container);
+        hidden_section.appendChild(occ_container);
+        
         let occ = document.createElement("INPUT");
         occ.setAttribute("type", "number");
-        occ_container.appendChild(occ);
         occ.value = 1;
+        occ_container.appendChild(occ);
+        
+        let var_containers = [];
+        let var_inputs = [];
+        let hypothesis_variables = [];
+        
+        tbox.onchange = (() => {
+            more_controls_container.innerHTML = "";
+            let hp_body = controller.observer.get_hp_body(tbox.value);
+            hypothesis_variables = theorem_parser.get_variables(hp_body);
+            
+            var_inputs = []
+            
+            for (let v of hypothesis_variables) {
+                let var_container = document.createElement('div');
+                var_container.className = "tbox-container";
+                var_container.textContent = `value of ${v}: `        // TODO language
+                let var_input = document.createElement("INPUT");
+                var_input.setAttribute("type", "text");
+                var_container.appendChild(var_input);
+
+                more_controls_container.appendChild(var_container);
+                var_inputs.push(var_input);
+            }
+            
+        });
+        
         
         let rw_lr = document.createElement("button");
         rw_lr.className = "button-4";
         rw_lr.textContent = `${local_langsel.current_language.APPLY} (→)`;
-        rw_lr.onclick = () => {controller.rewrite_theorem(tbox.value, true, occ.value, [], [])};
+        rw_lr.onclick = () => {controller.rewrite_theorem(tbox.value, true, occ.value, var_inputs.map(x => currifier.currify(x.value)), hypothesis_variables)};
 
         controller.visualizer.apply_buttons.push(rw_lr);
         
         let rw_rl = document.createElement("button");
         rw_rl.className = "button-4";
-        rw_rl.onclick = () => {controller.rewrite_theorem(tbox.value, false, occ.value, [], [])};
+        rw_rl.onclick = () => {controller.rewrite_theorem(tbox.value, false, occ.value, var_inputs.map(x => currifier.currify(x.value)), hypothesis_variables)};
         rw_rl.textContent = `${local_langsel.current_language.APPLY} (←)`;
         
         controller.visualizer.apply_buttons.push(rw_rl);
@@ -488,7 +524,7 @@ class Visualizer {
         hypbox.appendChild(theodesc);
         tbox_container.appendChild(tbox);
         hypbox.appendChild(tbox_container);
-        hypbox.appendChild(occ_container);
+        hypbox.appendChild(hidden_section);
         hypbox.appendChild(rw_lr);
         hypbox.appendChild(rw_rl);
         MathJax.typeset();
