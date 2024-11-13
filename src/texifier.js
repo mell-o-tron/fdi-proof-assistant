@@ -92,7 +92,8 @@ class TeXifier {
         for (let r of this.replacements) {
             res = res.replaceAll(r[0], r[1]);
         }
-        res = res.replaceAll(/([a-zA-Z0-9]) ([a-zA-Z0-9])/g, "$1\\;$2")
+
+        res = res.replaceAll(/^(?<=\\)([a-zA-Z0-9]) ([a-zA-Z0-9])/g, "$1\\;$2")
         res = res.replaceAll(/([\s\(;][a-zA-Z])([0-9]+)/g, "$1_{$2}")
         
         
