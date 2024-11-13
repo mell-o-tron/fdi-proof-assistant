@@ -64,7 +64,17 @@ class Visualizer {
                 content.innerHTML = "";
                 
                 const QED = new Image(300);
-                QED.src = "./imgs/exactly.gif";
+
+                let memes = ["./imgs/exactly.gif",
+                             "./imgs/obiwan.png",
+                             "./imgs/Q.jpg",
+                             "./imgs/conte.png",
+                            ];
+
+                const random = Math.floor(Math.random() * memes.length);
+
+
+                QED.src = memes[random];
                 content.appendChild(QED);
                 
                 let bottom_bar = document.createElement('div');
