@@ -88,6 +88,12 @@ class TeXifier {
     
     texify_common(text){
         let res = this.replace_ifs(text);
+
+        res = res.replace(/forall\s*(?:\(*\s*(?:\w+\s*)+:\s*\w+\s*\)*\s*)+\s*,/g,
+          (s) =>
+            "forall " + Array.from(s.substring(6).matchAll(/(?:((?:\w+\s*)+):(\s*\w+)\s*)/g))
+                        .map(([_, args, type]) => args.trim().split(" ").join("§") + " \\in " + type.trim())
+                        .join(" , forall ") + " , ")
         
         for (let r of this.replacements) {
             res = res.replaceAll(r[0], r[1]);
