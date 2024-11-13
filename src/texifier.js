@@ -46,6 +46,7 @@ class TeXifier {
             ["list", "L_A"],
             ["btn", "BT_\\mathbb{N}"],
             ["bte", "BT_A"],
+            ["nterm", "\\mathcal{N}Term"],
             ["false", "\\texttt{false}"],
             ["true", "\\texttt{true}"],
             ["||", "\\vee"],
