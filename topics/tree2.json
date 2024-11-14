@@ -35,7 +35,7 @@
       "display_name": "app",
       "text":
       {
-        "english" : "Let \\( \\texttt {app} : L_A \\times L_A \\to L_A \\) be defined as follows:<ul style=\"padding : 15px;\"><li>Base Clause: \\( \\texttt{app}([], l_2) = l_2 \\)</li><li>Inductive Clause: \\( \\texttt{app}(a :: l_1, l_2) =  \\texttt{app} a :: (l_1, l_2) \\).</li></ul>",
+        "english" : "Let \\( \\texttt {app} : L_A \\times L_A \\to L_A \\) be defined as follows:<ul style=\"padding : 15px;\"><li>Base Clause: \\( \\texttt{app}([], l_2) = l_2 \\)</li><li>Inductive Clause: \\( \\texttt{app}(a :: l_1, l_2) = a :: \\texttt{app} (l_1, l_2) \\).</li></ul>",
         "italiano" : "Sia \\( \\texttt {app} : L_A \\times L_A \\to L_A \\) definita come segue:<ul style=\"padding : 15px;\"><li>Clausola Base: \\( \\texttt{app}([], l_2) = l_2 \\)</li><li>Clausola Induttiva: \\( \\texttt{app}(a :: l_1, l_2) =  a :: \\texttt{app} (l_1, l_2) \\).</li></ul>"
       },
       "coq": "Fixpoint app (x y : listn) : listn := match x with | [] => y | x::xs => x :: app xs y end.\n"
@@ -98,8 +98,8 @@
         "italiano": "app (clausola induttiva)"
       },
       "text": {
-        "english": "Inductive clause of the definition of \\(\\texttt{app}\\):\n\n\\[ \\forall l_1,l_2 \\in L_A .\\; \\forall a \\in A .\\; \\texttt{app}(a :: l_1, l_2) = \\texttt{app} (l_1, l_2) \\]",
-        "italiano": "Clausola induttiva della definizione di \\(\\texttt{app}\\):\n\n\\[ \\forall l_1,l_2 \\in L_A .\\; \\forall a \\in A .\\; \\texttt{app}(a :: l_1, l_2) = \\texttt{app} (l_1, l_2) \\]"
+        "english": "Inductive clause of the definition of \\(\\texttt{app}\\):\n\n\\[ \\forall l_1,l_2 \\in L_A .\\; \\forall a \\in A .\\; \\texttt{app}(a :: l_1, l_2) = a :: \\texttt{app} (l_1, l_2) \\]",
+        "italiano": "Clausola induttiva della definizione di \\(\\texttt{app}\\):\n\n\\[ \\forall l_1,l_2 \\in L_A .\\; \\forall a \\in A .\\; \\texttt{app}(a :: l_1, l_2) = a :: \\texttt{app} (l_1, l_2) \\]"
       },
       "coq": "Theorem app_inductive_clause : forall (l1 : listn) (l2 : listn) (a : nat) , app (a :: l1) l2 = a :: app l1 l2.\nProof.\nAdmitted."
     },
