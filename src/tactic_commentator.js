@@ -11,8 +11,8 @@ function same_goal (g1, g2){
     return false;
   }
   
-  let hg1 = g1.hypotheses.sort((x, y) => `${x.name}${x.body}` > `${y.name}${y.body}`);
-  let hg2 = g2.hypotheses.sort((x, y) => `${x.name}${x.body}` > `${y.name}${y.body}`);
+  let hg1 = g1.hypotheses.sort((x, y) => x.name+x.body > y.name+y.body ? 1 : x.name+x.body === y.name+y.body ? 0 : -1);
+  let hg2 = g2.hypotheses.sort((x, y) => x.name+x.body > y.name+y.body ? 1 : x.name+x.body === y.name+y.body ? 0 : -1);
   
   for (let i in hg1){
     let h1 = hg1[i];
