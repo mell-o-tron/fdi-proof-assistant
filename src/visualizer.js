@@ -69,6 +69,8 @@ class Visualizer {
                              "./imgs/obiwan.png",
                              "./imgs/Q.jpg",
                              "./imgs/conte.png",
+                             "./imgs/pippo.png",
+                             "./imgs/gervasi.png",
                             ];
 
                 const random = Math.floor(Math.random() * memes.length);
