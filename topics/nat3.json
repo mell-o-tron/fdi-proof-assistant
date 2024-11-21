@@ -12,7 +12,7 @@
           "english" : "The set \\(\\mathcal{N}Term\\\\) is defined as follows: <ul style=\"padding : 15px;\"><li>Base Clause: \\(Z \\in \\mathcal{N}Term\\)</li><li>Inductive Clause: \\(\\forall n \\in \\mathcal{N}Term .\\; S(n) \\in \\mathcal{N}Term\\).</li></ul>",
           "italiano": "L'insieme \\(\\mathcal{N}Term\\) è definito come segue: <ul style=\"padding : 15px;\"><li>Clausola Base: \\(Z \\in \\mathcal{N}Term\\)</li><li> Clausola Induttiva: \\(\\forall n \\in \\mathcal{N}Term .\\; S(n) \\in \\mathcal{N}Term\\).</li></ul>."
         },
-      "coq": "Require Import NArith.\nOpen Scope N_scope.\nInductive nterm := | Z : nterm | S : nterm -> nterm.\n"
+      "coq": "Require Import NArith.\nOpen Scope N_scope.\nNotation nat := N.\nInductive nterm := | Z : nterm | S : nterm -> nterm.\n"
     },
     {
       "name": "val",
@@ -24,7 +24,7 @@
         "english" : "Let \\( \\texttt{val} : \\mathcal{N}Term \\to \\mathbb{N} \\) be defined as follows:<ul style=\"padding : 15px;\"><li>Base Clause: \\( \\texttt{val}(Z) = 0 \\)</li><li>Inductive Clause: \\( \\texttt{val}(S(n)) = \\texttt{val}(n) + 1 \\).</li></ul>",
         "italiano" : "Sia \\( \\texttt{val} : \\mathcal{N}Term \\to \\mathbb{N} \\) definita come segue:<ul style=\"padding : 15px;\"><li>Clausola Base: \\( \\texttt{val}(Z) = 0 \\)</li><li>Clausola Induttiva: \\( \\texttt{val}(S(n)) = \\texttt{val}(n) + 1 \\).</li></ul>"
       },
-      "coq": "Fixpoint val (n : nterm) : N := match n with | Z => 0 | S n' => val n' + 1 end.\n"
+      "coq": "Fixpoint val (n : nterm) : nat := match n with | Z => 0 | S n' => val n' + 1 end.\n"
     },
     {
       "name": "add",
@@ -203,7 +203,7 @@
           "english": "Definition of multiplication between natura numbers: \\[ \\forall n,m \\in \\mathbb{N} . \\; (n + 1) * m = n * m + m \\]",
           "italiano": "Definizione moltiplicazione fra numeri naturali: \\[ \\forall n,m \\in \\mathbb{N} . \\; (n + 1) * m = n * m + m \\]"
         },
-      "coq": "Theorem mul_def: forall n m : N , (n + 1) * m = n * m + m.\nProof.\nAdmitted.\n"
+      "coq": "Theorem mul_def: forall n m : nat, (n + 1) * m = n * m + m.\nProof.\nAdmitted.\n"
         },
     {
       "display_name": {
@@ -216,7 +216,7 @@
           "english": "Definition of a number to the power of 0: \\[ \\forall m \\in \\mathbb{N} . \\; m ^ 0 = 1 \\]",
           "italiano": "Definizione di un numero elevato alla 0: \\[ \\forall m \\in \\mathbb{N} . \\; m ^ 0 = 1 \\]"
         },
-      "coq": "Theorem exp_def_base: forall m : N , m ^ 0 = 1.\nProof.\nexact N.pow_0_r.\nQed.\n"
+      "coq": "Theorem exp_def_base: forall m : nat, m ^ 0 = 1.\nProof.\nexact N.pow_0_r.\nQed.\n"
         },
     {
       "display_name": {
@@ -229,7 +229,7 @@
           "english": "Definition of a number to the power of a positive number: \\[ \\forall n,m \\in \\mathbb{N} . \\; m ^ {n+1} = m^n * m \\]",
           "italiano": "Definizione di un numero elevato ad un numero positivo: \\[ \\forall n,m \\in \\mathbb{N} . \\; m ^ {n+1} = m^n * m \\]"
         },
-      "coq": "Theorem exp_def_inductive: forall n m : N , m ^ (n+1) = (m ^ n) * m.\nProof.\nintros ; rewrite N.add_1_r ; rewrite N.pow_succ_r' ; rewrite N.mul_comm ; reflexivity.\nQed.\n"
+      "coq": "Theorem exp_def_inductive: forall n m : nat, m ^ (n+1) = (m ^ n) * m.\nProof.\nintros ; rewrite N.add_1_r ; rewrite N.pow_succ_r' ; rewrite N.mul_comm ; reflexivity.\nQed.\n"
         }
   ],
   "tactics" : [
