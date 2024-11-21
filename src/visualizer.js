@@ -111,7 +111,7 @@ class Visualizer {
                 // Put all hypothesis in a centered LaTeX environment, so their vertical spacing is correct.
                 let hps = "\\begin{gather*}\n";
                 for (let h of this.observer.current_goal.hypotheses){
-                    hps += `{${h.name}}` + " : " + uncurrifier.uncurrify(h.body) + "\\\\";
+                    hps += `{${h.name}}` + " : " + uncurrifier.uncurrify(h.body) + " \\\\\n";
                 }
                 hps += "\n\\end{gather*}";
                 text += this.texifier.texify(hps);
