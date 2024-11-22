@@ -1,0 +1,14 @@
+{
+  "theorem": {
+    "name": "visit2_base_clause",
+    "display_name": {
+      "english": "visit2 (base clause)",
+      "italiano": "visit2 (clausola base)"
+    },
+    "text": {
+      "english": "Base clause of definition of \\(\\texttt{visit2}\\):\n\n\\[ \\texttt{visit2}(\\lambda) = [] \\]",
+      "italiano": "Clausola base della definizione di \\(\\texttt{visit2}\\):\n\n\\[ \\texttt{visit2}(\\lambda) = [] \\]"
+    },
+    "coq": "Theorem visit2_base_clause : visit2 lmd = [].\nProof.\nreflexivity.\nQed.\n"
+  }
+}

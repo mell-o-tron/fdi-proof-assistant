@@ -1,0 +1,22 @@
+{
+  "definitions": [
+    "list.json",
+    "app.json",
+    "sumList.json"
+  ],
+  "theorems": [
+    "app_base_clause.json",
+    "app_inductive_clause.json",
+    "sumList_base_clause.json",
+    "sumList_inductive_clause.json",
+    "app_empty.json",
+    "app_assoc.json"
+  ],
+  "tactics": [
+    "induction.json",
+    "intro.json",
+    "reflexivity.json",
+    "destruct.json",
+    "simplify arithmetic.json"
+  ]
+}

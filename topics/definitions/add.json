@@ -1,0 +1,11 @@
+{
+  "definition": {
+    "name": "add",
+    "display_name": "+",
+    "text": {
+      "english": "Let \\( ({+}) : \\mathbb N \\times \\mathbb N \\to \\mathbb N \\) be defined as follows:<ul><li>\\(0 + m \\triangleq m\\)</li><li>\\( succ (n) + m \\triangleq succ (n + m) \\).</li></ul>",
+      "italiano": "Sia \\( ({+}) : \\mathbb N \\times \\mathbb N \\to \\mathbb N \\) definito come segue:<ul><li>\\(0 + m \\triangleq m\\)</li><li>\\( succ (n) + m \\triangleq succ (n + m) \\).</li></ul>"
+    },
+    "coq": "Fixpoint add (n m : nat) : nat := match n with | 0 => m | succ n' => succ (add n' m) end.\nNotation \"A + B\" := (add A B).\n"
+  }
+}

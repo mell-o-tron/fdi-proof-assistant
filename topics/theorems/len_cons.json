@@ -1,0 +1,14 @@
+{
+  "theorem": {
+    "display_name": {
+      "english": "len IC",
+      "italiano": "len caso induttivo"
+    },
+    "name": "len_cons",
+    "text": {
+      "english": "Inductive case of len: \\[ \\forall a \\in A . \\; \\forall l \\in L_A . \\; len(a :: l) = len(l) + 1 \\]",
+      "italiano": "Case induttivo len: \\[ \\forall a \\in A . \\; \\forall l \\in L_A . \\; len(a :: l) = len(l) + 1 \\]"
+    },
+    "coq": "Lemma len_cons: forall a : A , forall l : list , len (a :: l) = len l + 1.\nProof.\nAdmitted.\n"
+  }
+}

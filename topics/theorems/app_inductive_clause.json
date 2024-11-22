@@ -1,0 +1,14 @@
+{
+  "theorem": {
+    "name": "app_inductive_clause",
+    "display_name": {
+      "english": "app (inductive clause)",
+      "italiano": "app (clausola induttiva)"
+    },
+    "text": {
+      "english": "Inductive clause of the definition of \\(\\texttt{app}\\):\n\n\\[ \\forall l_1,l_2 \\in L_A .\\; \\forall a \\in A .\\; \\texttt{app}(a :: l_1, l_2) = a :: \\texttt{app} (l_1, l_2) \\]",
+      "italiano": "Clausola induttiva della definizione di \\(\\texttt{app}\\):\n\n\\[ \\forall l_1,l_2 \\in L_A .\\; \\forall a \\in A .\\; \\texttt{app}(a :: l_1, l_2) = a :: \\texttt{app} (l_1, l_2) \\]"
+    },
+    "coq": "Theorem app_inductive_clause : forall (l1 : listn) (l2 : listn) (a : nat) , app (a :: l1) l2 = a :: app l1 l2.\nProof.\nAdmitted."
+  }
+}

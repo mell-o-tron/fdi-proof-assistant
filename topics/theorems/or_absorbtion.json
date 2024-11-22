@@ -1,0 +1,14 @@
+{
+  "theorem": {
+    "display_name": {
+      "english": "\\(\\vee\\) absorbtion",
+      "italiano": "Assorbimento \\(\\vee\\)"
+    },
+    "name": "or_absorbtion",
+    "text": {
+      "english": "\\(\\texttt{true}\\) is the absorbing element of \\(\\vee\\): \\[ \\forall b \\in Bool.\\; \\texttt{true} \\vee b = \\texttt{true} \\]",
+      "italiano": "\\(\\texttt{true}\\) è l'elemento assorbente di \\(\\vee\\): \\[ \\forall b \\in Bool.\\; \\texttt{true} \\vee b = \\texttt{true} \\]"
+    },
+    "coq": "Theorem or_absorbtion : forall b : Bool , true || b = true.\nProof.\nreflexivity.\nQed."
+  }
+}

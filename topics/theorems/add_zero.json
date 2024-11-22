@@ -1,0 +1,14 @@
+{
+  "theorem": {
+    "name": "add_zero",
+    "display_name": {
+      "english": "Identity of \\(\\texttt{add}\\)",
+      "italiano": "Unità di \\(\\texttt{add}\\)"
+    },
+    "text": {
+      "english": "\\(Z\\) is the identity element of \\(\\texttt{add}\\): \\[ \\forall n \\in \\mathcal{N}Term . \\; \\texttt{add}(n, Z) = n \\]",
+      "italiano": "\\(Z\\) è l'elemento neutro di \\(\\texttt{add}\\): \\[ \\forall n \\in \\mathcal{N}Term . \\; \\texttt{add}(n, Z) = n \\]"
+    },
+    "coq": "Theorem add_zero: forall n : nterm , add n Z = n.\nProof.\nAdmitted.\n"
+  }
+}

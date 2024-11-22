@@ -1,0 +1,14 @@
+{
+  "theorem": {
+    "display_name": {
+      "english": "\\(\\vee\\) commutativity",
+      "italiano": "Commutatività \\(\\vee\\)"
+    },
+    "name": "or_comm",
+    "text": {
+      "english": "\\(\\vee\\) is commutative:: \\[ \\forall a,b \\in Bool.\\; a \\vee b = b \\vee a \\]",
+      "italiano": "\\(\\vee\\) è commutativa: \\[ \\forall a,b \\in Bool.\\; a \\vee b = b \\vee a \\]"
+    },
+    "coq": "Theorem or_comm : forall a b : Bool , a || b = b || a.\nProof.\nAdmitted.\n"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "theorem": {
+    "display_name": {
+      "english": "rev (inductive clause)",
+      "italiano": "rev (clausola induttiva)"
+    },
+    "name": "rev_inductive_clause",
+    "text": {
+      "english": "Inductive clause of the definition of \\(\\texttt{rev}\\): \\[ \\forall l \\in L_A . \\forall a \\in A . \\; \\texttt{rev}(a :: l) = \\texttt{app}(\\texttt{rev}(l), [a]) \\]",
+      "italiano": "Clausola induttiva della definizione di \\(\\texttt{rev}\\): \\[ \\forall l \\in L_A . \\; \\forall a \\in A . \\; \\texttt{rev}(a :: l) = \\texttt{app}(\\texttt{rev}(l), [a]) \\]"
+    },
+    "coq": "Theorem rev_inductive_clause: forall l : list , forall a : A , rev (a :: l) = app (rev l) [a].\nProof.\nAdmitted.\n"
+  }
+}

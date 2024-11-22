@@ -1,0 +1,13 @@
+{
+  "definition": {
+    "name": "visit2",
+    "is_function": "true",
+    "arity": 1,
+    "display_name": "visit2",
+    "text": {
+      "english": "Let \\( \\texttt {visit2} : BT_A \\to L_A \\) be defined as follows:<ul style=\"padding : 15px;\"><li>Base Clause: \\( \\texttt{visit2}(\\lambda) = [] \\)</li><li>Inductive Clause: \\( \\texttt{visit2}(N(t_1,a,t_2) = a :: \\texttt{app}(\\texttt{visit2}(t_1),\\texttt{visit2}(t_2))\\)</li></ul>",
+      "italiano": "Sia \\( \\texttt {visit2} : BT_A \\to L_A \\) definita come segue:<ul style=\"padding : 15px;\"><li>Clausola Base: \\( \\texttt{visit2}(\\lambda) = [] \\)</li><li>Clausola Induttiva: \\( \\texttt{visit2}(N(t_1,a,t_2) = a :: \\texttt{app}(\\texttt{visit2}(t_1),\\texttt{visit2}(t_2))\\)</li></ul>"
+    },
+    "coq": "Fixpoint visit2 (t : btn) : listn := match t with | lmd => [] | N t1 a t2 => a :: app (visit2 t1) (visit2 t2) end.\n"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "theorem": {
+    "display_name": {
+      "english": "app of empty list",
+      "italiano": "app di lista vuota"
+    },
+    "name": "app_empty",
+    "text": {
+      "english": "\\(\\texttt{app}\\) of a listn and the empty listn is equal to the original list: \\[ \\forall l_1 \\in L_A.\\; \\texttt{app}(l_1,[]) = l_1 \\]",
+      "italiano": "\\(\\texttt{app}\\) di una lista e la lista vuota equivale alla lista originale: \\[ \\forall l_1 \\in L_A.\\; \\texttt{app}(l_1,[]) = l_1 \\]"
+    },
+    "coq": "Theorem app_empty : forall l1 : listn , app l1 [] = l1.\nProof.\nAdmitted.\n"
+  }
+}

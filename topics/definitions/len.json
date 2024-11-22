@@ -1,0 +1,13 @@
+{
+  "definition": {
+    "name": "len",
+    "is_function": "true",
+    "display_name": "len",
+    "arity": 1,
+    "text": {
+      "english": "Let \\( \\texttt {len} : L_{\\mathbb N} \\to \\mathbb N \\) be defined as follows:<ul style=\"padding : 15px;\"><li>Base Clause: \\( \\texttt{len}([]) = 0 \\)</li><li>Inductive Clause: \\( \\texttt{len}(a :: l_1) =  \\texttt{len} (l_1) + 1 \\).</li></ul>",
+      "italiano": "Sia \\( \\texttt {len} : L_{\\mathbb N} \\to \\mathbb N \\) definita come segue:<ul style=\"padding : 15px;\"><li>Clausola Base: \\( \\texttt{len}([]) = 0 \\)</li><li>Clausola Induttiva: \\( \\texttt{len}(a :: l_1) =  \\texttt{len} (l_1) + 1 \\).</li></ul>"
+    },
+    "coq": "Fixpoint len (x : list nat) : nat := match x with | [] => 0 | (x :: xs) => len xs + 1 end."
+  }
+}

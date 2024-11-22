@@ -1,0 +1,32 @@
+{
+  "definitions": [
+    "list.json",
+    "bte.json",
+    "app.json",
+    "belList.json",
+    "belBT.json",
+    "visit2.json"
+  ],
+  "theorems": [
+    "app_base_clause.json",
+    "app_inductive_clause.json",
+    "belList_base_clause.json",
+    "belList_inductive_clause.json",
+    "belBT_base_clause.json",
+    "belBT_inductive_clause.json",
+    "visit2_base_clause.json",
+    "visit2_inductive_clause.json",
+    "or_absorbtion.json",
+    "or_identity.json",
+    "app_empty.json",
+    "app_assoc.json",
+    "belList_app.json"
+  ],
+  "tactics": [
+    "induction.json",
+    "intro.json",
+    "reflexivity.json",
+    "destruct.json",
+    "simplify arithmetic.json"
+  ]
+}

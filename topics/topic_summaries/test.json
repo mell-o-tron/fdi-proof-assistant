@@ -1,0 +1,17 @@
+{
+  "definitions": [
+    "nat.json",
+    "add.json"
+  ],
+  "theorems": [
+    "add_dist.json",
+    "add_zero_left.json",
+    "add_zero_right.json",
+    "add_succ.json"
+  ],
+  "tactics": [
+    "induction.json",
+    "intro.json",
+    "reflexivity.json"
+  ]
+}

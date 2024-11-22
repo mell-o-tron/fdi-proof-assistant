@@ -1,0 +1,13 @@
+{
+  "definition": {
+    "name": "belList",
+    "is_function": "true",
+    "arity": 2,
+    "display_name": "belList",
+    "text": {
+      "english": "Let \\( \\texttt {belList} : L_A \\times A \\to Bool \\) be defined as follows:<ul style=\"padding : 15px;\"><li>Base Clause: \\( \\texttt{belList}([], b) = \\texttt{false} \\)</li><li>Inductive Clause: \\( \\texttt{belList}(a :: l, b) = \\begin{cases} \\texttt{true} & \\text{if}\\; a == b\\\\ \\texttt{belList}(l, b) & \\text{otherwise}\\end{cases} \\)</li></ul>",
+      "italiano": "Sia \\( \\texttt {belList} : L_A \\times A \\to Bool \\) definita come segue:<ul style=\"padding : 15px;\"><li>Clausola Base: \\( \\texttt{belList}([], b) = \\texttt{false} \\)</li><li>Clausola Induttiva: \\( \\texttt{belList}(a :: l, b) = \\begin{cases} \\texttt{true} & \\text{if}\\; a == b\\\\ \\texttt{belList}(l, b) & \\text{otherwise}\\end{cases}\\)</li></ul>"
+    },
+    "coq": "Fixpoint belList (l : list) (b : A) : Bool := match l with | [] => false | a::l' => if a == b then true else belList l' b end.\n"
+  }
+}

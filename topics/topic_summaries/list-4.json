@@ -1,0 +1,25 @@
+{
+  "definitions": [
+    "list.json",
+    "app.json",
+    "rev.json",
+    "len.json"
+  ],
+  "theorems": [
+    "undefined.json",
+    "app_cons.json",
+    "rev_nil.json",
+    "rev_cons.json",
+    "len_nil.json",
+    "len_cons.json",
+    "app_empty.json",
+    "app_assoc.json",
+    "len_app.json"
+  ],
+  "tactics": [
+    "induction.json",
+    "intro.json",
+    "reflexivity.json",
+    "aritmetic simplify.json"
+  ]
+}

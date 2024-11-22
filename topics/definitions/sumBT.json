@@ -1,0 +1,13 @@
+{
+  "definition": {
+    "name": "sumBT",
+    "is_function": "true",
+    "arity": 1,
+    "display_name": "sumBT",
+    "text": {
+      "english": "Let \\( \\texttt {sumBT} : BT_\\mathbb{N} \\to \\mathbb{N} \\) be defined as follows:<ul style=\"padding : 15px;\"><li>Base Clause: \\( \\texttt{sumBT}(\\lambda) = 0 \\)</li><li>Inductive Clause: \\( \\texttt{sumBT}(N(t_1,n,t_2)) = \\texttt{sumBT}(t_1) + \\texttt{sumBT}(t_2) + n \\)</li></ul>",
+      "italiano": "Sia \\( \\texttt {sumBT} : BT_\\mathbb{N} \\to \\mathbb{N} \\) definita come segue:<ul style=\"padding : 15px;\"><li>Clausola Base: \\( \\texttt{sumBT}(\\lambda) = 0 \\)</li><li>Clausola Induttiva: \\( \\texttt{sumBT}(N(t_1,n,t_2)) = \\texttt{sumBT}(t_1) + \\texttt{sumBT}(t_2) + n \\)</li></ul>"
+    },
+    "coq": "Fixpoint sumBT (t : btn) : nat := match t with | lmd => 0 | N t1 n t2  => sumBT t1 + sumBT t2 + n end.\n"
+  }
+}

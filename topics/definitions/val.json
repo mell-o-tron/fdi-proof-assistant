@@ -1,0 +1,13 @@
+{
+  "definition": {
+    "name": "val",
+    "is_function": "true",
+    "arity": 1,
+    "display_name": "val",
+    "text": {
+      "english": "Let \\( \\texttt{val} : \\mathcal{N}Term \\to \\mathbb{N} \\) be defined as follows:<ul style=\"padding : 15px;\"><li>Base Clause: \\( \\texttt{val}(Z) = 0 \\)</li><li>Inductive Clause: \\( \\texttt{val}(S(n)) = \\texttt{val}(n) + 1 \\).</li></ul>",
+      "italiano": "Sia \\( \\texttt{val} : \\mathcal{N}Term \\to \\mathbb{N} \\) definita come segue:<ul style=\"padding : 15px;\"><li>Clausola Base: \\( \\texttt{val}(Z) = 0 \\)</li><li>Clausola Induttiva: \\( \\texttt{val}(S(n)) = \\texttt{val}(n) + 1 \\).</li></ul>"
+    },
+    "coq": "Fixpoint val (n : nterm) : nat := match n with | Z => 0 | S n' => val n' + 1 end.\n"
+  }
+}

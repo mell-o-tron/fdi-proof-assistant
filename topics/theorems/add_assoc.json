@@ -1,0 +1,14 @@
+{
+  "theorem": {
+    "name": "add_assoc",
+    "display_name": {
+      "english": "associativity of \\(\\texttt{add}\\)",
+      "italiano": "Associatività di \\(\\texttt{add}\\)"
+    },
+    "text": {
+      "english": "\\(\\texttt{add}\\) is associative: \\[ \\forall n,m,o \\in \\mathcal{N}Term . \\; \\texttt{add}(\\texttt{add}(n,m), o) = \\texttt{add}(n,\\texttt{add}(m,o)) \\]",
+      "italiano": "\\(\\texttt{add}\\) è associativa: \\[ \\forall n,m,o \\in \\mathcal{N}Term . \\; \\texttt{add}(\\texttt{add}(n,m), o) = \\texttt{add}(n,\\texttt{add}(m,o)) \\]"
+    },
+    "coq": "Theorem add_assoc: forall n m o : nterm , add (add n m) o = add n (add m o).\nProof.\nAdmitted.\n"
+  }
+}

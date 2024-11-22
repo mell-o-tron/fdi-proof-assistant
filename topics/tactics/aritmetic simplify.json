@@ -1,0 +1,11 @@
+{
+  "tactic": {
+    "name": "aritmetic simplify",
+    "n_params": 0,
+    "text": {
+      "english": "Apply a definition. Choose the definition from the menu. Optional: use the input box to specify an occurrence writing:\\[ \\texttt{at occ} \\]where \\[\\texttt{occ}\\]is a number starting from 1",
+      "italiano": "Semplifica una espressione arimetica."
+    },
+    "coq": "ring_simplify."
+  }
+}

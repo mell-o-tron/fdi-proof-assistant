@@ -1,0 +1,14 @@
+{
+  "theorem": {
+    "name": "belList_base_clause",
+    "display_name": {
+      "english": "belList (base clause)",
+      "italiano": "belList (clausola base)"
+    },
+    "text": {
+      "english": "Base clause of definition of \\(\\texttt{belList}\\):\\[ \\forall b \\in A .\\; \\texttt{belList}([], b) = \\texttt{false} \\]",
+      "italiano": "Clausola base della definizione di \\(\\texttt{belList}\\):\\[ \\forall b \\in A .\\; \\texttt{belList}([], b) = \\texttt{false} \\]"
+    },
+    "coq": "Theorem belList_base_clause : forall (b : A), belList [] b = false.\nProof.\nAdmitted."
+  }
+}

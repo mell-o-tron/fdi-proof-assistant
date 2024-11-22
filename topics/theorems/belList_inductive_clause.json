@@ -1,0 +1,14 @@
+{
+  "theorem": {
+    "name": "belList_inductive_clause",
+    "display_name": {
+      "english": "belList (inductive clause)",
+      "italiano": "belList (clausola induttiva)"
+    },
+    "text": {
+      "english": "Inductive clause of the definition of \\(\\texttt{belList}\\): \\begin{multline} \\forall l \\in L_A.\\; \\forall a,b \\in A .\\\\ \\texttt{belList}(a :: l, b) = \\begin{cases} \\texttt{true} & \\text{if}\\; a == b\\\\ \\texttt{belList}(l, b) & \\text{otherwise}\\end{cases} \\end{multline}",
+      "italiano": "Clausola induttiva della definizione di \\(\\texttt{belList}\\): \\begin{multline} \\forall l \\in L_A.\\; \\forall a,b \\in A .\\\\ \\texttt{belList}(a :: l, b) = \\begin{cases} \\texttt{true} & \\text{if}\\; a == b\\\\ \\texttt{belList}(l, b) & \\text{otherwise}\\end{cases} \\end{multline}"
+    },
+    "coq": "Theorem belList_inductive_clause : forall (l : list) , forall (a b : A) , belList (a :: l) b = if a == b then true else belList l b.\nProof.\nAdmitted."
+  }
+}

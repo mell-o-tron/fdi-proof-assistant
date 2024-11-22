@@ -1,0 +1,25 @@
+{
+  "definitions": [
+    "nterm.json",
+    "val.json",
+    "add.json",
+    "mul.json"
+  ],
+  "theorems": [
+    "val_base_clause.json",
+    "val_inductive_clause.json",
+    "add_base_clause.json",
+    "add_inductive_clause.json",
+    "mul_base_clause.json",
+    "mul_inductive_clause.json",
+    "val_add.json",
+    "mul_def.json"
+  ],
+  "tactics": [
+    "induction.json",
+    "intro.json",
+    "reflexivity.json",
+    "destruct.json",
+    "simplify arithmetic.json"
+  ]
+}

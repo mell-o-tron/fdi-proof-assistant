@@ -1,0 +1,13 @@
+{
+  "definition": {
+    "name": "rev",
+    "is_function": "true",
+    "arity": 1,
+    "display_name": "rev",
+    "text": {
+      "english": "Let \\( \\texttt{rev} : L_A \\to L_A \\) be defined as follows:<ul style=\"padding : 15px\"><li>Base Clause: \\( \\texttt{rev}([]) = [] \\)</li><li>Inductive Clause: \\( \\texttt{rev}(a :: l') = \\texttt{app}(\\texttt{rev}(l'), [a]) \\).</li></ul>",
+      "italiano": "Sia \\( \\texttt{rev} : L_A \\to L_A \\) definito come segue:<ul style=\"padding : 15px\"><li>Clausola Base: \\( \\texttt{rev}([]) = [] \\)</li><li>Clausola Induttiva: \\( \\texttt{rev}(a :: l') = \\texttt{app}(\\texttt{rev}(l'), [a]) \\).</li></ul>"
+    },
+    "coq": "Fixpoint rev (l : list) : list := match l with | [] => [] | a :: l' => app (rev l') [a] end.\n"
+  }
+}

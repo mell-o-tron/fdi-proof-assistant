@@ -1,0 +1,14 @@
+{
+  "theorem": {
+    "display_name": {
+      "english": "mul is correct",
+      "italiano": "mul è corretta"
+    },
+    "name": "val_mul",
+    "text": {
+      "english": "Teorema: \\(\\texttt{mul}\\) is correct: \\[ \\forall n,m \\in \\mathcal{N}Term . \\; \\texttt{val}(\\texttt{mul}(n,m)) = \\texttt{val}(n) * \\texttt{val}(m) \\]",
+      "italiano": "Teorema: \\(\\texttt{mul}\\) è corretta: \\[ \\forall n,m \\in \\mathcal{N}Term . \\; \\texttt{val}(\\texttt{mul}(n,m)) = \\texttt{val}(n) * \\texttt{val}(m) \\]"
+    },
+    "coq": "Theorem val_mul: forall n m : nterm , val (mul n m) = val n * val m.\nProof.\nAdmitted.\n"
+  }
+}

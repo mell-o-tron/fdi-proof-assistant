@@ -1,0 +1,14 @@
+{
+  "theorem": {
+    "display_name": {
+      "english": "rev IB",
+      "italiano": "rev caso induttivo"
+    },
+    "name": "rev_cons",
+    "text": {
+      "english": "Inductive case of rev: \\[ \\forall a \\in A . \\; \\forall l \\in L_A . \\; rev(a :: l) = app(rev(l),\\; [a]) \\]",
+      "italiano": "Case induttivo rev: \\[ \\forall a \\in A . \\; \\forall l \\in L_A . \\; rev(a :: l) = app(rev(l),\\; [a]) \\]"
+    },
+    "coq": "Lemma rev_cons: forall a : A , forall l : list , rev (a :: l) = app (rev l) [a].\nProof.\nAdmitted.\n"
+  }
+}

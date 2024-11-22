@@ -1,0 +1,15 @@
+{
+  "definitions": [
+    "list.json",
+    "app.json"
+  ],
+  "theorems": [
+    "app_base_clause.json",
+    "app_inductive_clause.json"
+  ],
+  "tactics": [
+    "induction.json",
+    "intro.json",
+    "reflexivity.json"
+  ]
+}

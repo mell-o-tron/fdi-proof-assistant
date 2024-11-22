@@ -1,0 +1,14 @@
+{
+  "theorem": {
+    "name": "sumList_base_clause",
+    "display_name": {
+      "english": "sumList (base clause)",
+      "italiano": "sumList (clausola base)"
+    },
+    "text": {
+      "english": "Base clause of definition of \\(\\texttt{sumList}\\):\\[ \\texttt{sumList}([]) = 0 \\]",
+      "italiano": "Clausola base della definizione di \\(\\texttt{sumList}\\):\\[ \\texttt{sumList}([]) = 0 \\]"
+    },
+    "coq": "Theorem sumList_base_clause : sumList [] = 0.\nProof.\nreflexivity.\nQed."
+  }
+}

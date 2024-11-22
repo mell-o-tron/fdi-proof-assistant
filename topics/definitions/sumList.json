@@ -1,0 +1,13 @@
+{
+  "definition": {
+    "name": "sumList",
+    "is_function": "true",
+    "arity": 1,
+    "display_name": "sumList",
+    "text": {
+      "english": "Let \\( \\texttt {sumList} : L_\\mathbb{N} \\to \\mathbb{N} \\) be defined as follows:<ul style=\"padding : 15px;\"><li>Base Clause: \\( \\texttt{sumList}([]) = 0 \\)</li><li>Inductive Clause: \\( \\texttt{sumList}(n :: l) = \\texttt{sumList}(l) + n \\)</li></ul>",
+      "italiano": "Sia \\( \\texttt {sumList} : L_\\mathbb{N} \\to \\mathbb{N} \\) definita come segue:<ul style=\"padding : 15px;\"><li>Clausola Base: \\( \\texttt{sumList}([]) = 0 \\)</li><li>Clausola Induttiva: \\( \\texttt{sumList}(n :: l) = \\texttt{sumList}(l) + n \\)</li></ul>"
+    },
+    "coq": "Fixpoint sumList (l : listn) : nat := match l with | [] => 0 | n :: l => sumList l + n end.\n"
+  }
+}

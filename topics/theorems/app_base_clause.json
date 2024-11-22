@@ -1,0 +1,14 @@
+{
+  "theorem": {
+    "name": "app_base_clause",
+    "display_name": {
+      "english": "app (base clause)",
+      "italiano": "app (clausola base)"
+    },
+    "text": {
+      "english": "Base clause of definition of \\(\\texttt{app}\\):\n\n\\[ \\forall l_2 \\in L_A .\\; \\texttt{app}([], l_2) = l_2 \\]",
+      "italiano": "Clausola base della definizione di \\(\\texttt{app}\\):\n\n\n\\[ \\forall l_2 \\in L_A .\\; \\texttt{app}([], l_2) = l_2 \\]"
+    },
+    "coq": "Theorem app_base_clause : forall (l2 : listn), app [] l2 = l2.\nProof.\nAdmitted."
+  }
+}

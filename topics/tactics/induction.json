@@ -1,0 +1,18 @@
+{
+  "tactic": {
+    "name": "induction",
+    "display_name": {
+      "english": "induction",
+      "italiano": "induzione"
+    },
+    "n_params": 1,
+    "param_types": [
+      "text"
+    ],
+    "text": {
+      "english": "Proof by induction. Enter the induction variable:",
+      "italiano": "Dimostrazione per induzione. Inserisci la variabile d'induzione:"
+    },
+    "coq": "induction $0."
+  }
+}

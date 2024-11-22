@@ -1,0 +1,14 @@
+{
+  "theorem": {
+    "display_name": {
+      "english": "rev CB",
+      "italiano": "rev caso base"
+    },
+    "name": "rev_nil",
+    "text": {
+      "english": "Base case of rev: \\[ rev([]) = [] \\]",
+      "italiano": "Case base rev: \\[ rev([]) = [] \\]"
+    },
+    "coq": "Lemma rev_nil : rev [] = [].\nProof.\nAdmitted.\n"
+  }
+}

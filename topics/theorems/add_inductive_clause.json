@@ -1,0 +1,14 @@
+{
+  "theorem": {
+    "name": "add_inductive_clause",
+    "display_name": {
+      "english": "add (inductive clause)",
+      "italiano": "add (clausola induttiva)"
+    },
+    "text": {
+      "english": "Inductive clause of the definition of \\(\\texttt{add}\\): \\[ \\forall n,m \\in \\mathcal{N}Term . \\; \\texttt{add}(S(n), m) = S(\\texttt{add}(n, m)) \\]",
+      "italiano": "Clausola induttiva della definizione di \\(\\texttt{add}\\): \\[ \\forall n,m \\in \\mathcal{N}Term . \\; \\texttt{add}(S(n), m) = S(\\texttt{add}(n, m)) \\]"
+    },
+    "coq": "Theorem add_inductive_clause: forall n m : nterm , add (S n) m = S (add n m).\nProof.\nreflexivity.\nQed.\n"
+  }
+}

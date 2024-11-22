@@ -1,0 +1,18 @@
+{
+  "definitions": [
+    "list.json",
+    "len.json",
+    "app.json"
+  ],
+  "theorems": [
+    "len_base_clause.json",
+    "len_inductive_clause.json",
+    "app_base_clause.json",
+    "app_inductive_clause.json"
+  ],
+  "tactics": [
+    "induction.json",
+    "intro.json",
+    "reflexivity.json"
+  ]
+}

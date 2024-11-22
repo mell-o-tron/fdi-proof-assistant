@@ -1,0 +1,14 @@
+{
+  "theorem": {
+    "name": "add_zero_left",
+    "display_name": {
+      "english": "Theorem: 0 is left id of +",
+      "italiano": "Teorema: 0 è id sinistra di +"
+    },
+    "text": {
+      "english": "Theorem: 0 is the left identity for +:\\[ \\forall a \\in \\mathbb N . 0 + a = a \\]",
+      "italiano": "Teorema: 0 è l'identità sinistra per +:\\[ \\forall a \\in \\mathbb N . 0 + a = a \\]"
+    },
+    "coq": "Theorem add_zero_left : forall a : nat, add 0 a = a.\nProof.\nAdmitted.\n"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "definitions": [
+    "list.json",
+    "app.json",
+    "rev.json",
+    "len.json"
+  ],
+  "theorems": [
+    "app_base_clause.json",
+    "app_inductive_clause.json",
+    "rev_base_clause.json",
+    "rev_inductive_clause.json",
+    "len_base_clause.json",
+    "len_inductive_clause.json",
+    "app_empty.json",
+    "app_assoc.json"
+  ],
+  "tactics": [
+    "induction.json",
+    "intro.json",
+    "reflexivity.json",
+    "simplify arithmetic.json"
+  ]
+}

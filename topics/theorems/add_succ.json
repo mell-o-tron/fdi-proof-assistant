@@ -1,0 +1,14 @@
+{
+  "theorem": {
+    "name": "add_succ",
+    "display_name": {
+      "english": "Theorem: a + succ(b) = succ(a+b)",
+      "italiano": "Teorema: a + succ(b) = succ(a+b)"
+    },
+    "text": {
+      "english": "The following holds\\[ \\forall (a\\; b : \\mathbb N) , a + succ(b) = succ(a + b) \\]",
+      "italiano": "Vale il seguente\\[ \\forall (a\\; b : \\mathbb N) , a + succ(b) = succ(a + b) \\]"
+    },
+    "coq": "Theorem add_succ : forall a b : nat, (a + succ b) = succ(a + b).\nProof.\nAdmitted.\n"
+  }
+}
