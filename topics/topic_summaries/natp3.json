@@ -12,6 +12,6 @@
     "induction.json",
     "intro.json",
     "reflexivity.json",
-    "destruct.json",
+    "destruct.json"
   ]
 }

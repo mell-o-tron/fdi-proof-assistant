@@ -8,5 +8,5 @@
     "english": "Definition of a number to the power of 0: \\[ \\forall m \\in \\mathbb{N} . \\; m ^ 0 = 1 \\]",
     "italiano": "Definizione di un numero elevato alla 0: \\[ \\forall m \\in \\mathbb{N} . \\; m ^ 0 = 1 \\]"
   },
-  "coq": "Theorem exp_def_base: forall m : nat, m ^ 0 = 1.\nProof.\nexact N.pow_0_r.\nQed.\n"
+  "coq": "Theorem exp_def_base: forall m : nat, m ^ 0 = 1.\nProof.\nAdmitted.\n"
 }

@@ -32,6 +32,19 @@ function find_zero_depth_equals (s) {
     return equal_signs;
 }
 
+function find_matching_paren (s, i) {
+    let j = i;
+    let depth = 1;
+    while (j < s.length - 1 && depth != 0) {
+        j++;
+        if (s[j] == "(") depth ++;
+        if (s[j] == ")") depth --;
+    }
+    if (depth == 0) return j;
+    else return null;
+}
+
+
 class TeXifier {
     constructor() {
         this.replacements = [
@@ -90,16 +103,19 @@ class TeXifier {
         
 
         // code for visualizing exponents
-        for (let x of res.matchAll(/\^/g)) {
-            if (res.substring(x.index+1).trim().startsWith("(")) {
-                let ind = end_or_first_unmatched_rpar(res,x.index)
-                res = res.substring(0, x.index+1) + res.substring(x.index+1, ind).replace("(","{") + "}" + res.substring(ind+1)
-            }
-            else {
-                let after = res.substring(x.index+1).trim().match(/(?:^(.+?)\s+(.*)|^.+)/s)
-                res = res.substring(0,x.index+1) + "{" + (after[1] ? after[1] : after[0]) + "}" + (after[2] ? after[2] : "")
-            }
-        }
+
+        res = res.replaceAll("#^", "^{").replaceAll("^#", "}");
+
+        // for (let x of res.matchAll(/\^/g)) {
+        //     if (res.substring(x.index+1).trim().startsWith("(")) {
+        //         let ind = end_or_first_unmatched_rpar(res,x.index)
+        //         res = res.substring(0, x.index+1) + res.substring(x.index+1, ind).replace("(","{") + "}" + res.substring(ind+1)
+        //     }
+        //     else {
+        //         let after = res.substring(x.index+1).trim().match(/(?:^(.+?)\s+(.*)|^.+)/s)
+        //         res = res.substring(0,x.index+1) + "{" + (after[1] ? after[1] : after[0]) + "}" + (after[2] ? after[2] : "")
+        //     }
+        // }
         
         for (let r of this.replacements) {
             res = res.replaceAll(r[0], r[1]);
