@@ -87,143 +87,143 @@ language_selector.select_language(language.trim()).then(() => {
   readJsonFile(`./theorems/${name}.json`).then(function (proof_obj) {
     readJsonFile(`./topics/topic_summaries/${topic}.json`).then(function (topic_obj) {
       createTopicJson(topic_obj).then(function (topic_obj) {
-      console.log(proof_obj);
-      console.log(topic_obj);
-
-      if (proof_obj == null || topic_obj == null){
-          throw new Error ("proof environment is invalid");
-      }
-      else {
-        // returns the coq manager
-        let manager_promise = JsCoq.start(jscoq_ids, jscoq_opts);
-
-        manager_promise.then(function(manager) {
-
-          loading_set_number_daemon(manager);
-          
-          // waits for coq to be ready
-          manager.when_ready.then(function (result){
-
-            let coq_observer = new Observer();
-            manager.coq.observers.push(coq_observer);
-
-            console.log("COQ READY")
-            console.log(manager.coq.query(1, 0, ['Mode']));
-
-            // gathers the current code snippet - this is used for manipulating the code (e.g. adding lines).
-            let snippet = manager.provider.snippets[0]
-
-            console.log(language_selector);
-
-            let controller = new Controller(manager, snippet, coq_observer, language_selector);
+        console.log(proof_obj);
+        console.log(topic_obj);
+  
+        if (proof_obj == null || topic_obj == null){
+            throw new Error ("proof environment is invalid");
+        }
+        else {
+          // returns the coq manager
+          let manager_promise = JsCoq.start(jscoq_ids, jscoq_opts);
+  
+          manager_promise.then(function(manager) {
+  
+            loading_set_number_daemon(manager);
             
-            // add history to selectDropdown
-            selectDropdown.addEventListener('change', function (e) {
-              console.log(selectDropdown.value) 
+            // waits for coq to be ready
+            manager.when_ready.then(function (result){
+  
+              let coq_observer = new Observer();
+              manager.coq.observers.push(coq_observer);
+  
+              console.log("COQ READY")
+              console.log(manager.coq.query(1, 0, ['Mode']));
+  
+              // gathers the current code snippet - this is used for manipulating the code (e.g. adding lines).
+              let snippet = manager.provider.snippets[0]
+  
+              console.log(language_selector);
+  
+              let controller = new Controller(manager, snippet, coq_observer, language_selector);
               
-              let url = new URL(window.location.href);
-              url.searchParams.set("language", `${selectDropdown.value}`);
-//               url.searchParams.set("history", `${controller.coq_history.join("")}`);
+              // add history to selectDropdown
+              selectDropdown.addEventListener('change', function (e) {
+                console.log(selectDropdown.value) 
                 
-              window.location.href = url.toString();
-            });
-
-            
-            
-            controller.set_definitions(topic_obj.definitions);
-            
-            // adds definitions and theorem to coq code
-            let str = "";
-
-            for (let e of topic_obj.extra) {
-              str += e.coq + "\n"; 
-            }
-
-            for (let d of topic_obj.definitions) {
-              str += d.coq + "\n";
-            }
-
-            // adds theorems to the controller's available theorem list
-            for (let d of topic_obj.theorems) {
-              str += d.coq + "\n";
-            }
-
-            // adds tactics to the controller's available tactics list
-            for (let t of topic_obj.tactics) {
-              controller.available_tactics.push(t);
-            }
-
-            for (let d of proof_obj.definitions) {
-              str += d.coq + "\n";
-            }
-
-            str += proof_obj.theorem.coq + "\nProof.\n";
-
-            console.log(proof_obj.theorem);
-
-
-            controller.add_line(str);
-
-
-            controller.go_next_n(str.split("\n").length, false, () => {
+                let url = new URL(window.location.href);
+                url.searchParams.set("language", `${selectDropdown.value}`);
+  //               url.searchParams.set("history", `${controller.coq_history.join("")}`);
+                  
+                window.location.href = url.toString();
+              });
+  
               
               
-            for (let d of topic_obj.definitions) {
-              controller.visualizer.visualize_math(d, "definition", controller);
-            }
-
-            for (let d of topic_obj.theorems) {
-              controller.available_theorems.push(d);
-            }
-
-            for (let d of proof_obj.definitions) {
-              controller.visualizer.visualize_math(d, "definition", controller);
-            }
+              controller.set_definitions(topic_obj.definitions);
               
-            controller.visualizer.visualize_math(proof_obj.theorem, "theorem", controller);
-            
-            
-            // Add the available theorems to the menu on the right
-            for (let at of controller.available_theorems){
-              if (at.name.endsWith("base_clause") || at.name.endsWith("inductive_clause")){
-                controller.visualizer.add_theo_card(at, controller, "available_definitions");
-              } else {
-                controller.visualizer.add_theo_card(at, controller);
+              // adds definitions and theorem to coq code
+              let str = "";
+  
+              for (let e of topic_obj.extra) {
+                str += e.coq + "\n"; 
               }
-            }
-
-            // Add the available tactics to the menu on the right
-            for (let tac of controller.available_tactics){
-              controller.visualizer.add_tactic_card(tac, controller)
-            }
-
-            controller.visualizer.add_hp_handlers(controller)
-
-            document.getElementById("loading").style.display = "none";
-              // TODO IMPLEMENT REPLAY OF HISTORY WHEN CHANGE LANGUAGE
+  
+              for (let d of topic_obj.definitions) {
+                str += d.coq + "\n";
+              }
+  
+              // adds theorems to the controller's available theorem list
+              for (let d of topic_obj.theorems) {
+                str += d.coq + "\n";
+              }
+  
+              // adds tactics to the controller's available tactics list
+              for (let t of topic_obj.tactics) {
+                controller.available_tactics.push(t);
+              }
+  
+              for (let d of proof_obj.definitions) {
+                str += d.coq + "\n";
+              }
+  
+              str += proof_obj.theorem.coq + "\nProof.\n";
+  
+              console.log(proof_obj.theorem);
+  
+  
+              controller.add_line(str);
+  
+  
+              controller.go_next_n(str.split("\n").length, false, () => {
+                
+                
+              for (let d of topic_obj.definitions) {
+                controller.visualizer.visualize_math(d, "definition", controller);
+              }
+  
+              for (let d of topic_obj.theorems) {
+                controller.available_theorems.push(d);
+              }
+  
+              for (let d of proof_obj.definitions) {
+                controller.visualizer.visualize_math(d, "definition", controller);
+              }
+                
+              controller.visualizer.visualize_math(proof_obj.theorem, "theorem", controller);
               
-//               if (history) {
-//                 history = history.trim();
-//                 controller.coq_history = history.split("\n").map(x => x + "\n");
-//                 controller.add_line(history);
-//                 controller.go_next_n(history.split("\n").length - 2, false, () => {
-//                    controller.go_next_n(1, true, () => {}, () => {
-//                     console.log("There is a mistake in the history.")
-//                 });
-//                 }, () => {
-//                   console.log("There is a mistake in the history.")
-//                 });
-//               }
               
-            }, () => {
-              console.log("There is a mistake in the definitions or theorem statement.")
+              // Add the available theorems to the menu on the right
+              for (let at of controller.available_theorems){
+                if (at.name.endsWith("base_clause") || at.name.endsWith("inductive_clause")){
+                  controller.visualizer.add_theo_card(at, controller, "available_definitions");
+                } else {
+                  controller.visualizer.add_theo_card(at, controller);
+                }
+              }
+  
+              // Add the available tactics to the menu on the right
+              for (let tac of controller.available_tactics){
+                controller.visualizer.add_tactic_card(tac, controller)
+              }
+  
+              controller.visualizer.add_hp_handlers(controller)
+  
+              document.getElementById("loading").style.display = "none";
+                // TODO IMPLEMENT REPLAY OF HISTORY WHEN CHANGE LANGUAGE
+                
+  //               if (history) {
+  //                 history = history.trim();
+  //                 controller.coq_history = history.split("\n").map(x => x + "\n");
+  //                 controller.add_line(history);
+  //                 controller.go_next_n(history.split("\n").length - 2, false, () => {
+  //                    controller.go_next_n(1, true, () => {}, () => {
+  //                     console.log("There is a mistake in the history.")
+  //                 });
+  //                 }, () => {
+  //                   console.log("There is a mistake in the history.")
+  //                 });
+  //               }
+                
+              }, () => {
+                console.log("There is a mistake in the definitions or theorem statement.")
+              });
+  
             });
-
           });
-        });
-      }
-
-    })
+        }
+  
+      })
     }).catch(err => console.error("Error occurred while fetching or processing the JSON data:", err));
   }).catch(err => console.error("Error occurred while fetching or processing the JSON data:", err));
 
