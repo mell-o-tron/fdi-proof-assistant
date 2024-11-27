@@ -1,0 +1,3 @@
+{
+  "coq" : "Require Import Bool.\nNotation Bool := bool.\n"
+}

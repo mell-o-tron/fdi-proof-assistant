@@ -8,6 +8,32 @@
       "english": "Let \\( \\texttt {app} : L_A \\times L_A \\to L_A \\) be defined as follows:<ul style=\"padding : 15px;\"><li>Base Clause: \\( \\texttt{app}([], l_2) = l_2 \\)</li><li>Inductive Clause: \\( \\texttt{app}(a :: l_1, l_2) = a :: \\texttt{app} (l_1, l_2) \\).</li></ul>",
       "italiano": "Sia \\( \\texttt {app} : L_A \\times L_A \\to L_A \\) definita come segue:<ul style=\"padding : 15px;\"><li>Clausola Base: \\( \\texttt{app}([], l_2) = l_2 \\)</li><li>Clausola Induttiva: \\( \\texttt{app}(a :: l_1, l_2) =  a :: \\texttt{app} (l_1, l_2) \\).</li></ul>"
     },
-    "coq": "Fixpoint app (x y : listn) : listn := match x with | [] => y | x::xs => x :: app xs y end.\n"
-  }
+    "coq": "Fixpoint app {A : Type} (x y : list A) : list A := match x with | [] => y | x::xs => x :: app xs y end.\n"
+  },
+  "theorems": [
+    {
+      "name": "app_base_clause",
+      "display_name": {
+        "english": "app (base clause)",
+        "italiano": "app (clausola base)"
+      },
+      "text": {
+        "english": "Base clause of definition of \\(\\texttt{app}\\):\n\n\\[ \\forall l_2 \\in L_A .\\; \\texttt{app}([], l_2) = l_2 \\]",
+        "italiano": "Clausola base della definizione di \\(\\texttt{app}\\):\n\n\n\\[ \\forall l_2 \\in L_A .\\; \\texttt{app}([], l_2) = l_2 \\]"
+      },
+      "coq": "Theorem app_base_clause : forall {A : Type} (l2 : list A), app [] l2 = l2.\nProof.\nAdmitted."
+    },
+    {
+      "name": "app_inductive_clause",
+      "display_name": {
+        "english": "app (inductive clause)",
+        "italiano": "app (clausola induttiva)"
+      },
+      "text": {
+        "english": "Inductive clause of the definition of \\(\\texttt{app}\\):\n\n\\[ \\forall l_1,l_2 \\in L_A .\\; \\forall a \\in A .\\; \\texttt{app}(a :: l_1, l_2) = a :: \\texttt{app} (l_1, l_2) \\]",
+        "italiano": "Clausola induttiva della definizione di \\(\\texttt{app}\\):\n\n\\[ \\forall l_1,l_2 \\in L_A .\\; \\forall a \\in A .\\; \\texttt{app}(a :: l_1, l_2) = a :: \\texttt{app} (l_1, l_2) \\]"
+      },
+      "coq": "Theorem app_inductive_clause : forall {A : Type} (l1 : list A) (l2 : list A) (a : A) , app (a :: l1) l2 = a :: app l1 l2.\nProof.\nAdmitted."
+    }
+  ]
 }

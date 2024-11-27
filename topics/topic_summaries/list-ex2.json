@@ -1,14 +1,13 @@
 {
+  "extra": [
+    "arith.json"
+  ],
   "definitions": [
     "list.json",
     "app.json",
     "sumList.json"
   ],
   "theorems": [
-    "app_base_clause.json",
-    "app_inductive_clause.json",
-    "sumList_base_clause.json",
-    "sumList_inductive_clause.json",
     "app_empty.json",
     "app_assoc.json"
   ],

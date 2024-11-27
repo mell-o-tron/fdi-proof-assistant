@@ -38,15 +38,13 @@ class TeXifier {
             ["forall", "\\forall"],
             ["exists", "\\exists"],
             ["->", "\\to"],
-            [" nat", "\\mathbb{N}"],
+            [" nat", " \\mathbb{N}"],
 //            ["N", "\\mathbb{N}"],
             [",", " ."],
             ["→", "\\to"],
             ["ℕ", "\\mathbb{N}"],
-            ["listn", "L_\\mathbb{N}"],
-            ["list", "L_A"],
-            ["btn", "BT_\\mathbb{N}"],
-            ["bte", "BT_A"],
+            ["list", "L"],
+            ["bte", "BT"],
             ["nterm", "\\mathcal{N}Term"],
             ["false", "\\texttt{false}"],
             ["true", "\\texttt{true}"],
@@ -90,6 +88,8 @@ class TeXifier {
     texify_common(text){
         let res = this.replace_ifs(text);
         
+
+        // code for visualizing exponents
         for (let x of res.matchAll(/\^/g)) {
             if (res.substring(x.index+1).trim().startsWith("(")) {
                 let ind = end_or_first_unmatched_rpar(res,x.index)
@@ -104,6 +104,9 @@ class TeXifier {
         for (let r of this.replacements) {
             res = res.replaceAll(r[0], r[1]);
         }
+
+        // regex to replace generic types with subtext, e.g. L \mathbb{N} -> L_\mathbb{N}
+        res = res.replaceAll(/( [a-zA-Z]+) (\\*[a-zA-Z{}]+)/g, "$1_{$2}");
 
         res = res.replaceAll(/^(?<=\\)([a-zA-Z0-9]) ([a-zA-Z0-9])/g, "$1\\;$2")
         res = res.replaceAll(/([\s\(;][a-zA-Z])([0-9]+)/g, "$1_{$2}")

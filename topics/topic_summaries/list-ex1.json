@@ -1,4 +1,8 @@
 {
+  "extra": [
+    "bool.json",
+    "type_with_eq_dec.json"
+  ],
   "definitions": [
     "list.json",
     "app.json",
@@ -6,12 +10,6 @@
     "belList.json"
   ],
   "theorems": [
-    "app_base_clause.json",
-    "app_inductive_clause.json",
-    "rev_base_clause.json",
-    "rev_inductive_clause.json",
-    "belList_base_clause.json",
-    "belList_inductive_clause.json",
     "or_absorbtion.json",
     "or_identity.json",
     "or_comm.json",
@@ -23,7 +21,6 @@
     "induction.json",
     "intro.json",
     "reflexivity.json",
-    "destruct.json",
-    "simplify arithmetic.json"
+    "destruct.json"
   ]
 }

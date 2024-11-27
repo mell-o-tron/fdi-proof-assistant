@@ -1,14 +1,12 @@
 {
-  "theorem": {
-    "name": "add_zero_right",
-    "display_name": {
-      "english": "Theorem: 0 is right id of +",
-      "italiano": "Teorema: 0 è id destra di +"
-    },
-    "text": {
-      "english": "0 is the right identity for +:\\[ \\forall a \\in \\mathbb N . a + 0 = a \\]",
-      "italiano": "0 è l'identità destra per +:\\[ \\forall a \\in \\mathbb N . a + 0 = a \\]"
-    },
-    "coq": "Theorem add_zero_right : forall a : nat, add a 0 = a.\nProof.\nAdmitted.\n"
-  }
+  "name": "add_zero_right",
+  "display_name": {
+    "english": "Theorem: 0 is right id of +",
+    "italiano": "Teorema: 0 è id destra di +"
+  },
+  "text": {
+    "english": "0 is the right identity for +:\\[ \\forall a \\in \\mathbb N . a + 0 = a \\]",
+    "italiano": "0 è l'identità destra per +:\\[ \\forall a \\in \\mathbb N . a + 0 = a \\]"
+  },
+  "coq": "Theorem add_zero_right : forall a : nat, add a 0 = a.\nProof.\nAdmitted.\n"
 }

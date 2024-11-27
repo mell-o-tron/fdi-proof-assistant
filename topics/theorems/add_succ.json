@@ -1,14 +1,12 @@
 {
-  "theorem": {
-    "name": "add_succ",
-    "display_name": {
-      "english": "Theorem: a + succ(b) = succ(a+b)",
-      "italiano": "Teorema: a + succ(b) = succ(a+b)"
-    },
-    "text": {
-      "english": "The following holds\\[ \\forall (a\\; b : \\mathbb N) , a + succ(b) = succ(a + b) \\]",
-      "italiano": "Vale il seguente\\[ \\forall (a\\; b : \\mathbb N) , a + succ(b) = succ(a + b) \\]"
-    },
-    "coq": "Theorem add_succ : forall a b : nat, (a + succ b) = succ(a + b).\nProof.\nAdmitted.\n"
-  }
+  "name": "add_succ",
+  "display_name": {
+    "english": "\\(\\texttt{add}\\) of succ",
+    "italiano": "\\(\\texttt{add}\\) di un succesore"
+  },
+  "text": {
+    "english": "\\(\\texttt{add}\\) of an \\(\\mathcal{N}Term\\) and the succesor of another \\(\\mathcal{N}Term\\) equals the successor of the sum of them: \\[ \\forall n \\in \\mathcal{N}Term . \\; \\texttt{add}(n, S(m)) = S(add(n,m)) \\]",
+    "italiano": "\\(\\texttt{add}\\) di un qualsiasi \\(\\mathcal{N}Term\\) e il succesore di un'altro \\(\\mathcal{N}Term\\) equivale al succesore della somma di essi: \\[ \\forall n \\in \\mathcal{N}Term . \\; \\texttt{add}(n, S(m)) = S(add(n,m)) \\]"
+  },
+  "coq": "Theorem add_succ: forall n m : nterm , add n (S m) = S (add n m).\nProof.\nAdmitted.\n"
 }

@@ -1,10 +1,8 @@
 {
-  "theorem": {
-    "name": "app_nil",
-    "text": {
-      "english": "Base case of app: \\[ \\forall l2 \\in L_A . \\; app([], l2) = l2 \\]",
-      "italiano": "Case base app: \\[ \\forall l2 \\in L_A . \\; app([], l2) = l2 \\]"
-    },
-    "coq": "Lemma app_nil : forall l2 : list, app [] l2 = l2.\nProof.\nAdmitted.\n"
-  }
+  "name": "app_nil",
+  "text": {
+    "english": "Base case of app: \\[ \\forall l2 \\in L_A . \\; app([], l2) = l2 \\]",
+    "italiano": "Case base app: \\[ \\forall l2 \\in L_A . \\; app([], l2) = l2 \\]"
+  },
+  "coq": "Lemma app_nil : forall l2 : list, app [] l2 = l2.\nProof.\nAdmitted.\n"
 }

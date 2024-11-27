@@ -1,15 +1,13 @@
 {
-  "tactic": {
-    "name": "reflexivity",
-    "display_name": {
-      "english": "reflexivity",
-      "italiano": "riflessività"
-    },
-    "n_params": 0,
-    "text": {
-      "english": "Equality is reflexive.\\[ \\texttt{\"}A = A\\texttt{\"} \\text{ becomes } \\texttt{\"true\"}\\]",
-      "italiano": "L'uguaglianza è riflessiva.\\[ \\texttt{\"}A = A\\texttt{\"} \\text{ diventa } \\texttt{\"vero\"}\\]"
-    },
-    "coq": "reflexivity."
-  }
+  "name": "reflexivity",
+  "display_name": {
+    "english": "reflexivity",
+    "italiano": "riflessività"
+  },
+  "n_params": 0,
+  "text": {
+    "english": "Equality is reflexive.\\[ \\texttt{\"}A = A\\texttt{\"} \\text{ becomes } \\texttt{\"true\"}\\]",
+    "italiano": "L'uguaglianza è riflessiva.\\[ \\texttt{\"}A = A\\texttt{\"} \\text{ diventa } \\texttt{\"vero\"}\\]"
+  },
+  "coq": "reflexivity."
 }

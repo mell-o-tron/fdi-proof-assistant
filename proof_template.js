@@ -24,6 +24,19 @@ async function readJsonFile(url) {
     }
 }
 
+async function createTopicJson(summaryJson) {
+    let definitions = [];
+    let theorems = await Promise.all(summaryJson.theorems.map(x => readJsonFile(`./topics/theorems/${x}`)));
+    for (let d of summaryJson.definitions) {
+      let x = await readJsonFile(`./topics/definitions/${d}`)
+      definitions.push(x.definition)
+      theorems = theorems.concat(x?.theorems)
+    }
+    let extra = await Promise.all(summaryJson.extra.map(x => readJsonFile(`./topics/extra/${x}`)));
+    let tactics = await Promise.all(summaryJson.tactics.map(x => readJsonFile(`./topics/tactics/${x}`)));
+    return {extra, definitions, theorems, tactics}
+}
+
 function loading_set_number_daemon (manager) {
   console.log("DAEMON")
   let loading = document.getElementById("loading");
@@ -72,8 +85,8 @@ window.location.href = url.toString();
 
 language_selector.select_language(language.trim()).then(() => {
   readJsonFile(`./theorems/${name}.json`).then(function (proof_obj) {
-    readJsonFile(`./topics/${topic}.json`).then(function (topic_obj) {
-
+    readJsonFile(`./topics/topic_summaries/${topic}.json`).then(function (topic_obj) {
+      createTopicJson(topic_obj).then(function (topic_obj) {
       console.log(proof_obj);
       console.log(topic_obj);
 
@@ -121,6 +134,10 @@ language_selector.select_language(language.trim()).then(() => {
             
             // adds definitions and theorem to coq code
             let str = "";
+
+            for (let e of topic_obj.extra) {
+              str += e.coq + "\n"; 
+            }
 
             for (let d of topic_obj.definitions) {
               str += d.coq + "\n";
@@ -206,6 +223,7 @@ language_selector.select_language(language.trim()).then(() => {
         });
       }
 
+    })
     }).catch(err => console.error("Error occurred while fetching or processing the JSON data:", err));
   }).catch(err => console.error("Error occurred while fetching or processing the JSON data:", err));
 

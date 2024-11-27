@@ -5,9 +5,35 @@
     "display_name": "len",
     "arity": 1,
     "text": {
-      "english": "Let \\( \\texttt {len} : L_{\\mathbb N} \\to \\mathbb N \\) be defined as follows:<ul style=\"padding : 15px;\"><li>Base Clause: \\( \\texttt{len}([]) = 0 \\)</li><li>Inductive Clause: \\( \\texttt{len}(a :: l_1) =  \\texttt{len} (l_1) + 1 \\).</li></ul>",
-      "italiano": "Sia \\( \\texttt {len} : L_{\\mathbb N} \\to \\mathbb N \\) definita come segue:<ul style=\"padding : 15px;\"><li>Clausola Base: \\( \\texttt{len}([]) = 0 \\)</li><li>Clausola Induttiva: \\( \\texttt{len}(a :: l_1) =  \\texttt{len} (l_1) + 1 \\).</li></ul>"
+      "english": "Let \\( \\texttt {len} : L_A \\to \\mathbb N \\) be defined as follows:<ul style=\"padding : 15px;\"><li>Base Clause: \\( \\texttt{len}([]) = 0 \\)</li><li>Inductive Clause: \\( \\texttt{len}(a :: l_1) =  \\texttt{len} (l_1) + 1 \\).</li></ul>",
+      "italiano": "Sia \\( \\texttt {len} : L_A \\to \\mathbb N \\) definita come segue:<ul style=\"padding : 15px;\"><li>Clausola Base: \\( \\texttt{len}([]) = 0 \\)</li><li>Clausola Induttiva: \\( \\texttt{len}(a :: l_1) =  \\texttt{len} (l_1) + 1 \\).</li></ul>"
     },
-    "coq": "Fixpoint len (x : list nat) : nat := match x with | [] => 0 | (x :: xs) => len xs + 1 end."
-  }
+    "coq": "Fixpoint len {A : Type} (x : list A) : nat := match x with | [] => 0 | (x :: xs) => len xs + 1 end."
+  },
+  "theorems": [
+    {
+      "name": "len_base_clause",
+      "display_name": {
+        "english": "len (base clause)",
+        "italiano": "len (clausola base)"
+      },
+      "text": {
+        "english": "Base clause of definition of \\(\\texttt{len}\\):\n\n\\[ \\texttt{len}([]) = 0 \\]",
+        "italiano": "Caso base della definizione di \\(\\texttt{len}\\):\n\n\\[ \\texttt{len}([]) = 0 \\]"
+      },
+      "coq": "Theorem len_base_clause : forall (A : Type) , @len A [] = 0.\nProof.\nAdmitted."
+    },
+    {
+      "name": "len_inductive_clause",
+      "display_name": {
+        "english": "len (inductive clause)",
+        "italiano": "len (clausola induttiva)"
+      },
+      "text": {
+        "english": "Inductive clause of definition of \\(\\texttt{len}\\):\n\n\\[ \\forall l_1 \\in L_A .\\; \\forall a \\in A .\\; \\texttt{len}(a :: l_1) = \\texttt{len}(l_1) + 1 \\]",
+        "italiano": "Clausola Induttiva della definizione di \\(\\texttt{len}\\):\n\n\\[ \\forall l_1 \\in L_A .\\; \\forall a \\in A.\\; \\texttt{len}(a :: l_1) = \\texttt{len}(l_1) + 1 \\]"
+      },
+      "coq": "Theorem len_inductive_clause : forall (A : Type) (l1 : list A) (a : A), len (a :: l1) = len (l1) + 1.\nProof.\nAdmitted."
+    }
+  ]
 }

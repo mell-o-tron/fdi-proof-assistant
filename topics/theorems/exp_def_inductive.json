@@ -1,14 +1,12 @@
 {
-  "theorem": {
-    "display_name": {
-      "english": "exponential definition (inductive clause)",
-      "italiano": "definizione esponenziale (clausola induttiva)"
-    },
-    "name": "exp_def_inductive",
-    "text": {
-      "english": "Definition of a number to the power of a positive number: \\[ \\forall n,m \\in \\mathbb{N} . \\; m ^ {n+1} = m^n * m \\]",
-      "italiano": "Definizione di un numero elevato ad un numero positivo: \\[ \\forall n,m \\in \\mathbb{N} . \\; m ^ {n+1} = m^n * m \\]"
-    },
-    "coq": "Theorem exp_def_inductive: forall n m : nat, m ^ (n+1) = (m ^ n) * m.\nProof.\nintros ; rewrite N.add_1_r ; rewrite N.pow_succ_r' ; rewrite N.mul_comm ; reflexivity.\nQed.\n"
-  }
+  "display_name": {
+    "english": "exponential definition (inductive clause)",
+    "italiano": "definizione esponenziale (clausola induttiva)"
+  },
+  "name": "exp_def_inductive",
+  "text": {
+    "english": "Definition of a number to the power of a positive number: \\[ \\forall n,m \\in \\mathbb{N} . \\; m ^ {n+1} = m^n * m \\]",
+    "italiano": "Definizione di un numero elevato ad un numero positivo: \\[ \\forall n,m \\in \\mathbb{N} . \\; m ^ {n+1} = m^n * m \\]"
+  },
+  "coq": "Theorem exp_def_inductive: forall n m : nat, m ^ (n+1) = (m ^ n) * m.\nProof.\nintros ; rewrite N.add_1_r ; rewrite N.pow_succ_r' ; rewrite N.mul_comm ; reflexivity.\nQed.\n"
 }

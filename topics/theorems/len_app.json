@@ -1,14 +1,12 @@
 {
-  "theorem": {
-    "display_name": {
-      "english": "len of app",
-      "italiano": "len di app"
-    },
-    "name": "len_app",
-    "text": {
-      "english": "The length of the list obtained by appending two lists is equal to the sum of the length of the two lists: \\[ \\forall l_1\\;l_2 \\in L_A.\\; \\texttt{len}(\\texttt{app}(l_1,l_2)) = \\texttt{len}(l_1) + \\texttt{len}(l_2) \\]",
-      "italiano": "La lunghezza della lista ottenuta concatenando due liste e' equivalente alla somma delle lunghezze delle due liste: \\[ \\forall l_1\\;l_2 \\in L_A.\\; \\texttt{len}(\\texttt{app}(l_1,l_2)) = \\texttt{len}(l_1) + \\texttt{len}(l_2) \\]"
-    },
-    "coq": "Theorem len_app: forall l1 l2  : list , len (app l1 l2) = len l1 + len l2.\nProof.\nAdmitted.\n"
-  }
+  "display_name": {
+    "english": "len of app",
+    "italiano": "len di app"
+  },
+  "name": "len_app",
+  "text": {
+    "english": "The length of the list obtained by appending two lists is equal to the sum of the length of the two lists: \\[ \\forall l_1\\;l_2 \\in L_A.\\; \\texttt{len}(\\texttt{app}(l_1,l_2)) = \\texttt{len}(l_1) + \\texttt{len}(l_2) \\]",
+    "italiano": "La lunghezza della lista ottenuta concatenando due liste è equivalente alla somma delle lunghezze delle due liste: \\[ \\forall l_1\\;l_2 \\in L_A.\\; \\texttt{len}(\\texttt{app}(l_1,l_2)) = \\texttt{len}(l_1) + \\texttt{len}(l_2) \\]"
+  },
+  "coq": "Theorem len_app: forall {A : Type} (l1 l2 : list A) , len (app l1 l2) = len l1 + len l2.\nProof.\nAdmitted.\n"
 }

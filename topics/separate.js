@@ -42,27 +42,31 @@ const main = () => {
   // Process definitions
   inputData.definitions.forEach((definition) => {
     const fileName = `${definition.name}`;
-    const filePath = writeJsonFile(definitionsDir, fileName, { definition });
+    const theorems = inputData.theorems.filter(x => x.name.startsWith(definition.name) && x.name.endsWith("clause"));
+    const filePath = writeJsonFile(definitionsDir, fileName, { definition, theorems });
     generatedDefinitions.push(filePath);
   });
 
   // Process theorems
   inputData.theorems.forEach((theorem) => {
-    const fileName = `${theorem.name}`;
-    const filePath = writeJsonFile(theoremsDir, fileName, { theorem });
-    generatedTheorems.push(filePath);
+    if (!theorem.name.endsWith("clause")) {
+      const fileName = `${theorem.name}`;
+      const filePath = writeJsonFile(theoremsDir, fileName, theorem);
+      generatedTheorems.push(filePath);
+    }
   });
 
   // Process tactics
   inputData.tactics.forEach((tactic) => {
     const fileName = `${tactic.name}`;
-    const filePath = writeJsonFile(tacticsDir, fileName, { tactic });
+    const filePath = writeJsonFile(tacticsDir, fileName, tactic);
     generatedTactics.push(filePath);
   });
 
   // Write the summary JSON file
   const summaryFilePath = `./topic_summaries/${inputFileName}.json`;
   const summaryContent = {
+    extra: [],
     definitions: generatedDefinitions.map((file) => path.basename(file)),
     theorems: generatedTheorems.map((file) => path.basename(file)),
     tactics: generatedTactics.map((file) => path.basename(file)),

@@ -14,5 +14,6 @@
       "italiano": "L'insieme \\(\\mathcal{N}Term\\) è definito come segue: <ul style=\"padding : 15px;\"><li>Clausola Base: \\(Z \\in \\mathcal{N}Term\\)</li><li> Clausola Induttiva: \\(\\forall n \\in \\mathcal{N}Term .\\; S(n) \\in \\mathcal{N}Term\\).</li></ul>"
     },
     "coq": "Inductive nterm := | Z : nterm | S : nterm -> nterm.\n"
-  }
+  },
+  "theorems": []
 }

@@ -1,14 +1,8 @@
 {
-  "theorem": {
-    "display_name": {
-      "english": "len BC",
-      "italiano": "len caso base"
-    },
-    "name": "len_nil",
-    "text": {
-      "english": "Base case of len: \\[ len([]) = 0 \\]",
-      "italiano": "Case base len: \\[ len([]) = 0 \\]"
-    },
-    "coq": "Lemma len_nil: len [] = 0. \nProof.\nAdmitted.\n"
-  }
+  "name": "len_nil",
+  "text": {
+    "english": "Base case of len: \\[ len([]) = 0 \\]",
+    "italiano": "Case base len: \\[ len([]) = 0 \\]"
+  },
+  "coq": "Lemma len_nil: len [] = 0. \nProof.\nAdmitted.\n"
 }

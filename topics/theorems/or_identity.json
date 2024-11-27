@@ -1,14 +1,12 @@
 {
-  "theorem": {
-    "display_name": {
-      "english": "\\(\\vee\\) identity",
-      "italiano": "Unità \\(\\vee\\)"
-    },
-    "name": "or_identity",
-    "text": {
-      "english": "\\(\\texttt{false}\\) is the identity element of \\(\\vee\\): \\[ \\forall b \\in Bool.\\; \\texttt{false} \\vee b = b \\]",
-      "italiano": "\\(\\texttt{false}\\) è l'elemento neutro di \\(\\vee\\): \\[ \\forall b \\in Bool.\\; \\texttt{false} \\vee b = b \\]"
-    },
-    "coq": "Theorem or_identity : forall b : Bool , false || b = b.\nProof.\nreflexivity.\nQed."
-  }
+  "display_name": {
+    "english": "\\(\\vee\\) identity",
+    "italiano": "Unità \\(\\vee\\)"
+  },
+  "name": "or_identity",
+  "text": {
+    "english": "\\(\\texttt{false}\\) is the identity element of \\(\\vee\\): \\[ \\forall b \\in Bool.\\; \\texttt{false} \\vee b = b \\]",
+    "italiano": "\\(\\texttt{false}\\) è l'elemento neutro di \\(\\vee\\): \\[ \\forall b \\in Bool.\\; \\texttt{false} \\vee b = b \\]"
+  },
+  "coq": "Theorem or_identity : forall b : Bool , false || b = b.\nProof.\nreflexivity.\nQed."
 }

@@ -8,6 +8,32 @@
       "english": "Let \\( \\texttt{rev} : L_A \\to L_A \\) be defined as follows:<ul style=\"padding : 15px\"><li>Base Clause: \\( \\texttt{rev}([]) = [] \\)</li><li>Inductive Clause: \\( \\texttt{rev}(a :: l') = \\texttt{app}(\\texttt{rev}(l'), [a]) \\).</li></ul>",
       "italiano": "Sia \\( \\texttt{rev} : L_A \\to L_A \\) definito come segue:<ul style=\"padding : 15px\"><li>Clausola Base: \\( \\texttt{rev}([]) = [] \\)</li><li>Clausola Induttiva: \\( \\texttt{rev}(a :: l') = \\texttt{app}(\\texttt{rev}(l'), [a]) \\).</li></ul>"
     },
-    "coq": "Fixpoint rev (l : list) : list := match l with | [] => [] | a :: l' => app (rev l') [a] end.\n"
-  }
+    "coq": "Fixpoint rev {A : Type} (l : list A) : list A := match l with | [] => [] | a :: l' => app (rev l') [a] end.\n"
+  },
+  "theorems": [
+    {
+      "display_name": {
+        "english": "rev (base clause)",
+        "italiano": "rev (clausola base)"
+      },
+      "name": "rev_base_clause",
+      "text": {
+        "english": "Base clause of the definition of \\(\\texttt{rev}\\): \\[ \\texttt{rev}([]) = [] \\]",
+        "italiano": "Clausola base della definizione di \\(\\texttt{rev}\\): \\[ \\texttt{rev}([]) = [] \\]"
+      },
+      "coq": "Theorem rev_base_clause : forall {A : Type} , @rev A [] = [].\nProof.\nAdmitted.\n"
+    },
+    {
+      "display_name": {
+        "english": "rev (inductive clause)",
+        "italiano": "rev (clausola induttiva)"
+      },
+      "name": "rev_inductive_clause",
+      "text": {
+        "english": "Inductive clause of the definition of \\(\\texttt{rev}\\): \\[ \\forall l \\in L_A . \\forall a \\in A . \\; \\texttt{rev}(a :: l) = \\texttt{app}(\\texttt{rev}(l), [a]) \\]",
+        "italiano": "Clausola induttiva della definizione di \\(\\texttt{rev}\\): \\[ \\forall l \\in L_A . \\; \\forall a \\in A . \\; \\texttt{rev}(a :: l) = \\texttt{app}(\\texttt{rev}(l), [a]) \\]"
+      },
+      "coq": "Theorem rev_inductive_clause: forall {A : Type} (l : list A) , forall a : A , rev (a :: l) = app (rev l) [a].\nProof.\nAdmitted.\n"
+    }
+  ]
 }

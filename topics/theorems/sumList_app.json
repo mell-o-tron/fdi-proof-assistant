@@ -1,14 +1,12 @@
 {
-  "theorem": {
-    "display_name": {
-      "english": "sumList app interaction",
-      "italiano": "interazione sumList app"
-    },
-    "name": "sumList_app",
-    "text": {
-      "english": "Interaction between \\(\\texttt{sumList}\\) and \\(\\texttt{app}\\), i.e. \\begin{multline} \\forall l_1,l_2 \\in L_\\mathbb{N} . \\\\ \\texttt{sumList}(\\texttt{app}(l_1,l_2)) = \\texttt{susList}(l_1) + \\texttt{sumList}(l_2) \\end{multline}",
-      "italiano": "Interazione fra \\(\\texttt{sumList}\\) e \\(\\texttt{app}\\), i.e. \\begin{multline} \\forall l_1,l_2 \\in L_\\mathbb{N} . \\\\ \\texttt{sumList}(\\texttt{app}(l_1,l_2)) = \\texttt{susList}(l_1) + \\texttt{sumList}(l_2) \\end{multline}"
-    },
-    "coq": "Theorem sumList_app: forall l1 l2 : listn , sumList (app l1 l2)  = sumList l1 + sumList l2.\nProof.\nAdmitted."
-  }
+  "display_name": {
+    "english": "sumList app interaction",
+    "italiano": "interazione sumList app"
+  },
+  "name": "sumList_app",
+  "text": {
+    "english": "Interaction between \\(\\texttt{sumList}\\) and \\(\\texttt{app}\\), i.e. \\begin{multline} \\forall l_1,l_2 \\in L_\\mathbb{N} . \\\\ \\texttt{sumList}(\\texttt{app}(l_1,l_2)) = \\texttt{susList}(l_1) + \\texttt{sumList}(l_2) \\end{multline}",
+    "italiano": "Interazione fra \\(\\texttt{sumList}\\) e \\(\\texttt{app}\\), i.e. \\begin{multline} \\forall l_1,l_2 \\in L_\\mathbb{N} . \\\\ \\texttt{sumList}(\\texttt{app}(l_1,l_2)) = \\texttt{susList}(l_1) + \\texttt{sumList}(l_2) \\end{multline}"
+  },
+  "coq": "Theorem sumList_app: forall l1 l2 : list nat , sumList (app l1 l2)  = sumList l1 + sumList l2.\nProof.\nAdmitted."
 }

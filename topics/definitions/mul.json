@@ -9,5 +9,31 @@
       "italiano": "Sia \\( \\texttt{mul} : \\mathcal{N}Term \\to \\mathcal{N}Term \\) definito come segue:<ul style=\"padding : 15px\"><li>Clausola Base: \\( \\texttt{mul}(Z, m) = m \\)</li><li>Clausola Induttiva: \\( \\texttt{mul}(S(n), m) = \\texttt{add}(\\texttt{mul}(n,m), m) \\).</li></ul>"
     },
     "coq": "Fixpoint mul (n m : nterm) : nterm := match n with | Z => Z | S n' => add (mul n' m) m end.\n"
-  }
+  },
+  "theorems": [
+    {
+      "display_name": {
+        "english": "mul (base clause)",
+        "italiano": "mul (clausola base)"
+      },
+      "name": "mul_base_clause",
+      "text": {
+        "english": "Base clause of the definition of \\(\\texttt{mul}\\): \\[ \\forall m \\in \\mathcal{N}Term .\\; \\texttt{mul}(Z, m) = Z \\]",
+        "italiano": "Clausola base della definizione di \\(\\texttt{mul}\\): \\[ \\forall m \\in \\mathcal{N}Term .\\; \\texttt{mul}(Z, m) = Z \\]"
+      },
+      "coq": "Theorem mul_base_clause : forall m : nterm , mul Z m = Z.\nProof.\nreflexivity.\nQed.\n"
+    },
+    {
+      "display_name": {
+        "english": "mul (inductive clause)",
+        "italiano": "mul (clausola induttiva)"
+      },
+      "name": "mul_inductive_clause",
+      "text": {
+        "english": "Inductive clause of the definition of \\(\\texttt{mul}\\): \\[ \\forall n,m \\in \\mathcal{N}Term . \\; \\texttt{mul}(S(n), m) = \\texttt{add}(\\texttt{mul}(n,m), m) \\]",
+        "italiano": "Clausola induttiva della definizione di \\(\\texttt{mul}\\): \\[ \\forall n,m \\in \\mathcal{N}Term . \\; \\texttt{mul}(S(n), m) = \\texttt{add}(\\texttt{mul}(n,m), m) \\]"
+      },
+      "coq": "Theorem mul_inductive_clause: forall n m : nterm , mul (S n) m = add (mul n m) m.\nProof.\nreflexivity.\nQed.\n"
+    }
+  ]
 }

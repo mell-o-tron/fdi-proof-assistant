@@ -1,15 +1,13 @@
 {
-  "tactic": {
-    "name": "simplify arithmetic",
-    "display_name": {
-      "english": "simplify arithmetic",
-      "italiano": "semplifica aritmetica"
-    },
-    "n_params": 0,
-    "text": {
-      "english": "Simplify an arithmetic expression, i.e. \\[x+7+y+0+3=2+x+3+4+y+1\\] becomes \\[x+y+10=x+y+10\\]",
-      "italiano": "Semplifica una espressione aritmetica, i.e. \\[x+7+y+0+3=2+x+3+4+y+1\\] diventa \\[x+y+10=x+y+10\\]"
-    },
-    "coq": "ring_simplify."
-  }
+  "name": "simplify arithmetic",
+  "display_name": {
+    "english": "simplify arithmetic",
+    "italiano": "semplifica aritmetica"
+  },
+  "n_params": 0,
+  "text": {
+    "english": "Simplify an arithmetic expression, i.e. \\[x+7+y+0+3=2+x+3+4+y+1\\] becomes \\[x+y+10=x+y+10\\]",
+    "italiano": "Semplifica una espressione aritmetica, i.e. \\[x+7+y+0+3=2+x+3+4+y+1\\] diventa \\[x+y+10=x+y+10\\]"
+  },
+  "coq": "ring_simplify."
 }

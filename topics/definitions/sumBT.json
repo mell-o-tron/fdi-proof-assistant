@@ -8,6 +8,32 @@
       "english": "Let \\( \\texttt {sumBT} : BT_\\mathbb{N} \\to \\mathbb{N} \\) be defined as follows:<ul style=\"padding : 15px;\"><li>Base Clause: \\( \\texttt{sumBT}(\\lambda) = 0 \\)</li><li>Inductive Clause: \\( \\texttt{sumBT}(N(t_1,n,t_2)) = \\texttt{sumBT}(t_1) + \\texttt{sumBT}(t_2) + n \\)</li></ul>",
       "italiano": "Sia \\( \\texttt {sumBT} : BT_\\mathbb{N} \\to \\mathbb{N} \\) definita come segue:<ul style=\"padding : 15px;\"><li>Clausola Base: \\( \\texttt{sumBT}(\\lambda) = 0 \\)</li><li>Clausola Induttiva: \\( \\texttt{sumBT}(N(t_1,n,t_2)) = \\texttt{sumBT}(t_1) + \\texttt{sumBT}(t_2) + n \\)</li></ul>"
     },
-    "coq": "Fixpoint sumBT (t : btn) : nat := match t with | lmd => 0 | N t1 n t2  => sumBT t1 + sumBT t2 + n end.\n"
-  }
+    "coq": "Fixpoint sumBT (t : bte nat) : nat := match t with | lmd => 0 | N t1 n t2  => sumBT t1 + sumBT t2 + n end.\n"
+  },
+  "theorems": [
+    {
+      "name": "sumBT_base_clause",
+      "display_name": {
+        "english": "sumBT (base clause)",
+        "italiano": "sumBT (clausola base)"
+      },
+      "text": {
+        "english": "Base clause of definition of \\(\\texttt{sumBT}\\):\\[ \\texttt{sumBT}(\\lambda) = 0 \\]",
+        "italiano": "Clausola base della definizione di \\(\\texttt{sumBT}\\):\\[ \\texttt{sumBT}(\\lambda) = 0 \\]"
+      },
+      "coq": "Theorem sumBT_base_clause : sumBT lmd = 0.\nProof.\nreflexivity.\nQed."
+    },
+    {
+      "name": "sumBT_inductive_clause",
+      "display_name": {
+        "english": "sumBT (inductive clause)",
+        "italiano": "sumBT (clausola induttiva)"
+      },
+      "text": {
+        "english": "Inductive clause of the definition of \\(\\texttt{sumBT}\\): \\begin{multline} \\forall t_1,t_2 \\in BT_\\mathbb{N}.\\; \\forall n \\in \\mathbb{N} .\\\\ \\texttt{sumBT}(N(t_1, n, t_2)) = \\texttt{sumBT}(t_1) + \\texttt{sumBT}(t_2) + n \\end{multline}",
+        "italiano": "Clausola induttiva della definizione di \\(\\texttt{sumBT}\\): \\begin{multline} \\forall t_1,t_2 \\in BT_\\mathbb{N}.\\; \\forall n \\in \\mathbb{N} .\\\\ \\texttt{sumBT}(N(t_1, n, t_2)) = \\texttt{sumBT}(t_1) + \\texttt{sumBT}(t_2) + n \\end{multline}"
+      },
+      "coq": "Theorem sumBT_inductive_clause : forall (t1 t2 : bte nat) (n : nat) , sumBT (N t1 n t2) = sumBT t1 + sumBT t2 + n.\nProof.\nreflexivity.\nQed.\n"
+    }
+  ]
 }

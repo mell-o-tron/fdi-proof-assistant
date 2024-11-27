@@ -8,7 +8,7 @@
         "english" : "Teorema: Interaction between \\(\\texttt{rev}\\) and \\(\\texttt{app}\\) (distributivity of \\(\\texttt{rev}\\) over \\(\\texttt{app}\\)), i.e. \\[ \\forall l_1,l_2 \\in L_A .\\; \\texttt{rev}(\\texttt{app}(l_1\\; l_2)) = \\texttt{app}(\\texttt{rev}(l_2), \\texttt{rev}(l_1\\;)) \\]",
         "italiano" : "Teorema: Interazione fra \\(\\texttt{rev}\\) e \\(\\texttt{app}\\) (distributività di \\(\\texttt{rev}\\) su \\(\\texttt{app}\\)), i.e. \\[ \\forall l_1,l_2 \\in L_A .\\; \\texttt{rev}(\\texttt{app}(l_1\\; l_2)) = \\texttt{app}(\\texttt{rev}(l_2), \\texttt{rev}(l_1\\;)) \\]"
       },
-    "coq": "Theorem rev_app : forall l1 l2 : list , rev(app l1 l2) = app (rev l2) (rev l1).",
+    "coq": "Theorem rev_app : forall (A : Type) (l1 l2 : list A) , rev(app l1 l2) = app (rev l2) (rev l1).",
     
     "initial_hint" : {
       "text" : {

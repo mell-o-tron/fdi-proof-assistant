@@ -1,11 +1,10 @@
 {
+  "extra": [],
   "definitions": [
     "nterm.json",
     "add.json"
   ],
   "theorems": [
-    "add_base_clause.json",
-    "add_inductive_clause.json",
     "add_zero.json",
     "add_succ.json",
     "add_assoc.json"
@@ -15,6 +14,5 @@
     "intro.json",
     "reflexivity.json",
     "destruct.json",
-    "simplify arithmetic.json"
   ]
 }

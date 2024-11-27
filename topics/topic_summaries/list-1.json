@@ -1,4 +1,5 @@
 {
+  "extra": [],
   "definitions": [
     "list.json",
     "app.json"

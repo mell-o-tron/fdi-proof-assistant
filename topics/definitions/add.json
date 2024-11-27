@@ -1,11 +1,39 @@
 {
   "definition": {
     "name": "add",
-    "display_name": "+",
+    "is_function": "true",
+    "arity": 2,
+    "display_name": "add",
     "text": {
-      "english": "Let \\( ({+}) : \\mathbb N \\times \\mathbb N \\to \\mathbb N \\) be defined as follows:<ul><li>\\(0 + m \\triangleq m\\)</li><li>\\( succ (n) + m \\triangleq succ (n + m) \\).</li></ul>",
-      "italiano": "Sia \\( ({+}) : \\mathbb N \\times \\mathbb N \\to \\mathbb N \\) definito come segue:<ul><li>\\(0 + m \\triangleq m\\)</li><li>\\( succ (n) + m \\triangleq succ (n + m) \\).</li></ul>"
+      "english": "Let \\( \\texttt{add} : \\mathcal{N}Term \\to \\mathcal{N}Term \\) be defined as follows:<ul style=\"padding : 15px\"><li>Base Clause: \\( \\texttt{add}(Z, m) = m \\)</li><li>Inductive Clause: \\( \\texttt{add}(S(n), m) = S(\\texttt{add}(n,m)) \\).</li></ul>",
+      "italiano": "Sia \\( \\texttt{add} : \\mathcal{N}Term \\to \\mathcal{N}Term \\) definito come segue:<ul style=\"padding : 15px\"><li>Clausola Base: \\( \\texttt{add}(Z, m) = m \\)</li><li>Clausola Induttiva: \\( \\texttt{add}(S(n), m) = S(\\texttt{add}(n,m)) \\).</li></ul>"
     },
-    "coq": "Fixpoint add (n m : nat) : nat := match n with | 0 => m | succ n' => succ (add n' m) end.\nNotation \"A + B\" := (add A B).\n"
-  }
+    "coq": "Fixpoint add (n m : nterm) : nterm := match n with | Z => m | S n' => S (add n' m) end.\n"
+  },
+  "theorems": [
+    {
+      "name": "add_base_clause",
+      "display_name": {
+        "english": "add (base clause)",
+        "italiano": "add (clausola base)"
+      },
+      "text": {
+        "english": "Base clause of the definition of \\(\\texttt{add}\\): \\[ \\forall m \\in \\mathcal{N}Term .\\; \\texttt{add}(Z, m) = m \\]",
+        "italiano": "Clausola base della definizione di \\(\\texttt{add}\\): \\[ \\forall m \\in \\mathcal{N}Term .\\; \\texttt{add}(Z, m) = m \\]"
+      },
+      "coq": "Theorem add_base_clause : forall m : nterm , add Z m = m.\nProof.\nreflexivity.\nQed.\n"
+    },
+    {
+      "name": "add_inductive_clause",
+      "display_name": {
+        "english": "add (inductive clause)",
+        "italiano": "add (clausola induttiva)"
+      },
+      "text": {
+        "english": "Inductive clause of the definition of \\(\\texttt{add}\\): \\[ \\forall n,m \\in \\mathcal{N}Term . \\; \\texttt{add}(S(n), m) = S(\\texttt{add}(n, m)) \\]",
+        "italiano": "Clausola induttiva della definizione di \\(\\texttt{add}\\): \\[ \\forall n,m \\in \\mathcal{N}Term . \\; \\texttt{add}(S(n), m) = S(\\texttt{add}(n, m)) \\]"
+      },
+      "coq": "Theorem add_inductive_clause: forall n m : nterm , add (S n) m = S (add n m).\nProof.\nreflexivity.\nQed.\n"
+    }
+  ]
 }

@@ -1,14 +1,12 @@
 {
-  "theorem": {
-    "display_name": {
-      "english": "multiplication definition",
-      "italiano": "definizione multiplicazione"
-    },
-    "name": "mul_def",
-    "text": {
-      "english": "Definition of multiplication between natura numbers: \\[ \\forall n,m \\in \\mathbb{N} . \\; (n + 1) * m = n * m + m \\]",
-      "italiano": "Definizione moltiplicazione fra numeri naturali: \\[ \\forall n,m \\in \\mathbb{N} . \\; (n + 1) * m = n * m + m \\]"
-    },
-    "coq": "Theorem mul_def: forall n m : nat, (n + 1) * m = n * m + m.\nProof.\nAdmitted.\n"
-  }
+  "display_name": {
+    "english": "multiplication definition",
+    "italiano": "definizione multiplicazione"
+  },
+  "name": "mul_def",
+  "text": {
+    "english": "Definition of multiplication between natura numbers: \\[ \\forall n,m \\in \\mathbb{N} . \\; (n + 1) * m = n * m + m \\]",
+    "italiano": "Definizione moltiplicazione fra numeri naturali: \\[ \\forall n,m \\in \\mathbb{N} . \\; (n + 1) * m = n * m + m \\]"
+  },
+  "coq": "Theorem mul_def: forall n m : nat, (n + 1) * m = n * m + m.\nProof.\nAdmitted.\n"
 }

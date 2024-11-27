@@ -1,14 +1,8 @@
 {
-  "theorem": {
-    "display_name": {
-      "english": "app IC",
-      "italiano": "app caso induttivo"
-    },
-    "name": "app_cons",
-    "text": {
-      "english": "Inductive case of app: \\[ \\forall a \\in A . \\; \\forall l1, l2 \\in L_A . \\; app(a :: l1,\\; l2) = a :: app(l1,\\; l2) \\]",
-      "italiano": "Case induttivo app: \\[ \\forall a \\in A . \\; \\forall l1, l2 \\in L_A . \\; app(a :: l1,\\; l2) = a :: app(l1,\\; l2) \\]"
-    },
-    "coq": "Lemma app_cons : forall a : A , forall l1 l2 : list, app (a :: l1) l2 = a :: app l1 l2.\nProof.\nAdmitted.\n"
-  }
+  "name": "app_cons",
+  "text": {
+    "english": "Inductive case of app: \\[ \\forall a \\in A . \\; \\forall l1, l2 \\in L_A . \\; app(a :: l1,\\; l2) = a :: app(l1,\\; l2) \\]",
+    "italiano": "Case induttivo app: \\[ \\forall a \\in A . \\; \\forall l1, l2 \\in L_A . \\; app(a :: l1,\\; l2) = a :: app(l1,\\; l2) \\]"
+  },
+  "coq": "Lemma app_cons : forall a : A , forall l1 l2 : list, app (a :: l1) l2 = a :: app l1 l2.\nProof.\nAdmitted.\n"
 }

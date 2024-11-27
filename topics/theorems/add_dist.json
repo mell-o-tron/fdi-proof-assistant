@@ -1,14 +1,12 @@
 {
-  "theorem": {
-    "name": "add_dist",
-    "display_name": {
-      "english": "Theorem: addition is distributive",
-      "italiano": "Teorema: l'addizione è distributiva"
-    },
-    "text": {
-      "english": "Addition is distributive: \\[ \\forall a, b, c \\in \\mathbb N . (a + b) + c = a + (b + c) \\]",
-      "italiano": "L'addizione è distributiva: \\[ \\forall a, b, c \\in \\mathbb N . (a + b) + c = a + (b + c) \\]"
-    },
-    "coq": "Theorem add_dist : forall a b c : nat, add (add a b) c = add a (add b c).\nProof.\nAdmitted.\n"
-  }
+  "name": "add_dist",
+  "display_name": {
+    "english": "Theorem: addition is distributive",
+    "italiano": "Teorema: l'addizione è distributiva"
+  },
+  "text": {
+    "english": "Addition is distributive: \\[ \\forall a, b, c \\in \\mathbb N . (a + b) + c = a + (b + c) \\]",
+    "italiano": "L'addizione è distributiva: \\[ \\forall a, b, c \\in \\mathbb N . (a + b) + c = a + (b + c) \\]"
+  },
+  "coq": "Theorem add_dist : forall a b c : nat, add (add a b) c = add a (add b c).\nProof.\nAdmitted.\n"
 }

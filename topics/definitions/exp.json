@@ -9,5 +9,31 @@
       "italiano": "Sia \\( \\texttt{exp} : \\mathcal{N}Term \\to \\mathcal{N}Term \\) definito come segue:<ul style=\"padding : 15px\"><li>Clausola Base: \\( \\texttt{exp}(Z, m) = m \\)</li><li>Clausola Induttiva: \\( \\texttt{exp}(S(n), m)) = \\texttt{mul}(\\texttt{exp}(n,m)), m) \\).</li></ul>"
     },
     "coq": "Fixpoint exp (n m : nterm) : nterm := match n with | Z => S Z | S n' => mul (exp n' m) m end.\n"
-  }
+  },
+  "theorems": [
+    {
+      "display_name": {
+        "english": "exp (base clause)",
+        "italiano": "exp (clausola base)"
+      },
+      "name": "exp_base_clause",
+      "text": {
+        "english": "Base clause of the definition of \\(\\texttt{exp}\\): \\[ \\forall m \\in \\mathcal{N}Term .\\; \\texttt{exp}(Z, m) = S(Z) \\]",
+        "italiano": "Clausola base della definizione di \\(\\texttt{exp}\\): \\[ \\forall m \\in \\mathcal{N}Term .\\; \\texttt{exp}(Z, m) = S(Z) \\]"
+      },
+      "coq": "Theorem exp_base_clause : forall m : nterm , exp Z m = S Z.\nProof.\nreflexivity.\nQed.\n"
+    },
+    {
+      "display_name": {
+        "english": "exp (inductive clause)",
+        "italiano": "exp (clausola induttiva)"
+      },
+      "name": "exp_inductive_clause",
+      "text": {
+        "english": "Inductive clause of the definition of \\(\\texttt{exp}\\): \\[ \\forall n,m \\in \\mathcal{N}Term . \\; \\texttt{exp}(S(n), m) = \\texttt{mul}(\\texttt{exp}(n, m), m) \\]",
+        "italiano": "Clausola induttiva della definizione di \\(\\texttt{exp}\\): \\[ \\forall n,m \\in \\mathcal{N}Term . \\; \\texttt{exp}(S(n), m) = \\texttt{mul}(\\texttt{exp}(n, m), m) \\]"
+      },
+      "coq": "Theorem exp_inductive_clause: forall n m : nterm , exp (S n) m = mul (exp n m) m.\nProof.\nreflexivity.\nQed.\n"
+    }
+  ]
 }

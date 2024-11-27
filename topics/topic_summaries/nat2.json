@@ -1,4 +1,7 @@
 {
+  "extra": [
+    "arith.json"
+  ],
   "definitions": [
     "nterm.json",
     "val.json",
@@ -6,12 +9,6 @@
     "mul.json"
   ],
   "theorems": [
-    "val_base_clause.json",
-    "val_inductive_clause.json",
-    "add_base_clause.json",
-    "add_inductive_clause.json",
-    "mul_base_clause.json",
-    "mul_inductive_clause.json",
     "val_add.json",
     "mul_def.json"
   ],
