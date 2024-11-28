@@ -1,0 +1,24 @@
+{
+  "extra": [],
+  "definitions": [
+    "nterm.json",
+    "add.json",
+    "mul.json"
+  ],
+  "theorems": [
+    "add_zero.json",
+    "add_succ.json",
+    "add_assoc.json",
+    "add_comm.json",
+    "mul_zero.json",
+    "mul_succ.json",
+    "mul_comm.json",
+    "mul_distrib_add.json"
+  ],
+  "tactics": [
+    "induction.json",
+    "intro.json",
+    "reflexivity.json",
+    "destruct.json"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "add_comm",
+  "display_name": {
+    "english": "Commutativity of \\(\\texttt{add}\\)",
+    "italiano": "Commutatività di \\(\\texttt{add}\\)"
+  },
+  "text": {
+    "english": "\\(\\texttt{add}\\) is commutative: \\[ \\forall n,m \\in \\mathcal{N}Term . \\; \\texttt{add}(n,m) = \\texttt{add}(m, n) \\]",
+    "italiano": "\\(\\texttt{add}\\) è commutativa: \\[ \\forall n,m \\in \\mathcal{N}Term . \\; \\texttt{add}(n,m) = \\texttt{add}(m, n) \\]"
+  },
+  "coq": "Theorem add_comm: forall n m : nterm , add n m = add m n.\nProof.\nAdmitted.\n"
+}

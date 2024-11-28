@@ -1,0 +1,13 @@
+{
+  "definitions": [
+    
+  ],
+  "theorem": {
+    "text":
+      {
+        "english" : "Teorema: \\(\\texttt{mul}\\) is distributive over \\(\\texttt{add}\\), i.e. \\[ \\forall n,m,o \\in \\mathcal{N}Term . \\; \\texttt{mul}(\\texttt{add}(n,m),o) = \\texttt{add}(\\texttt{mul}(n,o),\\texttt{mul}(m,o)) \\]",
+        "italiano" : "Teorema: \\(\\texttt{mul}\\) è distributiva su \\(\\texttt{add}\\), i.e. \\[ \\forall n,m,o \\in \\mathcal{N}Term . \\; \\texttt{mul}(\\texttt{add}(n,m),o) = \\texttt{add}(\\texttt{mul}(n,o),\\texttt{mul}(m,o)) \\]"
+      },
+    "coq": "Theorem mul_distrib_add: forall n m o : nterm , mul (add n m) o = add (mul n o) (mul m o)."
+  }
+} 

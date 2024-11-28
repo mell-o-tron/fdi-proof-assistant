@@ -1,0 +1,13 @@
+{
+  "definitions": [
+    
+  ],
+  "theorem": {
+    "text":
+      {
+        "english" : "Teorema: \\(\\texttt{mul}\\) of \\(Z\\) (\\(Z\\) is the absorbing element of \\(\\texttt{mul}\\)), i.e. \\[ \\forall n \\in \\mathcal{N}Term . \\; \\texttt{mul}(n,Z) = Z \\]",
+        "italiano" : "Teorema: \\(\\texttt{mul}\\) di \\(Z\\) (\\(Z\\) è l'elemento assorbente di \\(\\texttt{mul}\\)), i.e. \\[ \\forall n \\in \\mathcal{N}Term . \\; \\texttt{mul}(n,Z) = Z \\]"
+      },
+    "coq": "Theorem mul_zero: forall n : nterm , mul n Z = Z."
+  }
+} 

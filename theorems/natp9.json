@@ -1,0 +1,13 @@
+{
+  "definitions": [
+    
+  ],
+  "theorem": {
+    "text":
+      {
+        "english" : "Teorema: \\(\\texttt{mul}\\) is associative, i.e. \\[ \\forall n,m,o \\in \\mathcal{N}Term . \\; \\texttt{mul}(\\texttt{mul}(n,m),o) = \\texttt{mul}(n,\\texttt{mul}(m,o)) \\]",
+        "italiano" : "Teorema: \\(\\texttt{mul}\\) è associativa, i.e. \\[ \\forall n,m,o \\in \\mathcal{N}Term . \\; \\texttt{mul}(\\texttt{mul}(n,m),o) = \\texttt{mul}(n,\\texttt{mul}(m,o)) \\]"
+      },
+    "coq": "Theorem mul_assoc: forall n m o : nterm , mul (mul n m) o = mul n (mul m o)."
+  }
+} 

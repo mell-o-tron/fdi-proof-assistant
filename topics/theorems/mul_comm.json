@@ -1,0 +1,12 @@
+{
+  "name": "mul_comm",
+  "display_name": {
+    "english": "Commutativity of \\(\\texttt{mul}\\)",
+    "italiano": "Commutatività di \\(\\texttt{mul}\\)"
+  },
+  "text": {
+    "english": "\\(\\texttt{mul}\\) is commutative: \\[ \\forall n,m \\in \\mathcal{N}Term . \\; \\texttt{mul}(n,m) = \\texttt{mul}(m,n) \\]",
+    "italiano": "\\(\\texttt{mul}\\) è commutativa: \\[ \\forall n,m \\in \\mathcal{N}Term . \\; \\texttt{mul}(n,m) = \\texttt{mul}(m,n) \\]"
+  },
+  "coq": "Theorem mul_comm: forall n m : nterm , mul n m = mul m n.\nProof.\nAdmitted.\n"
+}

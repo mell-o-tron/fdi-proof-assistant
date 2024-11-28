@@ -1,0 +1,12 @@
+{
+  "name": "mul_succ",
+  "display_name": {
+    "english": "\\(\\texttt{mul}\\) of succ",
+    "italiano": "\\(\\texttt{mul}\\) di un succesore"
+  },
+  "text": {
+        "english" : "Teorema: \\(\\texttt{mul}\\) of the succesor of a natural number: \\[ \\forall n,m \\in \\mathcal{N}Term . \\; \\texttt{mul}(n,S(m)) = \\texttt{add}(\\texttt{mul}(n,m),n) \\]",
+        "italiano" : "Teorema: \\(\\texttt{mul}\\) di un successore di un qualsiasi numero naturale: \\[ \\forall n,m \\in \\mathcal{N}Term . \\; \\texttt{mul}(n,S(m)) = \\texttt{add}(\\texttt{mul}(n,m),n) \\]"
+  },
+  "coq": "Theorem mul_succ: forall n m : nterm , mul n (S m) = add (mul n m) n.\nProof.\nAdmitted.\n"
+}

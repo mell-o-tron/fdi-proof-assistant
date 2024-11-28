@@ -1,0 +1,13 @@
+{
+  "definitions": [
+    
+  ],
+  "theorem": {
+    "text":
+      {
+        "english" : "Teorema: \\(\\texttt{mul}\\) of the succesor of a natural number, i.e. \\[ \\forall n,m \\in \\mathcal{N}Term . \\; \\texttt{mul}(n,S(m)) = \\texttt{add}(\\texttt{mul}(n,m),n) \\]",
+        "italiano" : "Teorema: \\(\\texttt{mul}\\) di un successore di un qualsiasi numero naturale, i.e. \\[ \\forall n,m \\in \\mathcal{N}Term . \\; \\texttt{mul}(n,S(m)) = \\texttt{add}(\\texttt{mul}(n,m),n) \\]"
+      },
+    "coq": "Theorem mul_succ: forall n m : nterm , mul n (S m) = add (mul n m) n."
+  }
+} 

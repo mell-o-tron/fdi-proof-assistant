@@ -1,0 +1,12 @@
+{
+  "name": "mul_zero",
+  "display_name": {
+    "english": "\\(\\texttt{mul}\\) of \\(Z\\)",
+    "italiano": "\\(\\texttt{mul}\\) di \\(Z\\)"
+  },
+  "text": {
+    "english": "\\(Z\\) is the absorbing of \\(\\texttt{mul}\\): \\[ \\forall n \\in \\mathcal{N}Term . \\; \\texttt{add}(n, Z) = Z \\]",
+    "italiano": "\\(Z\\) è l'elemento assorbente di \\(\\texttt{mul}\\): \\[ \\forall n \\in \\mathcal{N}Term . \\; \\texttt{add}(n, Z) = Z \\]"
+  },
+  "coq": "Theorem mul_zero: forall n : nterm , mul n Z = Z.\nProof.\nAdmitted.\n"
+}
