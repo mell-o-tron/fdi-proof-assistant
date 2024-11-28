@@ -39,7 +39,7 @@ class Visualizer {
         if (this.is_tactic(stmt)) {
             this.visualize_goal(stmt, controller);
         }
-        MathJax.typeset();
+//        MathJax.typeset();
     }
 
     // Method to visualize a goal
@@ -214,7 +214,7 @@ class Visualizer {
             this.step_list.push({content : content, bottom_bar : bottom_bar});
 
 
-            MathJax.typeset();
+            MathJax.typeset([content]);
         }
         
         this.observer.vis_fun = vis_fun;
@@ -278,7 +278,7 @@ class Visualizer {
         }
 
         document.getElementById("latex-proof").appendChild(box);
-        MathJax.typeset();
+        MathJax.typeset([content]);
 
     }
 
@@ -336,33 +336,52 @@ class Visualizer {
             var_inputs.push(var_input);
         }
         
+        let tbox_container = document.createElement("div");
+        tbox_container.className = "tbox-container";
+        
+        let tbox = document.createElement("select");
+        tbox.className = "hyp-dropdown theo"
+
+        tbox.onchange = () => {};
+        
         let currifier = new Currifier(controller);
         
         let rw_lr = document.createElement("button");
         rw_lr.className = "button-4";
-        rw_lr.textContent = `${local_langsel.current_language.APPLY} (→)`;
-        rw_lr.onclick = () => {controller.rewrite_theorem(at.name, true, occ.value, var_inputs.map(x => currifier.currify(x.value)), theorem_variables)};
-        
-        controller.visualizer.apply_buttons.push(rw_lr);
         
         let rw_rl = document.createElement("button");
         rw_rl.className = "button-4";
+
+        if (at?.apply) {
+            rw_lr.textContent = `${local_langsel.current_language.APPLY}`;
+            rw_lr.onclick = () => {controller.apply_theorem(at.name, var_inputs.map(x => currifier.currify(x.value)), theorem_variables, tbox.value!="goal" ? tbox.value : null)};
+            controller.visualizer.apply_buttons.push(rw_lr);
+        } else {
+            rw_lr.textContent = `${local_langsel.current_language.APPLY} (→)`;
+            rw_lr.onclick = () => {controller.rewrite_theorem(at.name, true, occ.value, var_inputs.map(x => currifier.currify(x.value)), theorem_variables, tbox.value!="goal" ? tbox.value : null)};
+            controller.visualizer.apply_buttons.push(rw_lr);
         
+       
         
-        rw_rl.onclick = () => {controller.rewrite_theorem(at.name, false, occ.value, var_inputs.map(x => currifier.currify(x.value)), theorem_variables)};
-        rw_rl.textContent = `${local_langsel.current_language.APPLY} (←)`;
+            rw_rl.onclick = () => {controller.rewrite_theorem(at.name, false, occ.value, var_inputs.map(x => currifier.currify(x.value)), theorem_variables, tbox.value!="goal" ? tbox.value : null)};
+            rw_rl.textContent = `${local_langsel.current_language.APPLY} (←)`;
         
-        controller.visualizer.apply_buttons.push(rw_rl);
-        
+            controller.visualizer.apply_buttons.push(rw_rl);
+        }
+                
         let hidden_section = document.createElement('div');
         hidden_section.style.display = "none";
         for (let c of var_containers) {
             hidden_section.appendChild(c);
         }
         
+        if (!at?.apply) {
+            hidden_section.appendChild(occ_container);
+        }
         
-        hidden_section.appendChild(occ_container);
-        
+        tbox_container.appendChild(tbox);
+        hidden_section.appendChild(tbox_container);
+
         let show_controls = document.createElement("button");
         show_controls.className = "button-4";
         show_controls.onclick = () => {hidden_section.style.display == "block" ? hidden_section.style.display = "none" : hidden_section.style.display = "block"};
@@ -377,9 +396,11 @@ class Visualizer {
         theodesc_container.appendChild(show_controls_container);
         theodesc_container.appendChild(hidden_section);
         theodesc_container.appendChild(rw_lr);
-        theodesc_container.appendChild(rw_rl);
+        if (!at?.apply) {
+            theodesc_container.appendChild(rw_rl);
+        }
         theobox.appendChild(theodesc_container);
-        MathJax.typeset();
+        MathJax.typeset([header, theodesc]);
     }
 
     add_tactic_card(at, controller) {
@@ -460,7 +481,7 @@ class Visualizer {
         }
         theodesc_container.appendChild(apply_button);
         theobox.appendChild(theodesc_container);
-        MathJax.typeset();
+        MathJax.typeset([theodesc]);
     }
     
     add_hp_application_card (controller) {
@@ -487,6 +508,14 @@ class Visualizer {
         let tbox = document.createElement("select");
         tbox.className = "hyp-dropdown"
         
+        let target_container = document.createElement("div");
+        target_container.className = "tbox-container";
+        
+        let target = document.createElement("select");
+        target.className = "hyp-dropdown theo"
+
+        target.onchange = () => {};
+        target_container.appendChild(target);
 
         let hidden_section = document.createElement('div');
         let occ_container = document.createElement('div');
@@ -505,6 +534,7 @@ class Visualizer {
         
         hidden_section.appendChild(more_controls_container);
         hidden_section.appendChild(occ_container);
+        hidden_section.appendChild(target_container)
         hidden_section.style.display = "none";
         
         let occ = document.createElement("INPUT");
@@ -541,17 +571,23 @@ class Visualizer {
         let rw_lr = document.createElement("button");
         rw_lr.className = "button-4";
         rw_lr.textContent = `${local_langsel.current_language.APPLY} (→)`;
-        rw_lr.onclick = () => {controller.rewrite_theorem(tbox.value, true, occ.value, var_inputs.map(x => currifier.currify(x.value)), hypothesis_variables)};
+        rw_lr.onclick = () => {controller.rewrite_theorem(tbox.value, true, occ.value, var_inputs.map(x => currifier.currify(x.value)), hypothesis_variables, target.value != "goal" ? target.value : null)};
 
         controller.visualizer.apply_buttons.push(rw_lr);
         
         let rw_rl = document.createElement("button");
         rw_rl.className = "button-4";
-        rw_rl.onclick = () => {controller.rewrite_theorem(tbox.value, false, occ.value, var_inputs.map(x => currifier.currify(x.value)), hypothesis_variables)};
+        rw_rl.onclick = () => {controller.rewrite_theorem(tbox.value, false, occ.value, var_inputs.map(x => currifier.currify(x.value)), hypothesis_variables, target.value != "goal" ? target.value : null)};
         rw_rl.textContent = `${local_langsel.current_language.APPLY} (←)`;
         
         controller.visualizer.apply_buttons.push(rw_rl);
         
+        let app_btn = document.createElement("button");
+        app_btn.className = "button-4";
+        app_btn.textContent = `${local_langsel.current_language.APPLY}`;
+        app_btn.onclick = () => {controller.apply_theorem(tbox.value, var_inputs.map(x => currifier.currify(x.value)), hypothesis_variables, target.value != "goal" ? target.value : null)};
+        controller.visualizer.apply_buttons.push(app_btn);
+
         hypbox.appendChild(header);
         hypbox.appendChild(theodesc);
         tbox_container.appendChild(tbox);
@@ -560,7 +596,8 @@ class Visualizer {
         hypbox.appendChild(hidden_section);
         hypbox.appendChild(rw_lr);
         hypbox.appendChild(rw_rl);
-        MathJax.typeset();
+        hypbox.appendChild(app_btn);
+        MathJax.typeset([theodesc]);
     }
         
         

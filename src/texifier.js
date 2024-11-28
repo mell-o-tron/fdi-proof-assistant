@@ -55,6 +55,13 @@ class TeXifier {
 //            ["N", "\\mathbb{N}"],
             [",", " ."],
             ["→", "\\to"],
+            ["/\\", "\\land"],
+            ["<=e", "\\le_{e}"],
+            [">e", ">_{e}"],
+            ["<=", "\\le"],
+            ["inf", "\\infty"],
+            ["left", "\\texttt{left}"],
+            ["right", "\\texttt{right}"],
             ["ℕ", "\\mathbb{N}"],
             ["list", "L"],
             ["bte", "BT"],
@@ -86,6 +93,8 @@ class TeXifier {
 
         res = res.replaceAll("#^", "^{").replaceAll("^#", "}");
 
+        // visualize implication
+        res = res.replaceAll("#implies", "").replaceAll("#to", "->");
         
         
         for (let r of this.replacements) {
@@ -93,7 +102,7 @@ class TeXifier {
         }
 
         // regex to replace generic types with subtext, e.g. L \mathbb{N} -> L_\mathbb{N}
-        res = res.replaceAll(/( [a-zA-Z]+) (\\*[a-zA-Z{}]+)/g, "$1_{$2}");
+        res = res.replaceAll(/(BT|L) (\\*[a-zA-Z{}]+)/g, "$1_{$2}");
 
         res = res.replaceAll(/^(?<=\\)([a-zA-Z0-9]) ([a-zA-Z0-9])/g, "$1\\;$2")
         res = res.replaceAll(/([\s\(;][a-zA-Z])([0-9]+)/g, "$1_{$2}")

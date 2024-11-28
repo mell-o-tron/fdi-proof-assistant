@@ -32,6 +32,8 @@
   "HINT" : "Suggerimento",  
   "CHOOSEARBITRARY" : "Prendi un generico",
   "APPLYREFLEXIVITY" : "Applica riflessività di =",
+  "SPLITGOAL" : "Dividi la dimostrazione",
+  "IMPLICATION" : "Assumiamo l'ipotesi",
   "theorem" : "Teorema",
   "definition" : "Definizione"
 

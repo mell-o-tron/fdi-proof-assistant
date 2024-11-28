@@ -68,7 +68,12 @@ class Observer {
       
       dropdowns.forEach(dropdown => {
         dropdown.innerHTML = "";
-        
+        if (dropdown.className === "hyp-dropdown theo") {
+          let hopt = document.createElement('option');
+          hopt.value = "goal";
+          hopt.textContent = "goal";
+          dropdown.appendChild(hopt);
+        }
         for (let h of this.current_goal.hypotheses){
           let hopt = document.createElement('option');
           hopt.value = h.name;

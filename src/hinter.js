@@ -39,7 +39,19 @@ class Hinter {
             }
         }
         
-        {/* HINT SYMMETRY */
+        {/* HINT IMPLICATION */
+            if (cur_goal.startsWith("#implies")) {
+                console.log("HINT".repeat(10))
+                res.push ({
+                    name : `${this.langsel.current_language.HINT}: ${this.langsel.current_language.IMPLICATION} (Intro)`,
+                    func : () => {
+                        this.controller.apply_tactic("intro.");
+                    }
+                });
+            }
+        }
+                    
+            {/* HINT SYMMETRY */
             if(cur_goal.includes("=")){
                 let s = cur_goal.split("=").map(x => x.trim())
                 if (s[0] == s[1]){
@@ -55,6 +67,16 @@ class Hinter {
                 }
             }
         }
+
+        {/* HINT SPLIT AND */
+            if(cur_goal.includes("/\\")) {
+                    res.push ({
+                        name : `${this.langsel.current_language.HINT}: ${this.langsel.current_language.SPLITGOAL} (Split)`,
+                        func : () => {
+                        this.controller.apply_tactic("split.");
+                    }});
+                }
+            }
         
         return res;
     }

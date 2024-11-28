@@ -102,7 +102,7 @@ class Controller {
     }
   }
   
-  rewrite_theorem(theo_name, direction, occ, var_values, var_names){
+  rewrite_theorem(theo_name, direction, occ, var_values, var_names, ih_name){
     
     this.visualizer.apply_buttons.forEach(x => {x.disabled = true});
     
@@ -113,7 +113,7 @@ class Controller {
       }
     }
     
-    let text = `rewrite ${direction?"->":"<-"} ${theo_name} ${var_value_string == "" ? "" : "with " + var_value_string} at ${occ}.`
+    let text = `rewrite ${direction?"->":"<-"} ${theo_name} ${var_value_string == "" ? "" : "with " + var_value_string}${ih_name ? " in " + ih_name : ""} at ${occ}.`
     this.add_line(text, this.snippet);
     this.go_next_n(1, true, () => {
       this.coq_history.push(text);
@@ -121,6 +121,26 @@ class Controller {
       this.visualizer.apply_buttons.forEach(x => {x.disabled = false});
     });
   
+  }
+
+  apply_theorem(theo_name, var_values, var_names, ih_name) {
+    
+    this.visualizer.apply_buttons.forEach(x => {x.disabled = true});
+
+    let var_value_string = ""
+    for (let i in var_names) {
+      if (var_values[i].trim() != "") {
+        var_value_string += (`(${var_names[i]} := ${var_values[i]})`)
+      }
+    }
+
+    let text = `apply ${theo_name}${var_value_string == "" ? "" : " with " + var_value_string}${ih_name ? " in " + ih_name : ""}.`
+    this.add_line(text, this.snippet);
+    this.go_next_n(1, true, () => {
+      this.coq_history.push(text);
+    }, () => {/*this.go_prev_n(1);*/ alert("Cannot apply hypothesis or theorem"); this.rm_line(); 
+      this.visualizer.apply_buttons.forEach(x => {x.disabled = false});
+    });
   }
 
   apply_tactic(tac_coq, args){
