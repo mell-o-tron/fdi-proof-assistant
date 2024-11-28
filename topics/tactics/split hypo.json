@@ -1,0 +1,16 @@
+{
+  "name": "split hypo",
+  "display_name": {
+    "english": "split hypothesis",
+    "italiano": "dividi ipotesi"
+  },
+  "n_params": 1,
+  "param_types": [
+    "select"
+  ],
+  "text": {
+    "english": "Divide an hypothesis of the form \\(H : A \\land B\\) in two hypothesis \\(H_1 : A\\) and \\(H_2 : B\\). Insert the hypothesis to divide:",
+    "italiano": "Dividi una ipotesi dalla forma \\(H : A \\land B\\) in due ipotesi \\(H_1 :  A\\) e \\(H_2 : B\\). Inserire l'ipotesi da dividere:"
+  },
+  "coq": "destruct $0."
+}

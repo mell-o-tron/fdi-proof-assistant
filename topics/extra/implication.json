@@ -1,0 +1,3 @@
+{
+  "coq": "Notation \"#implies A #to B\" := (A -> B) (at level 20).\n"
+}

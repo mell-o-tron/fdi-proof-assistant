@@ -1,0 +1,13 @@
+{
+  "display_name": {
+    "english": "0 is \\(\\le\\) of all natural numers",
+    "italiano": "0 è \\(\\le\\) di qualsiasi numero naturale"
+  },
+  "name": "le_0_n",
+  "text": {
+    "english": "0 is \\(\\le\\) of all natural numers, i.e. \\[ \\forall n \\in \\mathbb{N} .\\; 0 \\le n \\]",
+    "italiano": "0 è \\(\\le\\) di qualsiasi numero naturale, i.e. \\[ \\forall n \\in \\mathbb{N} .\\; 0 \\le n \\]"
+  },
+  "apply": true,
+  "coq": "\n"
+}

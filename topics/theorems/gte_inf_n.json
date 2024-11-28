@@ -1,0 +1,13 @@
+{
+  "display_name": {
+    "english": "\\(\\infty\\) is \\(>_{e}\\) of all natural numers",
+    "italiano": "\\(\\infty\\) è \\(>_{e}\\) di qualsiasi numero naturale"
+  },
+  "name": "gt_inf_n",
+  "text": {
+    "english": "\\(\\infty\\) is \\(>_{e}\\) of all natural numers, i.e. \\[ \\forall n \\in \\mathbb{N} .\\; \\infty >_{e} \\texttt{Nat}(n) \\]",
+    "italiano": "\\(\\infty\\) è \\(>_{e}\\) di qualsiasi numero naturale, i.e. \\[ \\forall n \\in \\mathbb{N} .\\; \\infty >_{e} \\texttt{Nat}(n) \\]"
+  },
+  "apply": true,
+  "coq": "Theorem gt_inf_n : forall n : nat , inf >e Nat n.\nProof.\nAdmitted.\n"
+}

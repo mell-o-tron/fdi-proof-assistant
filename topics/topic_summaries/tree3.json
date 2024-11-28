@@ -1,0 +1,29 @@
+{
+  "extra": [
+    "bool.json",
+    "implication.json"
+  ],
+  "definitions": [
+    "nat_ext.json",
+    "bte.json",
+    "max.json",
+    "min.json",
+    "ins.json",
+    "ordinatoPP.json"
+  ],
+  "theorems": [
+    "le_0_n.json",
+    "gte_inf_n.json",
+    "le_max.json",
+    "gte_min.json"
+  ],
+  "tactics": [
+    "induction.json",
+    "intro.json",
+    "reflexivity.json",
+    "destruct.json",
+    "split goal.json",
+    "split hypo.json",
+    "assumption.json"
+  ]
+}

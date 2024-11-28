@@ -1,0 +1,39 @@
+{
+  "definition": {
+    "name": "ins",
+    "is_function": "true",
+    "arity": 2,
+    "display_name": "ins",
+    "text": {
+      "english": "Let \\( \\texttt {ins} : \\mathbb{N} \\times \\ {BT}_\\mathbb{N} \\to {BT}_\\mathbb{N} \\) be defied as follows:<ul style=\"padding : 15px;\"><li>Base Clause: \\( \\texttt{ins}(n,\\lambda) = N(\\lambda,n,\\lambda) \\)</li><li>Inductive Clause: \\( \\texttt{ins}(n, N(t_1,m,t_2)) = \\begin{cases} N(\\texttt{ins}(n,t_1),m,t_2) & \\text{ if } n \\le m \\\\ N(t_1,m,\\texttt{ins}(n,t_2)) & \\text{ otherwise } \\end{cases} \\).</li></ul>",
+      "italiano": "Sia \\( \\texttt {ins} : \\mathbb{N} \\times \\ {BT}_\\mathbb{N} \\to {BT}_\\mathbb{N} \\) definita come segue:<ul style=\"padding : 15px;\"><li>Clausola Base: \\( \\texttt{ins}(n,\\lambda) = N(\\lambda,n,\\lambda) \\)</li><li>Clausola Induttiva: \\( \\texttt{ins}(n, N(t_1,m,t_2)) = \\begin{cases} N(\\texttt{ins}(n,t_1),m,t_2) & \\text{ se } n \\le m \\\\ N(t_1,m,\\texttt{ins}(n,t_2)) & \\text{ altrimenti } \\end{cases} \\).</li></ul>"
+    },
+    "coq": "Fixpoint ins (n : nat) (t : bte nat) : bte nat := match t with | lmd => N lmd n lmd | N t1 m t2 => #cases N (ins n t1) m t2 #if n <=? m #otherwise N t1 m (ins n t2) #endcases end.\n"
+  },
+  "theorems": [
+    {
+      "name": "ins_base_clause",
+      "display_name": {
+        "english": "ins (base clause)",
+        "italiano": "ins (clausola base)"
+      },
+      "text": {
+        "english": "Base clause of definition of \\(\\texttt{ins}\\):\n\n\n\\[ \\forall n \\in \\mathbb{N} .\\; \\texttt{ins}(n, \\lambda) = N(\\lambda,n,\\lambda) \\]",
+        "italiano": "Clausola base della definizione di \\(\\texttt{ins}\\):\n\n\n\\[ \\forall n \\in \\mathbb{N} .\\; \\texttt{ins}(n, \\lambda) = N(\\lambda,n,\\lambda) \\]"
+      },
+      "coq": "Theorem ins_base_clause : forall n : nat , ins n lmd = N lmd n lmd.\nProof.\nreflexivity.\nQed.\n"
+    },
+    {
+      "name": "ins_inductive_clause",
+      "display_name": {
+        "english": "ins (inductive clause)",
+        "italiano": "ins (clausola induttiva)"
+      },
+      "text": {
+        "english": "Inductive clause of the definition of \\(\\texttt{ins}\\):\n\n\\[ \\forall n \\in \\mathbb{N} .\\; \\forall t_1,t_2 \\in {BT}_\\mathbb{N} .\\; \\forall m \\in \\mathbb{N} .\\; \\texttt{ins}(n, N(t_1,m,t_2)) = \\begin{cases} N(\\texttt{ins}(n,t_1),m,t_2) & \\text{ se } n \\le m \\\\ N(t_1,m,\\texttt{ins}(n,t_2)) & \\text{ altrimenti } \\end{cases} \\]",
+        "italiano": "Clausola induttiva della definizione di \\(\\texttt{ins}\\):\n\n\\[ \\forall n \\in \\mathbb{N} .\\; \\forall t_1,t_2 \\in {BT}_\\mathbb{N} .\\; \\forall m \\in \\mathbb{N} .\\; \\texttt{ins}(n, N(t_1,m,t_2)) = \\begin{cases} N(\\texttt{ins}(n,t_1),m,t_2) & \\text{ se } n \\le m \\\\ N(t_1,m,\\texttt{ins}(n,t_2)) & \\text{ altrimenti } \\end{cases} \\]"
+      },
+      "coq": "Theorem ins_inductive_clause : forall (t1 t2 : bte nat) (n m : nat) , ins n (N t1 m t2) =  if n <=? m then N (ins n t1) m t2 else N t1 m (ins n t2).\nProof.\nreflexivity.\nQed.\n"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+
+{
+  "name": "assumption",
+  "display_name": {
+    "english": "banally true",
+    "italiano": "banalmente vero"
+  },
+  "n_params": 0,
+  "text": {
+    "english": "Proves the banally true goals, i.e. \\(True\\)",
+    "italiano": "Dimostra i goal banalmente veri, i.e. \\(True\\)"
+  },
+  "coq": "assumption."
+}
