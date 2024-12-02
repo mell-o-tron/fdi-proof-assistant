@@ -1,0 +1,8 @@
+{
+    "filenames": [
+        "bool.json",
+        "type_with_eq_dec.json",
+        "implication.json",
+        "arith.json"
+    ]
+}
