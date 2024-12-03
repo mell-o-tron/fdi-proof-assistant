@@ -7,6 +7,8 @@
   "INTROS" : "We introduce new hypotheses",
   "REFL" : "The two sides of the equality are the same: we proceed by reflexivity",
   "DESTRUCT" : "We proceed by exhaustion (cases)",
+  "SPLIT" : "We split the goal into the two parts of the conjunction",
+  "TRIVIAL" : "Goal is trivially true. We proceed with the following goal",
   "RING" : "We simplify an arithmetic expression",
   "RIGHTTOLEFT" : "from right to left",
   "LEFTTORIGHT" : "from left to right",
@@ -33,7 +35,7 @@
   "CHOOSEARBITRARY" : "Choose an arbitrary",
   "APPLYREFLEXIVITY" : "Apply reflexivity of =",
   "SPLITGOAL" : "Divide the proof",
-  "SPLITGOAL" : "Assume the hypothesis",
+  "IMPLICATION" : "Assume the hypothesis",
   "theorem" : "Theorem",
   "definition" : "Definition"
 

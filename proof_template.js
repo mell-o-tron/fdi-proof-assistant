@@ -2,6 +2,8 @@ import { JsCoq } from './node_modules/jscoq/jscoq.js';
 import {Controller} from "./src/coq_controls.js"
 import {LanguageSelector} from "./src/multilang.js"
 import {Observer} from "./src/coq_observer.js"
+import {Currifier} from "./src/currifier.js"
+import {TeXifier} from "./src/texifier.js"
 
 async function readJsonFile(url) {
     try {
@@ -23,6 +25,10 @@ async function readJsonFile(url) {
         return null; // Return null in case of an error
     }
 }
+
+
+window.addEventListener("unhandledrejection", (event) => {console.log(event)});
+
 
 async function createTopicJson(summaryJson) {
     let definitions = [];
@@ -97,6 +103,7 @@ async function initialize_system (){
     if (!theorem_creator) {
       proof_obj = await readJsonFile(`./theorems/${name}.json`);
       topic_obj = await readJsonFile(`./topics/topic_summaries/${topic}.json`);
+      topic_obj = await createTopicJson(topic_obj);
     } else {
       let definition_select = document.getElementById("definition_select");
       let theorem_select = document.getElementById("theorem_select");
@@ -105,21 +112,28 @@ async function initialize_system (){
 
       let theorem_input = document.getElementById("theorem_input");
 
-      console.log("SELECTS", [...definition_select.multiselect.selectedValues],
-                             [...theorem_select.multiselect.selectedValues],
-                             [...tactic_select.multiselect.selectedValues]);
-
+      
       topic_obj = {definitions:  [...definition_select.multiselect.selectedValues],
                    theorems:     [...theorem_select.multiselect.selectedValues],
                    tactics:      [...tactic_select.multiselect.selectedValues],
                    extra:        [...extra_select.multiselect.selectedValues]
       }
-
-      proof_obj = {theorem: {text:{english : "custom theorem: " + theorem_input.value, italiano : "custom theorem: " + theorem_input.value}, coq: theorem_input.value}, definitions : []}
+      
+      topic_obj = await createTopicJson(topic_obj);
+      
+      // NOTE bad hack, passes fake controller...
+      
+      let fake_controller = {definitions : topic_obj.definitions};
+      
+      let theorem_coq = "Theorem t : " + (new Currifier(fake_controller)).currify(theorem_input.value) + ".";
+      
+      console.log("THEOREM_COQ", theorem_coq);
+      
+      proof_obj = {theorem: {text:{english : "Custom Theorem: " + (new TeXifier).texify(theorem_input.value), italiano : "Teorema Custom: " + (new TeXifier).texify(theorem_input.value)}, coq: theorem_coq}, definitions : []}
 
     }
 
-    topic_obj = await createTopicJson(topic_obj);
+    
 
     console.log("PROOF OBJECT", proof_obj);
     console.log("TOPIC OBJECT", topic_obj);
@@ -209,12 +223,14 @@ async function initialize_system (){
         document.getElementById("loading").style.display = "none";
         // TODO IMPLEMENT REPLAY OF HISTORY WHEN CHANGE LANGUAGE
       }, () => {
+        alert("There is a mistake in the definitions or theorem statement.")
         console.log("There is a mistake in the definitions or theorem statement.")
       });
 
     }
 
   } catch (error) {
+    alert("Error Occurred: " + error)
     console.log("Error Occurred: " + error)
   }
 
@@ -231,6 +247,7 @@ else {
   start_proof_button.onclick = () => {
     document.getElementById("loading").style.display = "block";
     initialize_system()
+    theorem_creator.style.display = "none";
   }
 }
 

@@ -162,6 +162,12 @@ class Observer {
     div.scrollTop = div.scrollHeight; 
     
   }
+  
+  coqCoqExn({pp, msg, sids}) {
+        let theorem_creator = document.getElementById("theorem_creator");
+        if (theorem_creator && document.getElementById("loading").style.display != "none")
+          alert('Error: ' + msg);
+    }
 } 
 
 export {Observer}

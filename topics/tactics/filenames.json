@@ -2,7 +2,6 @@
     "filenames": [
         "split goal.json",
         "split hypo.json",
-        "aritmetic simplify.json",
         "induction.json",
         "simplify arithmetic.json",
         "intro.json",

@@ -107,6 +107,17 @@ class TeXifier {
         res = res.replaceAll(/^(?<=\\)([a-zA-Z0-9]) ([a-zA-Z0-9])/g, "$1\\;$2")
         res = res.replaceAll(/([\s\(;][a-zA-Z])([0-9]+)/g, "$1_{$2}")
         
+        console.log(res);
+        let matches = [...res.matchAll(/forall\s*([a-zA-Z0-9\s]+)\s*:/g)]
+        for (let m of matches){
+            let trimmed_args = m[1].trim();
+            let commad_args  = trimmed_args.replace(" ", ", ");
+            let commad_forall = m[0].replace(trimmed_args, commad_args);
+            
+            res = res.replace(m[0], commad_forall);
+        }
+        console.log("MATCHES", matches)
+
         
         // TODO recognize stuff of form X == Y and put it into parens
         

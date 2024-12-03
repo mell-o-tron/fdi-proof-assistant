@@ -151,6 +151,37 @@ class TacticCommentator {
                 return `${this.language_selector.current_language.DESTRUCT}.`;
 
             }
+            
+            case "destruct": {     // scope to redefine new goals
+
+                // TODO ONLY GIVES END OF CASE IF SPLIT IN TWO. GENERALIZE BY PUSHING ALL NEW GOALS.
+
+                let new_goals = this.observer.new_goals;
+                if(new_goals.length == 2){
+                    this.destruct_goal_stack.push(new_goals[1]); // save second case goal
+
+                }
+
+                return `${this.language_selector.current_language.DESTRUCT}.`;
+
+            }
+            
+            case "split": {     // scope to redefine new goals
+
+                // TODO ONLY GIVES END OF CASE IF SPLIT IN TWO. GENERALIZE BY PUSHING ALL NEW GOALS.
+
+                let new_goals = this.observer.new_goals;
+                if(new_goals.length == 2){
+                    this.destruct_goal_stack.push(new_goals[1]); // save second case goal
+
+                }
+
+                return `${this.language_selector.current_language.SPLIT}.`;
+
+            }
+            
+            case "assumption":
+                return `${this.language_selector.current_language.TRIVIAL}.`
 
             case "ring_simplify":
                 return `${this.language_selector.current_language.RING}.`
