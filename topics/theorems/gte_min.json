@@ -5,9 +5,8 @@
   },
   "name": "gte_min",
   "text": {
-    "english": "If a number \\(n\\) is lower than the min value of a binary tree, and lower than another number \\(m\\), then \\(n\\) is lower than the min value of the tree with an extra node of value \\(m\\) inserted: \\[ \\forall n,m \\in \\mathbb{N} .\\; \\forall t \\in BT_\\mathbb{N} .\\; m > n \\land \\texttt{min}(t) >_{e} \\texttt{Nat}(n) \\implies \\texttt{min}(\\texttt{ins}(m,t)) >_{e} \\texttt{Nat}(n) \\]",
-    "italiano": "Se un numero \\(n\\) è minore del minimo di un albero binario, ed è anche minore di un numero \\(m\\), allora \\(n\\) sarà minore del minimo dell'albero con inserito un nodo con valore \\(m\\): \\[ \\forall n,m \\in \\mathbb{N} .\\; \\forall t \\in BT_\\mathbb{N} .\\; m > n \\land \\texttt{min}(t) >_{e} \\texttt{Nat}(n) \\implies \\texttt{min}(\\texttt{ins}(m,t)) >_{e} \\texttt{Nat}(n) \\]"
+    "english": "If a number \\(n\\) is lower than the min value of a binary tree, and lower than another number \\(m\\), then \\(n\\) is lower than the min value of the tree with an extra node of value \\(m\\) inserted: \\[ \\forall n,m \\in \\mathbb{N} .\\; \\forall t \\in BT_\\mathbb{N} .\\; \\texttt{min}(\\texttt{ins}(m,t)) >_{e} \\texttt{Nat}(n) = m > n \\land \\texttt{min}(t) >_{e} \\texttt{Nat}(n) \\]",
+    "italiano": "Se un numero \\(n\\) è minore del minimo di un albero binario, ed è anche minore di un numero \\(m\\), allora \\(n\\) sarà minore del minimo dell'albero con inserito un nodo con valore \\(m\\): \\[ \\forall n,m \\in \\mathbb{N} .\\; \\forall t \\in BT_\\mathbb{N} .\\; \\texttt{min}(\\texttt{ins}(m,t)) >_{e} \\texttt{Nat}(n) = m > n \\land \\texttt{min}(t) >_{e} \\texttt{Nat}(n) \\]"
   },
-  "apply": true,
-  "coq": "Theorem gte_min : forall (n m : nat) (t : bte nat) , m > n /\\ min t >e Nat n -> min (ins m t) >e Nat n.\nProof.\nAdmitted.\n"
+  "coq": "Theorem gte_min : forall (n m : nat) (t : bte nat) ,  (min (ins m t) >e Nat n) = (m > n) && (min t >e Nat n).\nProof.\nAdmitted.\n"
 }

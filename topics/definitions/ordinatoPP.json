@@ -5,10 +5,10 @@
     "arity": 1,
     "display_name": "ordinatoPP",
     "text": {
-      "english": "Let \\( \\texttt {ordinatoPP} : {BT}_\\mathbb{N} \\to Bool \\) be defied as follows:<ul style=\"padding : 15px;\"><li>Clausola Base: \\( \\texttt{ordinatoPP}(\\lambda) = True \\)</li><li>Clausola Induttiva: \\( \\texttt{ordinatoPP}(N(t_1,n,t_2)) \\Leftrightarrow \\texttt{max}(t_1) \\le n \\land \\texttt{min}(t_2) >_e \\texttt{Nat}(n) \\land \\texttt{ordinatoPP}(t_1) \\land \\texttt{ordinatoPP}(t_2) \\).</li></ul>",
-      "italiano": "Sia \\( \\texttt {ordinatoPP} : {BT}_\\mathbb{N} \\to Bool \\) definita come segue:<ul style=\"padding : 15px;\"><li>Clausola Base: \\( \\texttt{ordinatoPP}(\\lambda) = True \\)</li><li>Clausola Induttiva: \\( \\texttt{ordinatoPP}(N(t_1,n,t_2)) \\Leftrightarrow \\texttt{max}(t_1) \\le n \\land \\texttt{min}(t_2) >_e \\texttt{Nat}(n) \\land \\texttt{ordinatoPP}(t_1) \\land \\texttt{ordinatoPP}(t_2) \\).</li></ul>"
+      "english": "Let \\( \\texttt {ordinatoPP} : {BT}_\\mathbb{N} \\to Bool \\) be defied as follows:<ul style=\"padding : 15px;\"><li>Clausola Base: \\( \\texttt{ordinatoPP}(\\lambda) = \\texttt{true} \\)</li><li>Clausola Induttiva: \\( \\texttt{ordinatoPP}(N(t_1,n,t_2)) = \\texttt{max}(t_1) \\le n \\land \\texttt{min}(t_2) >_e \\texttt{Nat}(n) \\land \\texttt{ordinatoPP}(t_1) \\land \\texttt{ordinatoPP}(t_2) \\).</li></ul>",
+      "italiano": "Sia \\( \\texttt {ordinatoPP} : {BT}_\\mathbb{N} \\to Bool \\) definita come segue:<ul style=\"padding : 15px;\"><li>Clausola Base: \\( \\texttt{ordinatoPP}(\\lambda) = \\texttt{true} \\)</li><li>Clausola Induttiva: \\( \\texttt{ordinatoPP}(N(t_1,n,t_2)) = \\texttt{max}(t_1) \\le n \\land \\texttt{min}(t_2) >_e \\texttt{Nat}(n) \\land \\texttt{ordinatoPP}(t_1) \\land \\texttt{ordinatoPP}(t_2) \\).</li></ul>"
     },
-    "coq": "Fixpoint ordinatoPP (t : bte nat) : Prop := match t with | lmd => True | N t1 n t2 => (max t1) <= n /\\ ((min t2) >e (Nat n)) /\\ (ordinatoPP t1) /\\ (ordinatoPP t2) end.\n"
+    "coq": "Fixpoint ordinatoPP (t : bte nat) : Bool := match t with | lmd => true | N t1 n t2 => ((max t1) <= n) && ((min t2) >e (Nat n)) && (ordinatoPP t1) && (ordinatoPP t2) end.\n"
   },
   "theorems": [
     {
@@ -18,10 +18,10 @@
         "italiano": "ordinatoPP (clausola base)"
       },
       "text": {
-        "english": "Base clause of definition of \\(\\texttt{ordinatoPP}\\):\n\n\n\\[ \\texttt{ordinatoPP}(\\lambda) = True \\]",
-        "italiano": "Clausola base della definizione di \\(\\texttt{ordinatoPP}\\):\n\n\n\\[ \\texttt{ordinatoPP}(\\lambda) = True \\]"
+        "english": "Base clause of definition of \\(\\texttt{ordinatoPP}\\):\n\n\n\\[ \\texttt{ordinatoPP}(\\lambda) = true \\]",
+        "italiano": "Clausola base della definizione di \\(\\texttt{ordinatoPP}\\):\n\n\n\\[ \\texttt{ordinatoPP}(\\lambda) = true \\]"
       },
-      "coq": "Theorem ordinatoPP_base_clause : ordinatoPP lmd = True.\nProof.\nreflexivity.\nQed.\n"
+      "coq": "Theorem ordinatoPP_base_clause : ordinatoPP lmd = true.\nProof.\nreflexivity.\nQed.\n"
     },
     {
       "name": "ordinatoPP_inductive_clause",
@@ -33,7 +33,7 @@
         "english": "Inductive clause of the definition of \\(\\texttt{ordinatoPP}\\):\n\n\\[ \\forall t_1,t_2 \\in {BT}_\\mathbb{N} .\\; \\forall n \\in \\mathbb{N} .\\; \\texttt{ordinatoPP}(N(t_1,n,t_2)) = \\texttt{max}(t_1) \\le n \\land \\texttt{min}(t_2) >_e \\texttt{Nat}(n) \\land \\texttt{ordinatoPP}(t_1) \\land \\texttt{ordinatoPP}(t_2) \\]",
         "italiano": "Clausola induttiva della definizione di \\(\\texttt{ordinatoPP}\\):\n\n\\[ \\forall t_1,t_2 \\in {BT}_\\mathbb{N} .\\; \\forall n \\in \\mathbb{N} .\\; \\texttt{ordinatoPP}(N(t_1,n,t_2)) = \\texttt{max}(t_1) \\le n \\land \\texttt{min}(t_2) >_e \\texttt{Nat}(n) \\land \\texttt{ordinatoPP}(t_1) \\land \\texttt{ordinatoPP}(t_2) \\]"
       },
-      "coq": "Theorem ordinatoPP_inductive_clause : forall (t1 t2 : bte nat) (n : nat) , ordinatoPP (N t1 n t2) <-> (max t1) <= n /\\ ((min t2) >e (Nat n)) /\\ (ordinatoPP t1) /\\ (ordinatoPP t2).\nProof.\nreflexivity.\nQed.\n"
+      "coq": "Theorem ordinatoPP_inductive_clause : forall (t1 t2 : bte nat) (n : nat) , ordinatoPP (N t1 n t2) = ((max t1) <= n) && ((min t2) >e (Nat n)) && (ordinatoPP t1) && (ordinatoPP t2).\nProof.\nreflexivity.\nQed.\n"
     }
   ]
 }

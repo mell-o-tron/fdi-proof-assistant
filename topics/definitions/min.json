@@ -5,10 +5,10 @@
     "arity": 1,
     "display_name": "min",
     "text": {
-      "english": "Let \\( \\texttt {min} : {BT}_\\mathbb{N} \\to \\mathbb{N}_\\infty \\) be defied as follows:<ul style=\"padding : 15px;\"><li>Base Clause: \\( \\texttt{min}(\\lambda) = 0 \\)</li><li>Inductive Clause: \\( \\texttt{min}(N(t_1,n,t_2)) = \\begin{cases} \\texttt{min}_{\\mathbb{N}_\\infty}(\\texttt{min}(t_1),\\texttt{min}(t_1)) & \\text{ if } n >_e \\texttt{min}_{\\mathbb{N}_\\infty}(\\texttt{min}(t_1),\\texttt{min}(t_2)) \\\\ \\texttt{Nat}(n) & \\text{ otherwise } \\end{cases} \\).</li></ul>",
-      "italiano": "Sia \\( \\texttt {min} : {BT}_\\mathbb{N} \\to \\mathbb{N}_\\infty \\) definita come segue:<ul style=\"padding : 15px;\"><li>Clausola Base: \\( \\texttt{min}(\\lambda) = 0 \\)</li><li>Clausola Induttiva: \\( \\texttt{min}(N(t_1,n,t_2)) = \\begin{cases} \\texttt{min}_{\\mathbb{N}_\\infty}(\\texttt{min}(t_1),\\texttt{min}(t_1)) & \\text{ se } n >_e \\texttt{min}_{\\mathbb{N}_\\infty}(\\texttt{min}(t_1),\\texttt{min}(t_2)) \\\\ \\texttt{Nat}(n) & \\text{ altrimenti } \\end{cases} \\).</li></ul>"
+      "english": "Let \\( \\texttt {min} : {BT}_\\mathbb{N} \\to \\mathbb{N}_\\infty \\) be defied as follows:<ul style=\"padding : 15px;\"><li>Base Clause: \\( \\texttt{min}(\\lambda) = 0 \\)</li><li>Inductive Clause: \\( \\texttt{min}(N(t_1,n,t_2)) = \\begin{cases} \\texttt{min}_{\\mathbb{N}_\\infty}(\\texttt{min}(t_1),\\texttt{min}(t_2)) & \\text{ if } n >_e \\texttt{min}_{\\mathbb{N}_\\infty}(\\texttt{min}(t_1),\\texttt{min}(t_2)) \\\\ \\texttt{Nat}(n) & \\text{ otherwise } \\end{cases} \\).</li></ul>",
+      "italiano": "Sia \\( \\texttt {min} : {BT}_\\mathbb{N} \\to \\mathbb{N}_\\infty \\) definita come segue:<ul style=\"padding : 15px;\"><li>Clausola Base: \\( \\texttt{min}(\\lambda) = 0 \\)</li><li>Clausola Induttiva: \\( \\texttt{min}(N(t_1,n,t_2)) = \\begin{cases} \\texttt{min}_{\\mathbb{N}_\\infty}(\\texttt{min}(t_1),\\texttt{min}(t_2)) & \\text{ se } n >_e \\texttt{min}_{\\mathbb{N}_\\infty}(\\texttt{min}(t_1),\\texttt{min}(t_2)) \\\\ \\texttt{Nat}(n) & \\text{ altrimenti } \\end{cases} \\).</li></ul>"
     },
-    "coq": "Fixpoint min (t : bte nat) : n_ext := match t with | lmd => inf | N t1 n t2 => if Nat n >e? Nat_e_min (min t1) (min t2) then Nat_e_min (min t1) (min t2) else Nat n end.\n"
+    "coq": "Fixpoint min (t : bte nat) : n_ext := match t with | lmd => inf | N t1 n t2 => if Nat n >e Nat_e_min (min t1) (min t2) then Nat_e_min (min t1) (min t2) else Nat n end.\n"
   },
   "theorems": [
     {
@@ -30,10 +30,10 @@
         "italiano": "min (clausola induttiva)"
       },
       "text": {
-        "english": "Inductive clause of the definition of \\(\\texttt{min}\\):\n\n\\[ \\forall t_1,t_2 \\in {BT}_\\mathbb{N} .\\; \\forall n \\in \\mathbb{N} .\\; \\texttt{min}(N(t_1,n,t_2)) = \\begin{cases} \\texttt{min}_{\\mathbb{N}}(\\texttt{min}(t_1),\\texttt{min}(t_1)) & \\text{ se } n >_e \\texttt{min}_{\\mathbb{N}}(\\texttt{min}(t_1),\\texttt{min}(t_2)) \\\\ n & \\text{ altrimenti } \\end{cases} \\]",
-        "italiano": "Clausola induttiva della definizione di \\(\\texttt{min}\\):\n\n\\[ \\forall t_1,t_2 \\in {BT}_\\mathbb{N} .\\; \\forall n \\in \\mathbb{N} .\\; \\texttt{min}(N(t_1,n,t_2)) = \\begin{cases} \\texttt{min}_{\\mathbb{N}}(\\texttt{min}(t_1),\\texttt{min}(t_1)) & \\text{ se } n >_e \\texttt{min}_{\\mathbb{N}}(\\texttt{min}(t_1),\\texttt{min}(t_2)) \\\\ n & \\text{ altrimenti } \\end{cases} \\]"
+        "english": "Inductive clause of the definition of \\(\\texttt{min}\\):\n\n\\[ \\forall t_1,t_2 \\in {BT}_\\mathbb{N} .\\; \\forall n \\in \\mathbb{N} .\\; \\texttt{min}(N(t_1,n,t_2)) = \\begin{cases} \\texttt{min}_{\\mathbb{N}}(\\texttt{min}(t_1),\\texttt{min}(t_2)) & \\text{ se } n >_e \\texttt{min}_{\\mathbb{N}}(\\texttt{min}(t_1),\\texttt{min}(t_2)) \\\\ n & \\text{ altrimenti } \\end{cases} \\]",
+        "italiano": "Clausola induttiva della definizione di \\(\\texttt{min}\\):\n\n\\[ \\forall t_1,t_2 \\in {BT}_\\mathbb{N} .\\; \\forall n \\in \\mathbb{N} .\\; \\texttt{min}(N(t_1,n,t_2)) = \\begin{cases} \\texttt{min}_{\\mathbb{N}}(\\texttt{min}(t_1),\\texttt{min}(t_2)) & \\text{ se } n >_e \\texttt{min}_{\\mathbb{N}}(\\texttt{min}(t_1),\\texttt{min}(t_2)) \\\\ n & \\text{ altrimenti } \\end{cases} \\]"
       },
-      "coq": "Theorem min_inductive_clause : forall (t1 t2 : bte nat) (n : nat) , min (N t1 n t2) = if Nat n >e? Nat_e_min (min t1) (min t2) then Nat_e_min (min t1) (min t2) else Nat n.\nProof.\nreflexivity.\nQed.\n"
+      "coq": "Theorem min_inductive_clause : forall (t1 t2 : bte nat) (n : nat) , min (N t1 n t2) = if Nat n >e Nat_e_min (min t1) (min t2) then Nat_e_min (min t1) (min t2) else Nat n.\nProof.\nreflexivity.\nQed.\n"
     }
   ]
 }

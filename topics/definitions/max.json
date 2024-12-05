@@ -5,10 +5,10 @@
     "arity": 1,
     "display_name": "max",
     "text": {
-      "english": "Let \\( \\texttt {max} : {BT}_\\mathbb{N} \\to \\mathbb{N} \\) be defied as follows:<ul style=\"padding : 15px;\"><li>Base Clause: \\( \\texttt{max}(\\lambda) = 0 \\)</li><li>Inductive Clause: \\( \\texttt{max}(N(t_1,n,t_2)) = \\begin{cases} \\texttt{max}_{\\mathbb{N}}(\\texttt{max}(t_1),\\texttt{max}(t_1)) & \\text{ if } n \\le \\texttt{max}_{\\mathbb{N}}(\\texttt{max}(t_1),\\texttt{max}(t_2)) \\\\ n & \\text{ otherwise } \\end{cases} \\).</li></ul>",
-      "italiano": "Sia \\( \\texttt {max} : {BT}_\\mathbb{N} \\to \\mathbb{N} \\) definita come segue:<ul style=\"padding : 15px;\"><li>Clausola Base: \\( \\texttt{max}(\\lambda) = 0 \\)</li><li>Clausola Induttiva: \\( \\texttt{max}(N(t_1,n,t_2)) = \\begin{cases} \\texttt{max}_{\\mathbb{N}}(\\texttt{max}(t_1),\\texttt{max}(t_1)) & \\text{ se } n \\le \\texttt{max}_{\\mathbb{N}}(\\texttt{max}(t_1),\\texttt{max}(t_2)) \\\\ n & \\text{ altrimenti } \\end{cases} \\).</li></ul>"
+      "english": "Let \\( \\texttt {max} : {BT}_\\mathbb{N} \\to \\mathbb{N} \\) be defied as follows:<ul style=\"padding : 15px;\"><li>Base Clause: \\( \\texttt{max}(\\lambda) = 0 \\)</li><li>Inductive Clause: \\( \\texttt{max}(N(t_1,n,t_2)) = \\begin{cases} \\texttt{max}_{\\mathbb{N}}(\\texttt{max}(t_1),\\texttt{max}(t_2)) & \\text{ if } n \\le \\texttt{max}_{\\mathbb{N}}(\\texttt{max}(t_1),\\texttt{max}(t_2)) \\\\ n & \\text{ otherwise } \\end{cases} \\).</li></ul>",
+      "italiano": "Sia \\( \\texttt {max} : {BT}_\\mathbb{N} \\to \\mathbb{N} \\) definita come segue:<ul style=\"padding : 15px;\"><li>Clausola Base: \\( \\texttt{max}(\\lambda) = 0 \\)</li><li>Clausola Induttiva: \\( \\texttt{max}(N(t_1,n,t_2)) = \\begin{cases} \\texttt{max}_{\\mathbb{N}}(\\texttt{max}(t_1),\\texttt{max}(t_2)) & \\text{ se } n \\le \\texttt{max}_{\\mathbb{N}}(\\texttt{max}(t_1),\\texttt{max}(t_2)) \\\\ n & \\text{ altrimenti } \\end{cases} \\).</li></ul>"
     },
-    "coq": "Fixpoint max (t : bte nat) : nat := match t with | lmd => 0 | N t1 n t2 => if n <=? Nat.max (max t1) (max t2) then Nat.max (max t1) (max t2) else n end.\n"
+    "coq": "Fixpoint max (t : bte nat) : nat := match t with | lmd => 0 | N t1 n t2 => if n <= Nat.max (max t1) (max t2) then Nat.max (max t1) (max t2) else n end.\n"
   },
   "theorems": [
     {
@@ -30,10 +30,10 @@
         "italiano": "max (clausola induttiva)"
       },
       "text": {
-        "english": "Inductive clause of the definition of \\(\\texttt{max}\\):\n\n\\[ \\forall t_1,t_2 \\in {BT}_\\mathbb{N} .\\; \\forall n \\in \\mathbb{N} .\\; \\texttt{max}(N(t_1,n,t_2)) = \\begin{cases} \\texttt{max}_{\\mathbb{N}}(\\texttt{max}(t_1),\\texttt{max}(t_1)) & \\text{ se } n \\le \\texttt{max}_{\\mathbb{N}}(\\texttt{max}(t_1),\\texttt{max}(t_2)) \\\\ n & \\text{ altrimenti } \\end{cases} \\]",
-        "italiano": "Clausola induttiva della definizione di \\(\\texttt{max}\\):\n\n\\[ \\forall t_1,t_2 \\in {BT}_\\mathbb{N} .\\; \\forall n \\in \\mathbb{N} .\\; \\texttt{max}(N(t_1,n,t_2)) = \\begin{cases} \\texttt{max}_{\\mathbb{N}}(\\texttt{max}(t_1),\\texttt{max}(t_1)) & \\text{ se } n \\le \\texttt{max}_{\\mathbb{N}}(\\texttt{max}(t_1),\\texttt{max}(t_2)) \\\\ n & \\text{ altrimenti } \\end{cases} \\]"
+        "english": "Inductive clause of the definition of \\(\\texttt{max}\\):\n\n\\[ \\forall t_1,t_2 \\in {BT}_\\mathbb{N} .\\; \\forall n \\in \\mathbb{N} .\\; \\texttt{max}(N(t_1,n,t_2)) = \\begin{cases} \\texttt{max}_{\\mathbb{N}}(\\texttt{max}(t_1),\\texttt{max}(t_2)) & \\text{ se } n \\le \\texttt{max}_{\\mathbb{N}}(\\texttt{max}(t_1),\\texttt{max}(t_2)) \\\\ n & \\text{ altrimenti } \\end{cases} \\]",
+        "italiano": "Clausola induttiva della definizione di \\(\\texttt{max}\\):\n\n\\[ \\forall t_1,t_2 \\in {BT}_\\mathbb{N} .\\; \\forall n \\in \\mathbb{N} .\\; \\texttt{max}(N(t_1,n,t_2)) = \\begin{cases} \\texttt{max}_{\\mathbb{N}}(\\texttt{max}(t_1),\\texttt{max}(t_2)) & \\text{ se } n \\le \\texttt{max}_{\\mathbb{N}}(\\texttt{max}(t_1),\\texttt{max}(t_2)) \\\\ n & \\text{ altrimenti } \\end{cases} \\]"
       },
-      "coq": "Theorem max_inductive_clause : forall (t1 t2 : bte nat) (n : nat) , max (N t1 n t2) = if n <=? Nat.max (max t1) (max t2) then Nat.max (max t1) (max t2) else n.\nProof.\nreflexivity.\nQed.\n"
+      "coq": "Theorem max_inductive_clause : forall (t1 t2 : bte nat) (n : nat) , max (N t1 n t2) = if n <= Nat.max (max t1) (max t2) then Nat.max (max t1) (max t2) else n.\nProof.\nreflexivity.\nQed.\n"
     }
   ]
 }

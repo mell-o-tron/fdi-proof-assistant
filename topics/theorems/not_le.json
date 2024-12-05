@@ -1,0 +1,12 @@
+{
+  "display_name": {
+    "english": "Not \\(\\le\\) equals \\(>\\)",
+    "italiano": "Non \\(\\le\\) equivale a \\(>\\)"
+  },
+  "name": "not_le",
+  "text": {
+    "english": "Se \\(n\\) non è minore uguale di \\(m\\) se è solo se \\(m\\) è maggiore di \\(n\\), i.e. \\[ \\forall n,m \\in \\mathbb{N} .\\; n \\le m = \\texttt{false} \\Leftrightarrow m > n = \\texttt{true} \\]",
+    "italiano": "Se \\(n\\) non è minore uguale di \\(m\\) se è solo se \\(m\\) è maggiore di \\(n\\), i.e. \\[ \\forall n,m \\in \\mathbb{N} .\\; n \\le m = \\texttt{false} \\Leftrightarrow m > n = \\texttt{true} \\]"
+  },
+  "coq": "Theorem not_le : forall n m : nat , n <= m = false <-> n > m = true.\nProof.\nAdmitted.\n"
+}

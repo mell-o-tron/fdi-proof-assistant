@@ -1,0 +1,12 @@
+{
+  "display_name": {
+    "english": "\\(\\land\\) identity",
+    "italiano": "Unità \\(\\land\\)"
+  },
+  "name": "andb_identity",
+  "text": {
+    "english": "\\(\\texttt{true}\\) is the identity element of \\(\\land\\): \\[ \\forall b \\in Bool.\\; \\texttt{true} \\land b = b \\]",
+    "italiano": "\\(\\texttt{true}\\) è l'elemento neutro di \\(\\land\\): \\[ \\forall b \\in Bool.\\; \\texttt{true} \\land b = b \\]"
+  },
+  "coq": "Theorem andb_identity : forall b : Bool , true && b = b.\nProof.\nreflexivity.\nQed."
+}

@@ -1,21 +1,26 @@
 {
   "extra": [
     "bool.json",
-    "implication.json"
+    "implication.json",
+    "split_goal.json",
+    "split_hypo.json"
   ],
   "definitions": [
-    "nat_ext.json",
+    "nat_extb.json",
     "bte.json",
     "max.json",
     "min.json",
-    "ins.json",
-    "ordinatoPP.json"
+    "insb.json",
+    "ordinatoPPb.json"
   ],
   "theorems": [
-    "le_0_n.json",
-    "gte_inf_n.json",
-    "le_max.json",
-    "gte_min.json"
+    "andb_identity.json",
+    "andb_comm.json",
+    "not_le.json",
+    "le_0_nb.json",
+    "gte_inf_nb.json",
+    "le_maxb.json",
+    "gte_minb.json"
   ],
   "tactics": [
     "induction.json",

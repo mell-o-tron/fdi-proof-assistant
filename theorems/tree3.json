@@ -5,9 +5,9 @@
   "theorem": {
     "text":
       {
-        "english" : "Teorema: \\(\\texttt{ins}\\) respects the \\(\\texttt{ordinatoPP}\\) property, in other words, if a binary tree is ordered then it will remain ordered if we add a node using \\(\\texttt{ins}\\), i.e. \\[ \\forall t \\in BT_\\mathbb{N} . \\; \\forall n \\in \\mathbb{N} . \\; \\texttt{ordinatoPP}(t) \\implies \\texttt{ordinatoPP}(\\texttt{ins}(n,t)) \\]",
-        "italiano" : "Teorema: \\(\\texttt{ins}\\) rispetta la proprietà \\(\\texttt{ordinatoPP}\\), ovvero, se un albero binario è ordinato, allora rimarrà ordinato se aggiungiamo un nodo utilizzando \\(\\texttt{ins}\\), i.e. \\[ \\forall t \\in BT_\\mathbb{N} . \\; \\forall n \\in \\mathbb{N} . \\; \\texttt{ordinatoPP}(t) \\implies \\texttt{ordinatoPP}(\\texttt{ins}(n,t)) \\]"
+        "english" : "Teorema: \\(\\texttt{ins}\\) respects the \\(\\texttt{ordinatoPP}\\) property, in other words, if a binary tree is ordered then it will remain ordered if we add a node using \\(\\texttt{ins}\\), i.e. \\[ \\forall t \\in BT_\\mathbb{N} . \\; \\forall n \\in \\mathbb{N} . \\; \\texttt{ordinatoPP}(t) = \\texttt{true} \\implies \\texttt{ordinatoPP}(\\texttt{ins}(n,t)) = \\texttt{true} \\]",
+        "italiano" : "Teorema: \\(\\texttt{ins}\\) rispetta la proprietà \\(\\texttt{ordinatoPP}\\), ovvero, se un albero binario è ordinato, allora rimarrà ordinato se aggiungiamo un nodo utilizzando \\(\\texttt{ins}\\), i.e. \\[ \\forall t \\in BT_\\mathbb{N} . \\; \\forall n \\in \\mathbb{N} . \\; \\texttt{ordinatoPP}(t) = \\texttt{true} \\implies \\texttt{ordinatoPP}(\\texttt{ins}(n,t)) = \\texttt{true} \\]"
       },
-    "coq": "Theorem ordinatoPP_ins: forall (t : bte nat) (n : nat) , #implies ordinatoPP t #to ordinatoPP (ins n t)."
+    "coq": "Theorem ordinatoPP_ins: forall (t : bte nat) (n : nat) , #implies ordinatoPP t = true #to ordinatoPP (ins n t) = true."
   }
 } 

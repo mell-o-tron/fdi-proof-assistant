@@ -5,9 +5,8 @@
   },
   "name": "le_0_n",
   "text": {
-    "english": "0 is \\(\\le\\) of all natural numers, i.e. \\[ \\forall n \\in \\mathbb{N} .\\; 0 \\le n \\]",
-    "italiano": "0 è \\(\\le\\) di qualsiasi numero naturale, i.e. \\[ \\forall n \\in \\mathbb{N} .\\; 0 \\le n \\]"
+    "english": "0 is \\(\\le\\) of all natural numers, i.e. \\[ \\forall n \\in \\mathbb{N} .\\; 0 \\le n = true \\]",
+    "italiano": "0 è \\(\\le\\) di qualsiasi numero naturale, i.e. \\[ \\forall n \\in \\mathbb{N} .\\; 0 \\le n = true \\]"
   },
-  "apply": true,
-  "coq": "\n"
+  "coq": "Theorem le_0_n : forall n : nat , 0 <= n = true.\nProof.\nAdmitted.\n"
 }

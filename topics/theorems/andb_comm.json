@@ -1,0 +1,12 @@
+{
+  "display_name": {
+    "english": "\\(\\land\\) commutativity",
+    "italiano": "Commutatività \\(\\land\\)"
+  },
+  "name": "andb_comm",
+  "text": {
+    "english": "\\(\\land\\) is commutative:: \\[ \\forall a,b \\in Bool.\\; a \\land b = b \\land a \\]",
+    "italiano": "\\(\\land\\) è commutativa: \\[ \\forall a,b \\in Bool.\\; a \\land b = b \\land a \\]"
+  },
+  "coq": "Theorem andb_comm : forall a b : Bool , a && b = b && a.\nProof.\nAdmitted.\n"
+}

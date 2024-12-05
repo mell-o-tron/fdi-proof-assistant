@@ -5,9 +5,8 @@
   },
   "name": "le_max",
   "text": {
-    "english": "If a number \\(n\\) is greater than or equal of the max value of a binary tree, and is greater than or equal to another number \\(m\\), then \\(n\\) is greater than or equal than the max value of the tree with an extra node of value \\(m\\) inserted: \\[ \\forall n,m \\in \\mathbb{N} .\\; \\forall t \\in BT_\\mathbb{N} .\\; m \\le n \\land \\texttt{max}(t) \\le n \\implies \\texttt{max}(\\texttt{ins}(m,t)) \\le n \\]",
-    "italiano": "Se un numero \\(n\\) è maggiore uguale del massimo di un albero binario, ed è anche maggiore uguale di un numero \\(m\\), allora \\(n\\) sarà maggiore uguale del massimo dell'albero inserendo un nodo con valore \\(m\\): \\[ \\forall n,m \\in \\mathbb{N} .\\; \\forall t \\in BT_\\mathbb{N} .\\; m \\le n \\land \\texttt{max}(t) \\le n \\implies \\texttt{max}(\\texttt{ins}(m,t)) \\le n \\]"
+    "english": "If a number \\(n\\) is greater than or equal of the max value of a binary tree, and is greater than or equal to another number \\(m\\), then \\(n\\) is greater than or equal than the max value of the tree with an extra node of value \\(m\\) inserted: \\[ \\forall n,m \\in \\mathbb{N} .\\; \\forall t \\in BT_\\mathbb{N} .\\;  \\texttt{max}(\\texttt{ins}(m,t)) \\le n = m \\le n \\land \\texttt{max}(t) \\le n \\]",
+    "italiano": "Se un numero \\(n\\) è maggiore uguale del massimo di un albero binario, ed è anche maggiore uguale di un numero \\(m\\), allora \\(n\\) sarà maggiore uguale del massimo dell'albero inserendo un nodo con valore \\(m\\): \\[ \\forall n,m \\in \\mathbb{N} .\\; \\forall t \\in BT_\\mathbb{N} .\\;  \\texttt{max}(\\texttt{ins}(m,t)) \\le n = m \\le n \\land \\texttt{max}(t) \\le n \\]"
   },
-  "apply": true,
-  "coq": "Theorem le_max : forall (n m : nat) (t : bte nat) , m <= n /\\ max t <= n -> max (ins m t) <= n.\nProof.\nAdmitted.\n"
+  "coq": "Theorem le_max : forall (n m : nat) (t : bte nat) , (max (ins m t) <= n) = (m <= n) && (max t <= n).\nProof.\nAdmitted.\n"
 }

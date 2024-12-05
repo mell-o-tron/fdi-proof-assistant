@@ -69,6 +69,7 @@ class TeXifier {
             ["false", "\\texttt{false}"],
             ["true", "\\texttt{true}"],
             ["||", "\\vee"],
+            ["&&", "\\land"],
             ["lmd", "\\lambda"],
 //             [" ", "\\;"],
             ["∀", "\\forall"],
