@@ -1,6 +1,6 @@
 {
   "extra": [
-    "arith.json"
+    "N.json"
   ],
   "definitions": [
     "nterm.json",

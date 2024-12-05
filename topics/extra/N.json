@@ -1,0 +1,3 @@
+{
+  "coq" : "Require Import NArith.\nNotation nat := N.\nOpen Scope N_scope.\nNotation \"A #^ B ^#\" := (A^B) (at level 2).\n"
+}
