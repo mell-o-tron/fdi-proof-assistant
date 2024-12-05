@@ -63,7 +63,7 @@ class Uncurrifier {
         let fun_name = fun.name;
         let arity = fun.arity;
         
-        let m = s1.match(new RegExp(fun_name + "\\s"))
+        let m = s1.match(fun_name + " ")
         if (m != null) {
             let i = m.index + fun_name.length;
             
@@ -95,7 +95,8 @@ class Uncurrifier {
         let s = t
         for (let fun of this.functions) {
             s = this.to_uncurried(s, fun)
-            s = s.replaceAll("(", " (").replaceAll(fun.name + " ", `\\texttt{${fun.name} }`).replaceAll(" (", "(");
+            let re = new RegExp(String.raw`(?:${fun.name})([^\w\d])`, "g")
+            s = s.replaceAll(re, (_s, p1) => `\\texttt{${fun.name}}${p1}`)
         }
         
         return s;
