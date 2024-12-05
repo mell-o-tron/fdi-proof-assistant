@@ -25,6 +25,8 @@
   "VALUEOF" : "valore di",
   "WEAPPLY" : "Applichiamo",
   "MORECONTROLS" : "Più controlli",
+  "IMPLIES" : "Implicazione",
+  "EQUALS" : "Equivalenza",
 
   "MUSTPROVEFOLLOWINGCLAUSES" : "Dobbiamo dimostrare le seguenti clausole",
   "BASECLAUSE" : "Clausola Base",

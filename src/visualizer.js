@@ -485,7 +485,7 @@ class Visualizer {
         MathJax.typeset([theodesc]);
     }
     
-    add_hp_application_card (controller) {
+    add_hp_application_card (controller, apply) {
 
         let local_langsel = new LanguageSelector();
         let theorem_parser = new TheoremParser();
@@ -499,7 +499,7 @@ class Visualizer {
 
         let header = document.createElement('div');
         header.className = "math-header hypothesis-header";
-        header.textContent = local_langsel.current_language.APPLYHYP;
+        header.textContent = `${local_langsel.current_language.APPLYHYP} (${local_langsel.current_language[apply ? "IMPLIES" : "EQUALS"]})` ;
         
         let currifier = new Currifier(controller);
         
@@ -507,13 +507,13 @@ class Visualizer {
         tbox_container.className = "tbox-container";
         
         let tbox = document.createElement("select");
-        tbox.className = "hyp-dropdown"
+        tbox.className = "hyp-dropdown " + (apply ? "apply" : "rewrite");
         
         let target_container = document.createElement("div");
         target_container.className = "tbox-container";
         
         let target = document.createElement("select");
-        target.className = "hyp-dropdown theo"
+        target.className = "hyp-dropdown theo";
 
         target.onchange = () => {};
         target_container.appendChild(target);
@@ -567,27 +567,7 @@ class Visualizer {
             }
             
         });
-        
-        
-        let rw_lr = document.createElement("button");
-        rw_lr.className = "button-4";
-        rw_lr.textContent = `${local_langsel.current_language.APPLY} (→)`;
-        rw_lr.onclick = () => {controller.rewrite_theorem(tbox.value, true, occ.value, var_inputs.map(x => currifier.currify(x.value)), hypothesis_variables, target.value != "goal" ? target.value : null)};
-
-        controller.visualizer.apply_buttons.push(rw_lr);
-        
-        let rw_rl = document.createElement("button");
-        rw_rl.className = "button-4";
-        rw_rl.onclick = () => {controller.rewrite_theorem(tbox.value, false, occ.value, var_inputs.map(x => currifier.currify(x.value)), hypothesis_variables, target.value != "goal" ? target.value : null)};
-        rw_rl.textContent = `${local_langsel.current_language.APPLY} (←)`;
-        
-        controller.visualizer.apply_buttons.push(rw_rl);
-        
-        let app_btn = document.createElement("button");
-        app_btn.className = "button-4";
-        app_btn.textContent = `${local_langsel.current_language.APPLY}`;
-        app_btn.onclick = () => {controller.apply_theorem(tbox.value, var_inputs.map(x => currifier.currify(x.value)), hypothesis_variables, target.value != "goal" ? target.value : null)};
-        controller.visualizer.apply_buttons.push(app_btn);
+              
 
         hypbox.appendChild(header);
         hypbox.appendChild(theodesc);
@@ -595,16 +575,43 @@ class Visualizer {
         hypbox.appendChild(tbox_container);
         hypbox.appendChild(show_controls_container);
         hypbox.appendChild(hidden_section);
-        hypbox.appendChild(rw_lr);
-        hypbox.appendChild(rw_rl);
-        hypbox.appendChild(app_btn);
+
+        if (apply) {
+            let app_btn = document.createElement("button");
+            app_btn.className = "button-4";
+            app_btn.textContent = `${local_langsel.current_language.APPLY}`;
+            app_btn.onclick = () => {controller.apply_theorem(tbox.value, var_inputs.map(x => currifier.currify(x.value)), hypothesis_variables, target.value != "goal" ? target.value : null)};
+            controller.visualizer.apply_buttons.push(app_btn);
+
+            hypbox.appendChild(app_btn);
+        } else {
+        
+            let rw_lr = document.createElement("button");
+            rw_lr.className = "button-4";
+            rw_lr.textContent = `${local_langsel.current_language.APPLY} (→)`;
+            rw_lr.onclick = () => {controller.rewrite_theorem(tbox.value, true, occ.value, var_inputs.map(x => currifier.currify(x.value)), hypothesis_variables, target.value != "goal" ? target.value : null)};
+ 
+            controller.visualizer.apply_buttons.push(rw_lr);
+
+            let rw_rl = document.createElement("button");
+            rw_rl.className = "button-4";
+            rw_rl.onclick = () => {controller.rewrite_theorem(tbox.value, false, occ.value, var_inputs.map(x => currifier.currify(x.value)), hypothesis_variables, target.value != "goal" ? target.value : null)};
+            rw_rl.textContent = `${local_langsel.current_language.APPLY} (←)`;
+
+            controller.visualizer.apply_buttons.push(rw_rl);
+
+            hypbox.appendChild(rw_lr);
+            hypbox.appendChild(rw_rl);
+        }
+
         MathJax.typeset([theodesc]);
     }
         
         
     
     add_hp_handlers(controller) {
-        this.add_hp_application_card(controller)
+        this.add_hp_application_card(controller, false)
+        this.add_hp_application_card(controller, true)
         
         
         // TODO Rewrite Hypothesis within Other Hypothesis

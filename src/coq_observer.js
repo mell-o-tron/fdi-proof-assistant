@@ -68,13 +68,17 @@ class Observer {
       
       dropdowns.forEach(dropdown => {
         dropdown.innerHTML = "";
-        if (dropdown.className === "hyp-dropdown theo") {
+        if (dropdown.className.includes("theo")) {
           let hopt = document.createElement('option');
           hopt.value = "goal";
           hopt.textContent = "goal";
           dropdown.appendChild(hopt);
         }
-        for (let h of this.current_goal.hypotheses){
+        // TODO: probably should make this also account for theorems that are supposed to be used with rewrite but aren't equalities (like double implications)
+        for (let h of this.current_goal.hypotheses.filter(x =>
+                                                           dropdown.className.includes("rewrite") ? x.body.includes("=") && !x.body.includes("#implies")
+                                                           : dropdown.className.includes("apply") ? x.body.includes("#implies")
+                                                           : true)){
           let hopt = document.createElement('option');
           hopt.value = h.name;
           hopt.textContent = h.name;

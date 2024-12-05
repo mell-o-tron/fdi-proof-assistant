@@ -25,6 +25,8 @@
   "VALUEOF" : "value of",
   "WEAPPLY" : "We apply",
   "MORECONTROLS" : "More controls",
+  "IMPLIES" : "Implication",
+  "EQUALS" : "Equivalence",
   
   "MUSTPROVEFOLLOWINGCLAUSES" : "We must now prove the following clauses",
   "BASECLAUSE" : "Base Clause",
