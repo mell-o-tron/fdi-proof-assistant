@@ -280,25 +280,60 @@ class MultiSelect {
                return jsonData;
 
             } catch (err) {
-               console.error("Error fetching or parsing the file:", err);
+               console.error(`Error fetching or parsing file "${url}":`, err);
                return null; // Return null in case of an error
             }
          }
 
          async function populate_selects (){
-
+            
             try {
                let definitions = await readJsonFile ("./topics/definitions/filenames.json");
                let tactics = await readJsonFile ("./topics/tactics/filenames.json");
                let theorems = await readJsonFile ("./topics/theorems/filenames.json");
                let extra = await readJsonFile ("./topics/extra/filenames.json");
 
-               return [definitions, tactics, theorems, extra].map(x => x.filenames)
+               let def_names = [];
+               let tac_names = [];
+               let theo_names = [];
+               let extra_names = [];
+               
+               for (let f of definitions.filenames) {
+                    try {
+                        let display_name = (await readJsonFile ("./topics/definitions/"+ f)).definition.display_name
+                        def_names.push([f, display_name])
+                    } catch (e) {
+
+                    }
+                }
+                
+                for (let f of tactics.filenames) {
+                    try {
+                        let display_name = (await readJsonFile ("./topics/tactics/"+ f)).display_name["english"]
+                        tac_names.push([f, display_name])
+                    } catch (e) {
+
+                    }
+                }
+                
+                for (let f of theorems.filenames) {
+                    try {
+                        let display_name = (await readJsonFile ("./topics/theorems/"+ f)).display_name["english"]
+                        theo_names.push([f, display_name])
+                    } catch (e) {
+
+                    }
+                }
+                
+                
+                extra_names = extra.filenames.map(x => x.replace(".json", ""))
+               
+               console.log("BANANA")
+               return [def_names, tac_names, theo_names, extra_names]
 
             } catch (e) {
-               console.log("error: " + e);
+               console.error("error: " + e);
             }
-
 
          }
 
@@ -320,31 +355,31 @@ class MultiSelect {
 
             for (let d of definitions) {
                let option = document.createElement("option");
-               option.value = d;
-               option.textContent = d.replace(".json", "");
+               option.value = d[0];
+               option.textContent = d[1];
                definition_select.appendChild(option);
             }
 
 
             for (let d of theorems) {
                let option = document.createElement("option");
-               option.value = d;
-               option.textContent = d.replace(".json", "");
+               option.value = d[0];
+               option.textContent = d[1];
                theorem_select.appendChild(option);
             }
 
 
             for (let d of tactics) {
                let option = document.createElement("option");
-               option.value = d;
-               option.textContent = d.replace(".json", "");
+               option.value = d[0];
+               option.textContent = d[1];
                tactic_select.appendChild(option);
             }
 
             for (let d of extra) {
                let option = document.createElement("option");
                option.value = d;
-               option.textContent = d.replace(".json", "");
+               option.textContent = d;
                extra_select.appendChild(option);
             }
 
@@ -352,6 +387,7 @@ class MultiSelect {
 
             document.querySelectorAll('[data-multi-select]').forEach(select => {
                 let ms = new MultiSelect(select, {placeholder : select.placeholder});
+                MathJax.typeset();
                 return ms;
             });
         })

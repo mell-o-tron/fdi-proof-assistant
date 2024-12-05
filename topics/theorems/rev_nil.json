@@ -1,8 +1,7 @@
 {
   "name": "rev_nil",
-  "text": {
-    "english": "Base case of rev: \\[ rev([]) = [] \\]",
-    "italiano": "Case base rev: \\[ rev([]) = [] \\]"
+  "display_name": {
+    "english": "\\(\\texttt{rev}\\) and \\(\\texttt{[]}\\)",
+    "italiano": "\\(\\texttt{rev}\\) e \\(\\texttt{[]}\\)"
   },
-  "coq": "Lemma rev_nil : rev [] = [].\nProof.\nAdmitted.\n"
-}
+  "coq": "Lemma rev_nil : forall A : Type, rev (@nil A) = [].\nProof.\nAdmitted.\n"

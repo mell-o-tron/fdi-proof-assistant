@@ -17,7 +17,9 @@
         <nav>
             <a href="./index.html" style="color: white; margin: 0 15px;">Home</a>
             <div style="float : right;margin: 0 15px;">
-
+            
+             <button style="margin: 0 15px;border-radius: 8px;" id="toggle_coq">Toggle Coq (debug)</button>
+               
             <label for="langs">Language:</label>
 
             <select name="langs" id="langs">
@@ -54,13 +56,22 @@
 <h2>Write the theorem you want to prove:</h2>
          <div style="text-align: center;margin:30px;">
          <textarea id="theorem_input" rows="4" cols="100" placeholder="Your Theorem" style="-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;"> </textarea>
+         
+         </div>
+         Insert Special Symbols:
+         <div id="palette" style="text-align: center;margin:30px;">
+         <button class="button-4" id="insert_forall">\(\forall\)</button>
+         <button class="button-4" id="insert_list">\(L_A\)</button>
+         <button class="button-4" id="insert_nterm">\(\mathcal NTerm\)</button>
+         <button class="button-4" id="insert_bt">\(BT_A\)</button>
+         <button class="button-4" id="insert_set">Set</button>
          </div>
          <button class="button-4" id="start_proof">Start Proof</button>
          </div>
 
          <div id="latex-proof"> </div>
          
-            <div class="jscoq-main" style="display: none;">
+            <div id = "the_coq" class="jscoq-main" style="display: none;">
                <div id="ide-wrapper" class="toggled">
                   <div id="code-wrapper">
                      <div id="document">
@@ -112,6 +123,40 @@
             });
          });
 
+         
+         const insertText = (textarea, text) => {
+            // Get the current cursor position
+            const position = textarea.selectionStart;
+
+            // Get the text before and after the cursor position
+            const before = textarea.value.substring(0, position);
+            const after = textarea.value.substring(position, textarea.value.length);
+
+            // Insert the new text at the cursor position
+            textarea.value = before + text + after;
+
+            // Set the cursor position to after the newly inserted text
+            textarea.selectionStart = textarea.selectionEnd = position + text.length;
+         };
+         
+         let textarea = document.getElementById("theorem_input");
+         
+         let insert_forall = document.getElementById("insert_forall");
+         let insert_list = document.getElementById("insert_list");
+         let insert_nterm = document.getElementById("insert_nterm");
+         let insert_bt = document.getElementById("insert_bt");
+         let insert_set = document.getElementById("insert_set");
+         
+         insert_forall.onclick = () => {insertText(textarea, "forall (name : type) , [...]")}
+         insert_list.onclick = () => {insertText(textarea, "list A")}
+         insert_nterm.onclick = () => {insertText(textarea, "nterm")}
+         insert_bt.onclick = () => {insertText(textarea, "bte A")}
+         insert_set.onclick = () => {insertText(textarea, "Type")}
+         
+         let toggle_coq = document.getElementById("toggle_coq");
+         toggle_coq.onclick = () => {document.getElementById("the_coq").style.display = document.getElementById("the_coq").style.display == "none" ? "block" : "none"}
+         
+         
       </script>
       <script src="multiselect.js"></script>
    </body>

@@ -1,0 +1,12 @@
+{
+  "name": "rev_app",
+  "display_name": {
+    "english": "\\(\\texttt{rev}\\) and \\(\\texttt{app}\\)",
+    "italiano": "\\(\\texttt{rev}\\) e \\(\\texttt{app}\\)"
+  },
+  "text": {
+    "english": "Inductive case of rev: \\[ \\forall A, \\forall l_1, l_2 \\in L_A . rev(app (l_1, l_2)) = app (rev (l_2), rev (l_1)) \\]",
+    "italiano": "Case induttivo rev: \\[ \\forall A, \\forall l_1, l_2 \\in L_A . rev(app l1 l2) = app (rev l2) (rev l1) \\]"
+  },
+  "coq": "Lemma rev_app:forall (A : Type) (l1 l2 : list A), rev(app l1 l2) = app (rev l2) (rev l1).\nProof.\nAdmitted.\n"
+}
