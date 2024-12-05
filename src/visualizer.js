@@ -26,7 +26,8 @@ class Visualizer {
             "exists", "field", "firstorder", "fold", "fourier", "generalize", "have", "hnf", "induction", "injection", "instantiate", "intro",
             "intros", "inversion", "left", "move", "pattern", "pose", "refine", "remember", "rename", "repeat", "replace", "revert", "rewrite",
             "right", "ring", "set", "simpl", "specialize", "split", "subst", "suff", "symmetry", "transitivity", "trivial", "try", "unfold",
-            "unlock", "using", "vm_compute", "where", "wlog", "ring_simplify", "destruct_with_eqn"
+            "unlock", "using", "vm_compute", "where", "wlog", "ring_simplify", "destruct_with_eqn",
+            "split_goal", "split_hypo"
         ];
         this.terminators = [
             "assumption", "eassumption", "by", "contradiction", "discriminate", "easy", "exact", "now", "lia", "omega", "reflexivity", "tauto"

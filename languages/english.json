@@ -8,6 +8,8 @@
   "REFL" : "The two sides of the equality are the same: we proceed by reflexivity",
   "DESTRUCT" : "We proceed by exhaustion (cases)",
   "SPLIT" : "We split the goal into the two parts of the conjunction",
+  "SPLITHYPO1" : "We divide the hypothesis",
+  "SPLITHYPO2" : "into the single parts of the conjuction",
   "TRIVIAL" : "Goal is trivially true. We proceed with the following goal",
   "RING" : "We simplify an arithmetic expression",
   "RIGHTTOLEFT" : "from right to left",

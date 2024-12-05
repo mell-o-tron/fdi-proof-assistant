@@ -1,0 +1,3 @@
+{
+  "coq" : "Tactic Notation \"split_hypo\" constr(x) := repeat rewrite andb_true_iff in x ; decompose [and] x ; clear x.\n"
+}

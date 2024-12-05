@@ -8,6 +8,8 @@
   "REFL" : "I due lati dell'uguaglianza sono identici: procediamo per riflessività",
   "DESTRUCT" : "Procediamo per casi",
   "SPLIT" : "Dividiamo il goal nelle due parti della congiunzione",
+  "SPLITHYPO1" : "Dividiamo l'ipotesi",
+  "SPLITHYPO2" : "nelle singole parti della congiunzione",
   "TRIVIAL" : "Il goal è banalmente vero. Procediamo con il successivo",
   "RING" : "Semplifichiamo un'espressione aritmetica",
   "RIGHTTOLEFT" : "da destra a sinistra",

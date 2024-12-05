@@ -6,8 +6,8 @@
   },
   "n_params": 0,
   "text": {
-    "english": "Divide a proof of a goal of the form \\(A \\land B\\) in the proof of two goals \\(A\\) and \\(B\\).",
-    "italiano": "Dividi una dimostrazione di un goal dalla forma \\(A \\land B\\) nella dimostrazione di due goal \\(A\\) e \\(B\\)."
+    "english": "Divide a proof of a goal of the form \\(A \\land B = \\texttt{true}\\) in the proof of two goals \\(A = \\texttt{true}\\) and \\(B = \\texttt{true}\\).",
+    "italiano": "Dividi una dimostrazione di un goal dalla forma \\(A \\land B = \\texttt{true}\\) nella dimostrazione di due goal \\(A = \\texttt{true}\\) e \\(B = \\texttt{true}\\)."
   },
-  "coq": "split."
+  "coq": "split_goal."
 }

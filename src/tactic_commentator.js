@@ -166,7 +166,7 @@ class TacticCommentator {
 
             }
             
-            case "split": {     // scope to redefine new goals
+            case "split_goal": {     // scope to redefine new goals
 
                 // TODO ONLY GIVES END OF CASE IF SPLIT IN TWO. GENERALIZE BY PUSHING ALL NEW GOALS.
 
@@ -179,6 +179,9 @@ class TacticCommentator {
                 return `${this.language_selector.current_language.SPLIT}.`;
 
             }
+
+            case "split_hypo":
+                return `${this.language_selector.current_language.SPLITHYPO1} \\(${text.match(/ (\S+)\./)[1]}\\) ${this.language_selector.current_language.SPLITHYPO2}.`
             
             case "assumption":
                 return `${this.language_selector.current_language.TRIVIAL}.`
