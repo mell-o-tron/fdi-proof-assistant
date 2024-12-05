@@ -16,6 +16,7 @@
   "theorems": [
     "andb_identity.json",
     "andb_comm.json",
+    "andb_assoc.json",
     "not_le.json",
     "le_0_nb.json",
     "gte_inf_nb.json",

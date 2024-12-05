@@ -1,0 +1,12 @@
+{
+  "name": "andb_assoc",
+  "display_name": {
+    "english": "associativity of \\(\\land\\)",
+    "italiano": "Associatività di \\(\\land\\)"
+  },
+  "text": {
+    "english": "\\(\\land\\) is associative: \\[ \\forall a,b,c \\in Bool . \\; a \\land b \\land c = a \\land (b \\land c) \\]",
+    "italiano": "\\(\\land\\) è associativa: \\[ \\forall a,b,c \\in Bool . \\; a \\land b \\land c = a \\land (b \\land c) \\]"
+  },
+  "coq": "Theorem andb_assoc: forall a b c : Bool , a && (b && c) = a && b && c.\nProof.\nAdmitted.\n"
+}
