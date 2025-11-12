@@ -1,12 +1,12 @@
 {
   "display_name": {
-    "english": "\\(\\vee\\) identity",
+    "english": "belList app",
     "italiano": "belList app"
   },
   "name": "belList_app",
   "text": {
-    "english": "\\(\\texttt{false}\\) is the identity element of \\(\\vee\\): \\[ \\forall b \\in Bool.\\; \\texttt{false} \\vee b = b \\]",
-    "italiano": "Interazione fra \\(\\texttt{belList}\\) e \\(\\texttt{app}\\), i.e. \\begin{gather*} \\forall l_1,l_2 \\in L_A . \\; \\forall b \\in A. \\\\ \\texttt{belList}(\\texttt{app}(l_1,l_2),b) = \\\\ \\texttt{belList}(l_1,b) \\vee \\texttt{belList}(l_2,b) \\end{gather*}"
+    "english": "Interaction between \\(\\texttt{belList}\\) and \\(\\texttt{app}\\), i.e. \\begin{gather*} \\forall l_1,l_2 \\in L_A . \\; \\forall b \\in A. \\texttt{belList}(\\texttt{app}(l_1,l_2),b) = \\\\ \\texttt{belList}(l_1,b) \\vee \\texttt{belList}(l_2,b) \\end{gather*}",
+    "italiano": "Interazione fra \\(\\texttt{belList}\\) e \\(\\texttt{app}\\), i.e. \\begin{gather*} \\forall l_1,l_2 \\in L_A . \\; \\forall b \\in A. \\texttt{belList}(\\texttt{app}(l_1,l_2),b) = \\\\ \\texttt{belList}(l_1,b) \\vee \\texttt{belList}(l_2,b) \\end{gather*}"
   },
   "coq": "Theorem belList_app: forall (l1 l2 : list A) (b : A) , belList (app l1 l2) b = belList l1 b || belList l2 b.\nProof.\nAdmitted.\n"
 }
