@@ -422,7 +422,7 @@ class Visualizer {
         theodesc_container.className = 'math-content-container';
         
         let theodesc = document.createElement("div");
-        theodesc.className = 'math-content scroll-equation';
+        theodesc.className = 'math-content';
 
         theodesc.textContent = at.text[`${local_langsel.current_language.language_name}`];
         document.getElementById("available_tactics").appendChild(theobox);
