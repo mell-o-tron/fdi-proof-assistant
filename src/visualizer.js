@@ -111,7 +111,8 @@ class Visualizer {
                 text += this.language_selector.current_language.ASSUMING; //"Assuming the following hypotheses:";
                 // Put all hypothesis in a centered LaTeX environment, so their vertical spacing is correct.
                 let hps = "\\begin{gather*}\n";
-                for (let h of this.observer.current_goal.hypotheses){
+                for (let h of this.observer.current_goal.hypotheses.toSorted((a,b) => {let x = a.name.includes("H"); let y = b.name.includes("H");
+				return x != y ? (x > y ? 1 : -1) : (a.name < b.name ? -1 : a.name > b.name);})) {
                     hps += `{${h.name}}` + " : " + uncurrifier.uncurrify(h.body) + " \\\\\n";
                 }
                 hps += "\n\\end{gather*}";
