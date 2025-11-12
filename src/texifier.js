@@ -73,7 +73,9 @@ class TeXifier {
             ["lmd", "\\lambda"],
 //             [" ", "\\;"],
             ["∀", "\\forall"],
-            ["§", ","]
+            ["§", ","],
+            [": Type", "\\ è\\ un\\ Insieme"],
+
         ];
     }
 
