@@ -68,7 +68,8 @@ prelude:   true,
 implicit_libs: true,
 editor:{ mode: { 'company-coq': true }, keyMap: 'default' },
 init_pkgs: ['init'],
-all_pkgs:  ['coq']
+all_pkgs:  ['coq'],
+backend: 'wa'
 };
 
 
