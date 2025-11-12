@@ -119,7 +119,13 @@ class TeXifier {
             
             res = res.replace(m[0], commad_forall);
         }
-        console.log("MATCHES", matches)
+        console.log("MATCHES", matches);
+
+        // Make it so : becomes \in in foralls and hypotheses of type: "Var : TypeofVar"
+        // To note, this doesn't effect hypotheses which are equivalences or implications, since they get skipped
+        // due to having "H" in their name (very hacky way of finding the right ones to change I know)
+        res = res.replaceAll(/(({|\(| |\n)[a-gj-zA-GJ-Z0-9_{}]+}? ?): /g, "$1\\in ");
+
 
         
         // TODO recognize stuff of form X == Y and put it into parens
