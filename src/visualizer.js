@@ -300,10 +300,17 @@ class Visualizer {
         let theodesc_container = document.createElement("div");
         theodesc_container.className = 'math-content-container';
         
-        let theodesc = document.createElement("div");
-        theodesc.className = 'math-content scroll-equation';
+	let txt = at.text[`${local_langsel.current_language.language_name}`].split("(?=(\\\\\[|\\\\begin{multiline}))");
 
-        theodesc.textContent = at.text[`${local_langsel.current_language.language_name}`];
+        let theodesc = document.createElement("div");
+        theodesc.className = 'math-content';
+        theodesc.textContent = txt[0];
+		
+	let theomath = document.createElement("div");
+        theomath.className = 'math-content scroll-equation';
+	theomath.textContent = txt[1];
+
+	theodesc.appendChild(theomath);
 
         let header = document.createElement('div');
         header.className = "math-header theorem-header";
